@@ -1,0 +1,4 @@
+interface:
+  display_name: "engineering-log: solution design"
+  short_description: "Designs the solution and prepares Execution-Spec input"
+  default_prompt: "Design the conceptual technical solution via engineering-log: ask for TASK_DIR containing 01-problem-statement.md, read it, choose a mode (explore solution space or use a single obvious option), then strictly follow the corresponding prompt from references and write the results into the task files."

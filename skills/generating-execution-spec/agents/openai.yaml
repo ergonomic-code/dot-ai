@@ -1,0 +1,4 @@
+interface:
+  display_name: "engineering-log: Execution Spec"
+  short_description: "Fills 04-execution-spec.md from 03-solution-hld.md"
+  default_prompt: "Prepare and fill an Execution-Spec for an engineering-log task: ask for TASK_DIR, read TASK_DIR/03-solution-hld.md (must contain the block === RESULT FOR EXECUTION-SPEC ===) and TASK_DIR/04-execution-spec.md (template), ask only factual clarifying questions when data is missing, then fully fill and overwrite 04-execution-spec.md, output exactly the same text in chat, and offer to save the transcript to TASK_DIR/chats/02-execution-spec-chat-1.md."

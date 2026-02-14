@@ -1,0 +1,4 @@
+interface:
+  display_name: "Requirements Formalization"
+  short_description: "Formalize informal tasks into testable requirements"
+  default_prompt: "Use $requirements-formalization to turn an informal task statement into a formal, testable requirements document with acceptance criteria."

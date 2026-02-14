@@ -1,0 +1,4 @@
+interface:
+  display_name: "Concept Description"
+  short_description: "Synthesizes a concept spec from sources"
+  default_prompt: "Describe a concept from source materials: synthesize a stable operational notion and structure the document according to sections 2–5 from SKILL.md, without retelling the sources and without referencing them in the Concept spec body."
