@@ -67,8 +67,38 @@ Skills for this repository are located in `./.ai/skills/` (agent context, note t
 
 ### 6.1. Skill index bootstrap (metadata-only)
 
-At the beginning of a new chat in this repository, build an in-memory "skill index" so you can quickly locate a relevant skill later.
-To build the index, scan `./skills/` and `./.ai/skills/` for `SKILL.md` files.
-For each `SKILL.md`, read only its YAML front matter block (between the first pair of `---` lines).
-Extract only `name` and `description`.
-Record `skill_name → SKILL.md path → description` and do not read any other content until that specific skill is selected for use.
+At the beginning of a new chat in this repository, ensure you can quickly locate a relevant skill later.
+Prefer a cached, metadata-only skill index stored on disk, and only rebuild it when needed.
+
+The skill index contains only YAML front matter metadata:
+- `name`
+- `description`
+
+Index sources:
+- `./skills/`
+- `./.ai/skills/`
+
+Caching and invalidation:
+- Store the index at `.ai/.cache/skills-index.json`.
+- Rebuild the index only if the cache is missing or if any `SKILL.md` in the sources has changed since the cache was built.
+- Keep chat output minimal, and do not print the full index unless the user asks.
+
+Cache format (minimal):
+- `built_at_epoch_ms`: number
+- `sources`: array of source directories scanned
+- `files`: array of objects:
+  - `path`: string (path to `SKILL.md`)
+  - `mtime_epoch_ms`: number (last modified time when indexed)
+  - `name`: string
+  - `description`: string
+
+Cache validity (mtime-based):
+- If any indexed `SKILL.md` has a different `mtime` than recorded, rebuild.
+- If any new `SKILL.md` appears in the sources that is not present in the cache, rebuild.
+- If any cached `SKILL.md` no longer exists, rebuild.
+
+Chat output:
+- On cache hit or rebuild, print at most a single short status line (for example: `skills-index: loaded (N), cache_hit=true`).
+- Only print the full index when the user asks.
+
+When a specific skill is selected for use, only then read that skill's `SKILL.md` beyond its YAML front matter.
