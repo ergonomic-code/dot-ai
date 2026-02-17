@@ -91,6 +91,7 @@ Base rules:
 - before committing or pushing any change, and before reporting task completion, run the relevant automated test suite(s) and ensure they pass;
 - if the test command is unknown, ask the user for the correct command (or find it in project docs/config) before proceeding with committing/pushing or reporting task completion;
 - if any test fails, stop and fix the root cause (or revert the change) before making further commits;
+- follow git conventions (see `../conventions/git.md`).
 - when coding, avoid duplication (DRY), including in tests and string constants;
 - place test classes at least in the same module as the SUT, in a mirrored package;
 - when adding new test cases, append them to the end of the file or to the end of the relevant existing test case group, not at the beginning;
