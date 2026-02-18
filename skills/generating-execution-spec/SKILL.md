@@ -18,7 +18,7 @@ If the template is missing, ask the user to run the task init skill first.
 
 ## Output
 
-- Overwritten `TASK_DIR/04-execution-spec.md` as a single complete document.
+- Overwritten `TASK_DIR/04-execution-spec.md` as a single complete document (English).
 - The same final text printed to chat (no additions).
 - Optional: saved chat transcript to `TASK_DIR/chats/02-execution-spec-chat-1.md`.
 
