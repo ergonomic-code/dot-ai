@@ -41,9 +41,10 @@ If the template is missing, ask the user to run the task init skill first.
 8. Hard requirement for the filled spec: include a test definition of done that states “all acceptance test cases are implemented and pass”.
 9. Conventions rule: do not duplicate test coding rules in the spec.
 10. Conventions rule: provide links to the relevant conventions instead.
-11. If a required link or acceptance cases cannot be provided factually from inputs, ask for it as a clarifying question and stop with `=== WAITING FOR ANSWERS (EXECUTION-SPEC) ===`.
-12. Write the final document to `TASK_DIR/04-execution-spec.md` and output the exact same text to chat.
-13. Ask whether the current chat transcript may be saved.
-14. If yes, save it to `TASK_DIR/chats/02-execution-spec-chat-1.md`.
-15. If you cannot save the transcript automatically, do not fabricate it.
-16. Ask the user for help or use `$chat-transcript-export`.
+11. Default requirement: if the task impacts any public API (HTTP, RPC, events, DB contracts, or other externally consumed interfaces), explicitly require backward compatibility in `TASK_DIR/04-execution-spec.md` unless the inputs explicitly approve a breaking change.
+12. If a required link or acceptance cases cannot be provided factually from inputs, ask for it as a clarifying question and stop with `=== WAITING FOR ANSWERS (EXECUTION-SPEC) ===`.
+13. Write the final document to `TASK_DIR/04-execution-spec.md` in English and output the exact same text to chat.
+14. Ask whether the current chat transcript may be saved.
+15. If yes, save it to `TASK_DIR/chats/02-execution-spec-chat-1.md`.
+16. If you cannot save the transcript automatically, do not fabricate it.
+17. Ask the user for help or use `$chat-transcript-export`.
