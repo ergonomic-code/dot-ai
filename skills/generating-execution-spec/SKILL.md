@@ -45,6 +45,7 @@ If the template is missing, ask the user to run the task init skill first.
 12. If a required link or acceptance cases cannot be provided factually from inputs, ask for it as a clarifying question and stop with `=== WAITING FOR ANSWERS (EXECUTION-SPEC) ===`.
 13. Write the final document to `TASK_DIR/04-execution-spec.md` in English and output the exact same text to chat.
 14. Ask whether the current chat transcript may be saved.
-15. If yes, save it to `TASK_DIR/chats/02-execution-spec-chat-1.md`.
-16. If you cannot save the transcript automatically, do not fabricate it.
-17. Ask the user for help or use `$chat-transcript-export`.
+15. If yes, append to the transcript as you go, after each completed step, instead of saving only at the end.
+16. Save the transcript to `TASK_DIR/chats/04-execution-spec-chat-1.md`.
+17. If you cannot save the transcript automatically, do not fabricate it.
+18. Ask the user for help or use `$chat-transcript-export`.
