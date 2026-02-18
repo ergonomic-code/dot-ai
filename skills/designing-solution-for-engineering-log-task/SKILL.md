@@ -62,4 +62,4 @@ Write `TASK_DIR/02-solution-options.md` (if applicable) and `TASK_DIR/03-solutio
 Both prompts require saving the current chat transcript into `TASK_DIR/chats/...`.
 Append to the transcript as you go, after each completed step, instead of waiting until the end.
 If you cannot save the transcript automatically, do not fabricate it.
-Ask the user to help, or use the `chat-transcript-export` skill.
+Ask the user to help, or use the `exporting-chat-artifacts` skill.

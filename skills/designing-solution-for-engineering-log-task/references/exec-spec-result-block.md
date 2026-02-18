@@ -24,6 +24,7 @@ Key invariants:
 Hard constraints:
   - <...>
   - <...>
+  - Sources of truth and contract mapping: <...> (see `../../../conventions/contracts.md`)
 Responsibility boundaries:
   - <...>
   - <...>

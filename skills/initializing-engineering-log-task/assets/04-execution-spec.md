@@ -57,6 +57,7 @@ Implement the functionality *strictly according to* this document.
 - <...> (compatibility / backward compatibility)
 - <...> (security / access control)
 - <...> (performance / timeouts / resource limits)
+- <...> (contract mapping and sources of truth, see `../../../conventions/contracts.md`)
 - Always follow the development and testing rules from `AGENTS.md` and `AGENTS.local.md`.
 
 > This section is mandatory.
@@ -104,6 +105,16 @@ Format: statements only, no explanations.
 
 ## 5. Data contracts
 
+### 5.0 Contract map (cross-surface naming and encoding)
+
+Use the conventions from `../../../conventions/contracts.md`.
+If a concept exists in multiple surfaces, it must appear in this table.
+
+| Concept | HTTP (field/param) | Persistence (table/column/path) | Integration (keys) | Encoding | Source of truth |
+| --- | --- | --- | --- | --- | --- |
+| <...> | <...> | <...> | <...> | <...> | <...> |
+| <...> | <...> | <...> | <...> | <...> | <...> |
+
 ### 5.1 DTO / API models
 
 ```kotlin
@@ -119,6 +130,7 @@ Format: statements only, no explanations.
 Serialization / Jackson / nullability:
 - Required vs optional fields: <...>
 - Default values: <...>
+- Discriminators and polymorphism: <...>
 - Date/time formats: <...>
 - Unknown fields handling: <...>
 
@@ -131,7 +143,7 @@ Serialization / Jackson / nullability:
 - Data format: <...>
 - Mapping / data access: <...>
 - Indexes / constraints: <...>
-- Migrations (if any): <...>
+- Migrations (if any): <...> (include ordering, backfill, and idempotence requirements)
 
 ---
 
@@ -177,6 +189,7 @@ If any public API changes, this section **must** include a requirement to update
 ## 9. Testing
 
 - Approach: TDD (see section 0, “Implementer role”).
+- Test oracle (assertion source of truth): <...>
 
 ### 9.1 Test case list (must drive the implementation)
 

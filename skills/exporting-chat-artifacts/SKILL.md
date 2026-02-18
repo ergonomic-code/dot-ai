@@ -124,7 +124,7 @@ Generate Markdown:
 4. Collect transcript from current chat (visible user + assistant messages).
 5. Remove service blocks and markers.
 6. If transcript is “dirty,” clean it via script.
-7. Use `python skills/chat-transcript-export/scripts/clean_transcript.py <file> --inplace`.
+7. Use `python skills/exporting-chat-artifacts/scripts/clean_transcript.py <file> --inplace`.
 8. Perform sanitization (tokens, keys, names, internal URLs).
 9. Write `transcript.md`.
 10. If Variant A is selected, generate `brief.md` using the structure above and write it alongside.

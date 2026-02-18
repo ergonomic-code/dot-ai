@@ -98,6 +98,8 @@ Choose an option: 1 / 2 / 3 / 4 (or suggest edits to options/criteria)
 - Explicitly separate:
   - what is *definitely required*;
   - what is *not required*.
+- Identify any “source of truth” choices that must be fixed before solution design (for example, request parameter vs stored profile vs derived state).
+- If the task depends on an external filter/query DSL, name it explicitly and note that its semantics must be expressed in the DSL’s canonical form (see `../../../conventions/contracts.md`).
 - Ask clarifying questions only if there are missing facts/constraints that block Stage 2.
 
 At this stage:
@@ -123,6 +125,7 @@ For each option, describe:
 - what changes are required (modules/files/contracts);
 - key risks;
 - pros and cons.
+- If the option uses an external filter/query DSL, include a canonical representation and an estimate of size/complexity growth (see `../../../conventions/contracts.md`).
 
 ⚠️ **Forbidden:**
 - proposing hybrids;

@@ -75,4 +75,11 @@ If the input block is missing, contradictory, or information is insufficient, as
 - Ask whether the current chat transcript may be saved.
 - If yes, save it to `{{TASK_DIR}}/chats/02-execution-spec-chat-1.md`.
 - If you cannot save the transcript automatically, do not fabricate it.
-- Ask the user for help, or use `$chat-transcript-export`.
+- Ask the user for help, or use `$exporting-chat-artifacts`.
+
+## Rework minimization (mandatory self-checks)
+
+- Self-check: contract terminology is consistent across all surfaces (HTTP/API, persistence, integration keys, docs).
+- Self-check: if a concept exists in multiple contracts, its mapping and encoding are explicit (see `../../../conventions/contracts.md`).
+- Self-check: sources of truth for value sets and dictionaries are explicitly named and reused (no local duplicates unless required).
+- Self-check: if the solution uses an external query/filter DSL, the spec uses a canonical form, not ambiguous boolean “pseudocode” (see `../../../conventions/contracts.md`).

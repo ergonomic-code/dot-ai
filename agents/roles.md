@@ -97,7 +97,6 @@ Base rules:
 - when adding new test cases, append them to the end of the file or to the end of the relevant existing test case group, not at the beginning;
 - in tests, set up DB state via `*TestApi` classes, not SQL scripts, except for a minimal ubiquitous standard fixture;
 - follow technology and project conventions (see `../ergo/tech/` and `../../project-local/`).
-- after every assistant message, append the latest question/answer pair to the chat transcript file using the `$chat-transcript-export` skill (do not fabricate a transcript path or overwrite without explicit permission).
 
 ## Role: assistant (operational tasks)
 
