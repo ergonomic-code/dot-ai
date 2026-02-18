@@ -55,6 +55,7 @@ After classification:
 
 Do not mix prompts.
 Do not violate their stop points and file-writing rules.
+Write `TASK_DIR/02-solution-options.md` (if applicable) and `TASK_DIR/03-solution-hld.md` in English.
 
 ## Transcript export
 
