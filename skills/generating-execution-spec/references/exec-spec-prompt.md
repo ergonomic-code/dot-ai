@@ -56,6 +56,7 @@ If the input block is missing, contradictory, or information is insufficient, as
   - “forbidden”;
   - “only”;
   - “always / never”.
+- Require the executor to stop and ask the user for clarification/approval if, during implementation, it turns out the Execution-Spec cannot be followed literally.
 - In the template section `## 9. Testing`, always provide either acceptance test cases or a link to an artifact that contains them.
 - In the template section `## 9. Testing`, explicitly require the executor to work by TDD using those acceptance test cases.
 - In the template section `## 9. Testing`, include a test definition of done: “all acceptance test cases are implemented and passing”.

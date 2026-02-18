@@ -42,10 +42,11 @@ If the template is missing, ask the user to run the task init skill first.
 9. Conventions rule: do not duplicate test coding rules in the spec.
 10. Conventions rule: provide links to the relevant conventions instead.
 11. Default requirement: if the task impacts any public API (HTTP, RPC, events, DB contracts, or other externally consumed interfaces), explicitly require backward compatibility in `TASK_DIR/04-execution-spec.md` unless the inputs explicitly approve a breaking change.
-12. If a required link or acceptance cases cannot be provided factually from inputs, ask for it as a clarifying question and stop with `=== WAITING FOR ANSWERS (EXECUTION-SPEC) ===`.
-13. Write the final document to `TASK_DIR/04-execution-spec.md` in English and output the exact same text to chat.
-14. Ask whether the current chat transcript may be saved.
-15. If yes, append to the transcript as you go, after each completed step, instead of saving only at the end.
-16. Save the transcript to `TASK_DIR/chats/04-execution-spec-chat-1.md`.
-17. If you cannot save the transcript automatically, do not fabricate it.
-18. Ask the user for help or use `$chat-transcript-export`.
+12. Hard requirement for the filled spec: instruct the executor to stop and ask the user for clarification/approval if, during implementation, it turns out the spec cannot be followed literally.
+13. If a required link or acceptance cases cannot be provided factually from inputs, ask for it as a clarifying question and stop with `=== WAITING FOR ANSWERS (EXECUTION-SPEC) ===`.
+14. Write the final document to `TASK_DIR/04-execution-spec.md` in English and output the exact same text to chat.
+15. Ask whether the current chat transcript may be saved.
+16. If yes, append to the transcript as you go, after each completed step, instead of saving only at the end.
+17. Save the transcript to `TASK_DIR/chats/04-execution-spec-chat-1.md`.
+18. If you cannot save the transcript automatically, do not fabricate it.
+19. Ask the user for help or use `$chat-transcript-export`.
