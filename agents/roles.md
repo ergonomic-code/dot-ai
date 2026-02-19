@@ -90,11 +90,13 @@ Base rules:
 - if tests exist, work via TDD;
 - before committing or pushing any change, and before reporting task completion, run the relevant automated test suite(s) and ensure they pass;
 - if the test command is unknown, ask the user for the correct command (or find it in project docs/config) before proceeding with committing/pushing or reporting task completion;
+- before reporting task completion, ensure there are no untracked files under `src/` (use `git status --porcelain -- src/`);
+- if you created new files under `src/` for the task, stage them with `git add -- <path>` unless they are intentionally ignored by `.gitignore`;
 - if any test fails, stop and fix the root cause (or revert the change) before making further commits;
-- follow git conventions (see `../conventions/git.md`).
+- follow git conventions (see `../conventions/git.md`);
 - when coding, avoid duplication (DRY), including in tests and string constants;
 - follow testing conventions and checklists (see `../ergo/tech/kotlin/testing.md`, `../ergo/tech/spring/testing.md`, and `../checklists/testing.md`);
-- follow technology and project conventions (see `../ergo/tech/` and `../../project-local/`).
+- follow technology and project conventions (see `../ergo/tech/` and `../../project-local/`);
 
 ## Role: assistant (operational tasks)
 
