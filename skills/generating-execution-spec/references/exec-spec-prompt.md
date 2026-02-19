@@ -81,6 +81,8 @@ If the input block is missing, contradictory, or information is insufficient, as
 
 - Self-check: contract terminology is consistent across all surfaces (HTTP/API, persistence, integration keys, docs).
 - Self-check: if a concept exists in multiple contracts, its mapping and encoding are explicit (see `../../../conventions/contracts.md`).
+- Self-check: no isomorphic DTO types are introduced (see `../../../conventions/contracts.md`).
+- Self-check: if dedicated DTO types exist, their contract delta is explicit and non-empty.
 - Self-check: sources of truth for value sets and dictionaries are explicitly named and reused (no local duplicates unless required).
 - Self-check: if the solution uses an external query/filter DSL, the spec uses a canonical form, not ambiguous boolean “pseudocode” (see `../../../conventions/contracts.md`).
 - Self-check: illegal states implied by invariants are made unrepresentable where feasible, and the enforcement kind is explicit (see `../../../concepts/making-illegal-states-unrepresentable.md`).

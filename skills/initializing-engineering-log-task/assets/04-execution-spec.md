@@ -117,6 +117,15 @@ If a concept exists in multiple surfaces, it must appear in this table.
 
 ### 5.1 DTO / API models
 
+DTO strategy (must be explicit): `reuse-domain` or `dedicated-dto`.
+Isomorphic DTOs are forbidden (see `../../../conventions/contracts.md`).
+
+If `dedicated-dto`, include a “DTO ↔ Domain delta” table with at least one row.
+
+| DTO type | Domain type | Delta (what differs) | Reason |
+| --- | --- | --- | --- |
+| <...> | <...> | <...> | <...> |
+
 ```kotlin
 // DTO / API models: <...>
 ```

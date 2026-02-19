@@ -23,6 +23,32 @@ Use a table that maps the same concept across:
 
 This contract map is a primary rework minimizer.
 
+## Rule: No isomorphic DTOs (DTO == domain)
+
+An isomorphic DTO is a DTO type that is identical to the domain model in:
+
+- field set and field types,
+- required vs optional fields (nullability),
+- default values,
+- discriminators and polymorphism (if any),
+- contract encoding (field names, casing, date formats, unknown fields handling).
+
+Rules:
+
+- If the HTTP/API contract is isomorphic to the domain model, introducing a dedicated DTO type is forbidden.
+- In that case, the API must reuse the domain types as API models.
+- Dedicated DTO types are allowed only if there is an explicit contract delta (at least one intentional contract difference).
+- If a dedicated DTO exists, the contract delta must be documented in the Execution-Spec.
+- If an isomorphic DTO is proposed “for layering / cleanliness / dependencies”, the author must stop and ask for explicit approval, and record the reason as a hard constraint.
+
+Allowed reasons for a dedicated DTO:
+
+- backward compatibility (deprecated/alias fields),
+- security / permissions shaping (hide or expose fields intentionally),
+- different encoding (field names/casing/date formats/unknown fields policy),
+- different value sets or validation rules,
+- different variant shape or discriminator strategy.
+
 ## Rule: Make illegal states unrepresentable
 
 Prefer type shape that makes invalid states not representable.
