@@ -58,6 +58,7 @@ Implement the functionality *strictly according to* this document.
 - <...> (security / access control)
 - <...> (performance / timeouts / resource limits)
 - <...> (contract mapping and sources of truth, see `../../../conventions/contracts.md`)
+- <...> (EA principles and budgets, see `../../../conventions/ea-principles.md` and `../../../checklists/README.md`)
 - Always follow the development and testing rules from `AGENTS.md` and `AGENTS.local.md`.
 
 > This section is mandatory.

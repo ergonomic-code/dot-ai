@@ -21,4 +21,6 @@ Recommended integration structure:
 - skills/ — executable skills and procedures.
 - concepts/ — formalized concepts (operational definitions and specifications).
 - conventions/ — shared conventions and formatting rules.
+- conventions/ea-principles.md — EA principles as top-level review criteria.
+- checklists/ — review checklists aligned with EA principles.
 - bootstrap/ — initial project bootstrap templates to activate the framework.

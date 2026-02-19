@@ -101,6 +101,8 @@ Choose an option: 1 / 2 / 3 / 4 (or suggest edits to options/criteria)
 - Identify any “source of truth” choices that must be fixed before solution design (for example, request parameter vs stored profile vs derived state).
 - If the task depends on an external filter/query DSL, name it explicitly and note that its semantics must be expressed in the DSL’s canonical form (see `../../../conventions/contracts.md`).
 - Identify DTO/domain invariants that imply “illegal states” and must be made unrepresentable (see `../../../concepts/making-illegal-states-unrepresentable.md`).
+- Ensure the solution respects EA principles and budgets by default (see `../../../conventions/ea-principles.md`).
+- Use the relevant checklist(s) for a quick self-audit (see `../../../checklists/README.md`).
 - Ask clarifying questions only if there are missing facts/constraints that block Stage 2.
 
 At this stage:

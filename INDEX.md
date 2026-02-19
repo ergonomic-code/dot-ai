@@ -6,6 +6,7 @@ Use this page as an entry point and as a discoverability index.
 ## Start here
 
 - Read [`conventions/ea-principles.md`](conventions/ea-principles.md) to understand the top-level principles and review criteria.
+- Use [`checklists/README.md`](checklists/README.md) for lightweight review checklists derived from the principles.
 - Read [`agents/roles.md`](agents/roles.md) to understand the agent roles and collaboration rules.
 - Read [`conventions/markdown.md`](conventions/markdown.md) and follow it when editing framework documents.
 
@@ -16,6 +17,10 @@ Use this page as an entry point and as a discoverability index.
 ## Conventions
 
 - See [`conventions/README.md`](conventions/README.md) for conventions and formatting rules.
+
+## Checklists
+
+- See [`checklists/README.md`](checklists/README.md) for review checklists aligned with EA principles.
 
 ## Skills
 

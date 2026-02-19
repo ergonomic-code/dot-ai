@@ -26,6 +26,8 @@ Hard constraints:
   - <...>
   - <...>
   - Sources of truth and contract mapping: <...> (see `../../../conventions/contracts.md`)
+  - EA principles and budgets: <...> (see `../../../conventions/ea-principles.md`)
+  - Review checklist(s): <...> (see `../../../checklists/README.md`)
 Responsibility boundaries:
   - <...>
   - <...>

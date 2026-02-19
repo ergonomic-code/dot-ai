@@ -86,3 +86,5 @@ If the input block is missing, contradictory, or information is insufficient, as
 - Self-check: sources of truth for value sets and dictionaries are explicitly named and reused (no local duplicates unless required).
 - Self-check: if the solution uses an external query/filter DSL, the spec uses a canonical form, not ambiguous boolean “pseudocode” (see `../../../conventions/contracts.md`).
 - Self-check: illegal states implied by invariants are made unrepresentable where feasible, and the enforcement kind is explicit (see `../../../concepts/making-illegal-states-unrepresentable.md`).
+- Self-check: the resulting specification respects EA principles and budgets by default, or explicitly records justified exceptions (see `../../../conventions/ea-principles.md`).
+- Self-check: the specification links to the relevant review checklist(s) for impacted areas (see `../../../checklists/README.md`).
