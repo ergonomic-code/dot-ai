@@ -16,6 +16,7 @@ Recommended integration structure:
 
 ## Repository navigation
 
+- [INDEX.md](INDEX.md) — start here (entry point and artifact index).
 - agents/ — agent roles and collaboration model.
 - skills/ — executable skills and procedures.
 - concepts/ — formalized concepts (operational definitions and specifications).

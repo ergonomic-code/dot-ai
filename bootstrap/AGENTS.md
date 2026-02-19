@@ -4,7 +4,9 @@
 
 1. If `AGENTS.local.md` exists in this repository, read it before proceeding and follow it with higher priority than this file.
 2. Global rules: see `.ai/ergo/agents/roles.md` and `.ai/ergo/conventions/`.
-3. Global skills: see `.ai/ergo/skills`
+3. Framework index (start here): see `.ai/ergo/INDEX.md`.
+4. If the framework is not located at `.ai/ergo/`, find `agents/roles.md` in the repository and open `INDEX.md` in the same directory tree.
+5. Global skills: see `.ai/ergo/skills`.
 
 ## 1. Project context
 
