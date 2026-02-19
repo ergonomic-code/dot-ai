@@ -35,6 +35,7 @@ In particular, documents like `agents/roles.md` define how the framework should 
 
 - Markdown: one sentence per line.
 - Artifact links: use repository paths.
+- Language: all framework content Markdown documents must be written in English.
 
 ## 4. User questions
 
