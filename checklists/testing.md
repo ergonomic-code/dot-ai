@@ -12,6 +12,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 
 - Test cases do not call production code directly except via dedicated test facades (fixtures APIs).
 - HTTP entry points are exercised through `*HttpApi` fixtures APIs, and transport-contract checks (for example JSON schema validation) are implemented in the client rather than duplicated in test cases.
+- Smell: if a test or a `*HttpApi` models an HTTP response body as `Map<*, *>` or `Any`, treat it as a missing typed contract and refactor the client to decode the controller return type.
 - Tests primarily assert behavior and contracts, not internal implementation details.
 - Mocks are used only for unmanaged external dependencies and for simulating failures.
 

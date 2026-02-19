@@ -14,6 +14,14 @@ Test cases should be divided into blocks and separated with comments:
 * `// When`
 * `// Then`
 
+## Test Location
+
+Test classes should be located in the same module as the SUT and in a mirrored package.
+
+## Adding Test Cases
+
+When adding new test cases, append them to the end of the file or to the end of the relevant existing test case group, not at the beginning.
+
 ## Test Data and System Interaction
 
 Avoid direct interaction with production code inside test cases.
@@ -22,6 +30,7 @@ Conventions:
 
 * Create test data using `*ObjectMother` factories.
 * Perform actions and read results through test APIs (`*TestApi`, `*HttpApi`).
+* Set up DB state via `*TestApi` classes, not SQL scripts, except for a minimal ubiquitous standard fixture.
 
 ## Naming
 
