@@ -21,6 +21,7 @@ Acceptance test changes: (how acceptance tests must change after this work)
 Key invariants:
   - <...>
   - <...>
+  - Illegal states and enforcement: <...> (see `../../../concepts/making-illegal-states-unrepresentable.md`)
 Hard constraints:
   - <...>
   - <...>

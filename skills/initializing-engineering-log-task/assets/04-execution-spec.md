@@ -134,6 +134,28 @@ Serialization / Jackson / nullability:
 - Date/time formats: <...>
 - Unknown fields handling: <...>
 
+### 5.3 Illegal states
+
+Follow `../../../concepts/making-illegal-states-unrepresentable.md`.
+List invariants and concrete illegal states, and state how each invariant is enforced (`type` → `constructor` → `validation`).
+
+```yaml
+isu:
+  scope: "<...>"
+  invariants:
+    - name: "<...>"
+      illegal_states:
+        - "<...>"
+      enforcement:
+        kind: type|constructor|validation
+        mechanism: "<...>"
+      surfaces:
+        - surface: http
+          representation: "<...>"
+        - surface: domain
+          representation: "<...>"
+```
+
 ---
 
 ## 6. Persistence and infrastructure

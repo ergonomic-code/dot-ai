@@ -23,6 +23,13 @@ Use a table that maps the same concept across:
 
 This contract map is a primary rework minimizer.
 
+## Rule: Make illegal states unrepresentable
+
+Prefer type shape that makes invalid states not representable.
+Prefer sum types for mutually exclusive states and refined types for constrained values.
+If surface constraints make this impossible, enforce invariants at construction time at the boundary, and use validation only as a last resort.
+See `../concepts/making-illegal-states-unrepresentable.md`.
+
 ## Rule: State sources of truth for value sets and dictionaries
 
 For any value set that is validated or constrained, name the single source of truth.

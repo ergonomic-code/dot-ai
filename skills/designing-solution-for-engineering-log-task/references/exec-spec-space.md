@@ -100,6 +100,7 @@ Choose an option: 1 / 2 / 3 / 4 (or suggest edits to options/criteria)
   - what is *not required*.
 - Identify any “source of truth” choices that must be fixed before solution design (for example, request parameter vs stored profile vs derived state).
 - If the task depends on an external filter/query DSL, name it explicitly and note that its semantics must be expressed in the DSL’s canonical form (see `../../../conventions/contracts.md`).
+- Identify DTO/domain invariants that imply “illegal states” and must be made unrepresentable (see `../../../concepts/making-illegal-states-unrepresentable.md`).
 - Ask clarifying questions only if there are missing facts/constraints that block Stage 2.
 
 At this stage:
@@ -126,6 +127,7 @@ For each option, describe:
 - key risks;
 - pros and cons.
 - If the option uses an external filter/query DSL, include a canonical representation and an estimate of size/complexity growth (see `../../../conventions/contracts.md`).
+- If the option changes data contracts, explicitly state how illegal states are prevented (type shape vs construction checks vs validation).
 
 ⚠️ **Forbidden:**
 - proposing hybrids;
