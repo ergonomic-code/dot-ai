@@ -21,7 +21,7 @@ Avoid direct interaction with production code inside test cases.
 Conventions:
 
 * Create test data using `*ObjectMother` factories.
-* Perform actions and read results through test APIs (`*TestApi`).
+* Perform actions and read results through test APIs (`*TestApi`, `*HttpApi`).
 
 ## Naming
 

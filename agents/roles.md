@@ -96,6 +96,7 @@ Base rules:
 - place test classes at least in the same module as the SUT, in a mirrored package;
 - when adding new test cases, append them to the end of the file or to the end of the relevant existing test case group, not at the beginning;
 - in tests, set up DB state via `*TestApi` classes, not SQL scripts, except for a minimal ubiquitous standard fixture;
+- for HTTP entry points, call the system only via `*HttpApi` fixtures APIs that mirror controller types and keep JSON schema verification in the client, using `*ForResponse` / `*ForError` variants when tests need HTTP-level assertions (see `../ergo/tech/spring/testing.md`);
 - follow technology and project conventions (see `../ergo/tech/` and `../../project-local/`).
 
 ## Role: assistant (operational tasks)
