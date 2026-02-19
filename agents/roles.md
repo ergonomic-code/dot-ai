@@ -95,6 +95,8 @@ Base rules:
 - if any test fails, stop and fix the root cause (or revert the change) before making further commits;
 - follow git conventions (see `../conventions/git.md`);
 - when coding, avoid duplication (DRY), including in tests and string constants;
+- after the relevant tests are green, do a quick DRY pass over newly added/changed code;
+- in tests, shared infrastructure (for example `WebTestClient` creation, base URLs, object mappers, common request builders) must be extracted to a base test or a dedicated fixture API rather than copy-pasted across test classes;
 - follow testing conventions and checklists (see `../ergo/tech/kotlin/testing.md`, `../ergo/tech/spring/testing.md`, and `../checklists/testing.md`);
 - follow technology and project conventions (see `../ergo/tech/` and `../../project-local/`);
 
