@@ -21,6 +21,9 @@ It is not a package layering scheme by itself.
 It is not a requirement to always introduce interfaces, adapters, or clean-architecture style boundaries.
 It is not a static “class diagram of everything,” but a model of key runtime objects and their stable links.
 
+Related framework conventions.
+See `../ergo/tech/jvm/coding-conventions/naming.md` for class suffix taxonomy and `../ergo/tech/jvm/coding-conventions/packages.md` for a default package layout.
+
 Operational distinction.
 If the artifact cannot be used to reconstruct the port/operation/resource graph and check dependency constraints (no port-to-port links, no operation-to-operation links, and resource incoming-link rules), then it is not an Ergonomic Components Structure.
 

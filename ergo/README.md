@@ -10,5 +10,7 @@ Keep domain and project-specific information out of this layer.
 
 ## Tech
 
+- [`tech/jvm/coding-conventions/packages.md`](tech/jvm/coding-conventions/packages.md) — Package layout conventions.
+- [`tech/jvm/coding-conventions/naming.md`](tech/jvm/coding-conventions/naming.md) — Component naming suffix taxonomy.
 - [`tech/kotlin/testing.md`](tech/kotlin/testing.md) — Kotlin testing conventions.
 - [`tech/spring/testing.md`](tech/spring/testing.md) — Spring testing conventions.

@@ -24,6 +24,16 @@ Describe the module structure and how the application is assembled.
 
 Describe the layering conventions and dependency rules.
 
+### 3.3 Code Layout and Naming
+
+Describe the top-level package layout used by the project.
+Recommended default vocabulary is `app/domain/i9ns/infra/platform`, with common aliases `core` and `integrations`.
+
+List naming conventions enforced by the project.
+Recommended default suffix taxonomy includes `*Controller`, `*Listener`, `*Scheduler`, `*Op`, `*Repo`, `*Client`, `*Channel`, `*Queue`, `*Conf`, `*Rq`, `*View`, `*Rs`, `*Row`, and `*Dao`.
+
+Record any project-specific exceptions (for example, allowed `*Service` usage and a migration plan).
+
 ## 4. Key Files & Directories
 
 List of key directories and files.

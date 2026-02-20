@@ -17,6 +17,12 @@ Primary reference is `../conventions/ea-principles.md` (EA.C1–EA.C6).
 - Application classes avoid mutable fields and avoid “immutable fields holding mutable types”.
 - Effects per class are minimized to the smallest set of external resources required by the responsibility.
 
+## Naming
+
+- Class suffixes reflect the component kind (`*Controller`, `*Listener`, `*Scheduler`, `*Op`, `*Repo`, `*Client`, `*Conf`, and DTO suffixes).
+- `*Service` usage is explicitly justified and tracked as a refactoring target toward a more specific suffix.
+
 ## Links
 
 - EA principles: `../conventions/ea-principles.md`.
+- Component naming: `../ergo/tech/jvm/coding-conventions/naming.md`.

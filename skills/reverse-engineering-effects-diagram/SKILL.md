@@ -37,6 +37,8 @@ See the definition and format of the diagram in `concepts/effects-diagram.md`.
 3. Create a draft of `events`, `operations`, and `triggers`.
    If a handler directly implements behavior, treat it as an operation.
    If a handler delegates to “application logic,” treat the delegated target method as the operation.
+   In JVM codebases, use naming heuristics as a starting point (and verify by reading the code):
+   `*Controller`, `*Listener`, and `*Scheduler` are Ports, `*Op` are Operations, and `*Repo` / `*Client` / `*Channel` / `*Queue` are Resources.
 4. Identify resources.
    Include in `resources` all input/output and state elements accessed by operations (databases, queues, files, caches, external HTTP/gRPC/SOAP APIs).
 5. Extract effects for each operation.
@@ -60,6 +62,16 @@ Minimum heuristic: search for entry points and input/output boundaries.
 * Database access: `rg -n "<repository/DAO/SQL patterns>" CODE_ROOT`
 * External calls: `rg -n "<HTTP client/SDK patterns>" CODE_ROOT`
 * Queues/buses: `rg -n "<publish/consume patterns>" CODE_ROOT`
+
+JVM/Kotlin naming heuristics (optional).
+
+* Ports: `rg -n "class .*Controller\\b|class .*Listener\\b|class .*Scheduler\\b" CODE_ROOT`
+* Operations: `rg -n "class .*Op\\b" CODE_ROOT`
+* Resources: `rg -n "class .*Repo\\b|class .*Client\\b|class .*Channel\\b|class .*Queue\\b" CODE_ROOT`
+* Primitive resources: `rg -n "class .*Dao\\b" CODE_ROOT`
+
+Shared vocabulary.
+See `../../ergo/tech/jvm/coding-conventions/naming.md` and `../../ergo/tech/jvm/coding-conventions/packages.md`.
 
 ## Common warnings
 
