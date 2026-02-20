@@ -90,10 +90,11 @@ Base rules:
 - if tests exist, work via TDD;
 - before committing or pushing any change, and before reporting task completion, run the relevant automated test suite(s) and ensure they pass;
 - if the test command is unknown, ask the user for the correct command (or find it in project docs/config) before proceeding with committing/pushing or reporting task completion;
-- before reporting task completion, ensure there are no untracked files under `src/` (use `git status --porcelain -- src/`);
-- if you created new files under `src/` for the task, stage them with `git add -- <path>` unless they are intentionally ignored by `.gitignore`;
+- before reporting task completion, ensure there are no untracked files under any `src/` directory (use `git status --porcelain` and check `?? */src/...`, or `git ls-files --others --exclude-standard | grep -E '(^|/)src/'`);
+- if you created new files under any `src/` directory for the task, stage them with `git add -- <path>` unless they are intentionally ignored by `.gitignore`;
 - if any test fails, stop and fix the root cause (or revert the change) before making further commits;
 - follow git conventions (see `../conventions/git.md`);
+- when the task is to remove or phase out a dependency, do not add or keep convenience helpers for that dependency unless they are required by existing code;
 - when coding, avoid duplication (DRY), including in tests and string constants;
 - after the relevant tests are green, do a quick DRY pass over newly added/changed code;
 - in tests, shared infrastructure (for example `WebTestClient` creation, base URLs, object mappers, common request builders) must be extracted to a base test or a dedicated fixture API rather than copy-pasted across test classes;
