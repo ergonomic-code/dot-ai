@@ -1,0 +1,4 @@
+interface:
+  display_name: "Improving framework from feedback"
+  short_description: "Convert model fix-up commits into framework patches"
+  default_prompt: "Given PROJECT_DIR, MODEL, PROMPT, RESULT_COMMIT, and FIX_COMMITS (and optionally FINAL_COMMIT and PATCH_MODE), analyze diffs and commit messages, cluster failure modes, and patch the correct targets based on PATCH_MODE. If PATCH_MODE is missing, choose consumer-project when {PROJECT_DIR}/.ai/ergo exists, otherwise choose framework-repo. In framework-repo mode patch this repo and/or {PROJECT_DIR}/.ai/project-local. In consumer-project mode patch {PROJECT_DIR}/.ai/ergo and/or {PROJECT_DIR}/.ai/project-local. Keep changes minimal and generalizable; add a lightweight regression hook."
