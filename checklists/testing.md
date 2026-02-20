@@ -26,5 +26,6 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 ## Links
 
 - IRW analysis: `../concepts/irw-matrix-analysis.md`.
+- Code hygiene: `../conventions/code-hygiene.md`.
 - Kotlin testing conventions: `../ergo/tech/kotlin/testing.md`.
 - Spring testing conventions: `../ergo/tech/spring/testing.md`.

@@ -10,4 +10,5 @@ Conventions are normative agreements intended to be referenced from specs and sk
 - [`markdown.md`](markdown.md) — Documentation style rules.
 - [`diagrams.md`](diagrams.md) — Diagram conventions (Mermaid, structure, and notation).
 - [`git.md`](git.md) — Git conventions for changes.
+- [`code-hygiene.md`](code-hygiene.md) — Universal rules to reduce duplication and dead complexity.
 - [`kotlin.md`](kotlin.md) — Kotlin coding conventions (project emphasis).
