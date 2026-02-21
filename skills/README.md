@@ -11,6 +11,11 @@ Each skill lives in its own directory and is defined by a `SKILL.md` file with Y
 - [`generating-execution-spec/SKILL.md`](generating-execution-spec/SKILL.md) — Fill an Execution‑Spec template from the HLD results.
 - [`exporting-chat-artifacts/SKILL.md`](exporting-chat-artifacts/SKILL.md) — Export the current chat transcript and brief for framework improvements.
 
+## Testing workflows
+
+- [`refactoring-http-tests-to-httpapi/SKILL.md`](refactoring-http-tests-to-httpapi/SKILL.md) — Refactor Spring/JUnit HTTP tests to typed `*HttpApi` clients.
+- [`refactoring-test-setup-to-fixturepresets-and-testapi/SKILL.md`](refactoring-test-setup-to-fixturepresets-and-testapi/SKILL.md) — Refactor scenario test setup to `*Fixture` + `*FixturePresets` + `*TestApi`.
+
 ## Effects diagram workflow
 
 - [`designing-effects-diagram-from-requirements/SKILL.md`](designing-effects-diagram-from-requirements/SKILL.md) — Build a new effects diagram from requirements.

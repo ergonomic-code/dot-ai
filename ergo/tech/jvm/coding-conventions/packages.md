@@ -76,6 +76,20 @@ Use `*.platform` for:
 Use `*.infra` for factories and wiring for the parent scope.
 In Spring, this typically includes `@Configuration` classes and bean factories.
 
+## Test package layout (recommended)
+
+This layout is a recommendation for scenario-level tests in JVM projects.
+The goal is to keep test cases thin and move setup, insertion, and stubbing into reusable layers.
+
+Recommended packages inside the test root:
+
+- `...tests.cases...` — scenario test cases.
+- `...tests.fixture.object_mothers...` — `*ObjectMother` factories and test data generators.
+- `...tests.fixture.presets...` — `*Fixture` types and `*FixturePresets` components.
+- `...tests.fixture.test_apis...` — `*TestApi` facades used by tests and fixture insertion.
+- `...tests.fixture.mock_servers...` — `Mock*Server` wrappers (WireMock or an equivalent stubbing layer).
+- `...tests.infra...` — suite boot, shared infrastructure, and per-test reset helpers.
+
 ## Example tree
 
 ```text

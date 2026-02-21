@@ -45,6 +45,15 @@ Operation behavior constraints are defined in `../../../core/coding-conventions/
 - `*Rs` — a transport response DTO when it is distinct from `*View`.
 - `*Row` — a persistence row/record DTO.
 
+### Test-only suffixes (test sources)
+
+- `*HttpApi` — a typed HTTP client used by tests to call ports through transport.
+- `*TestApi` — a typed façade used by tests and fixture insertion to call production code directly.
+- `*Fixture` — a declarative data graph for scenario state and stubs.
+- `*FixturePresets` — a fixture builder and inserter that materializes `*Fixture` via production calls (directly or via `*TestApi`) and `Mock*Server`.
+- `Mock*Server` — a wrapper over a stubbing tool (for example WireMock) that owns stubs and defaults.
+- `*ObjectMother` — factories/builders for production data types used in tests.
+
 ### Primitive resources (implementation details)
 
 - `*Dao` — a low-level persistence or infrastructure detail used to implement a higher-level Resource.

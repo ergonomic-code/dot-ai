@@ -51,7 +51,7 @@ Priority order when principles conflict:
 Budgets are target constraints.
 They may be overridden per project (for example in `<project-local>/PROJECT-CONTEXT.md` or a dedicated `<project-local>/budgets.yaml`), but any deviation must be explicit and recorded.
 
-- Test time: a single test case < 10 seconds; full service test suite < 300 seconds.
+- Test time: a typical test case < 10 seconds; full service test suite < 300 seconds.
 - Cognitive complexity: I/O functions <= 4; pure functions <= 15.
 - Record/entity/value object size: up to 10 fields.
 - Class size: 7 ± 2 fields.
@@ -106,8 +106,10 @@ Exceptions / trade-offs
 Statement
 
 - Tests primarily interact through the system public API, not through implementation classes.
-- In test case code, calls to production code are prohibited.
-- Calls to production code are allowed only inside dedicated test facades (fixtures API).
+- In external scenario test case code, calls to production code are prohibited.
+- In external scenario tests, calls to production code are allowed only inside dedicated test facades (`*HttpApi`, `*TestApi`, `*FixturePresets`).
+- In internal scenario tests, the test case calls the SUT directly and uses `*TestApi` and `*FixturePresets` only for fixture setup and observation/asserts.
+- Complex fixture setup and insertion is extracted into `*FixturePresets`.
 - For “expensive” inbound dependencies, prefer fakes; mocks are used only to simulate system failures and/or to verify interactions with unmanaged (external) dependencies.
 
 Why
@@ -116,14 +118,15 @@ Why
 
 How to verify
 
-- Test reviews ensure interactions go through the public API or test facades, not through internal implementation classes.
+- Test reviews ensure external scenario tests interact through the public API or test facades (`*HttpApi`, `*TestApi`, `*FixturePresets`), not through internal implementation classes.
+- Test reviews ensure internal scenario tests call only the SUT directly and use `*TestApi` and `*FixturePresets` for fixture setup and observation/asserts.
 - The project has a rule/check that forbids tests from importing internal implementation packages (outside fixtures).
 - Mocks appear only where justified: either an unmanaged external dependency, or simulation of a system failure.
 
 Links
 
-- Concepts: `../concepts/testing-philosophy.md` (TODO).
-- Skills: `../skills/kotlin-testing-conventions/` (TODO), `../skills/refactor-testcases-guideline/` (TODO).
+- Concepts: `../concepts/testing-philosophy.md`, `../concepts/testing-testcode-architecture.md`.
+- Skills: `../skills/refactoring-http-tests-to-httpapi/`, `../skills/refactoring-test-setup-to-fixturepresets-and-testapi/`.
 - Checklists: `../checklists/testing.md`.
 
 Exceptions / trade-offs
@@ -147,7 +150,7 @@ How to verify
 
 Links
 
-- Concepts: `../concepts/testing-speed-budgets.md` (TODO).
+- Concepts: `../concepts/testing-speed-budgets.md`.
 - Skills: `../skills/test-infra-optimization/` (TODO).
 - Checklists: `../checklists/testing.md`.
 
