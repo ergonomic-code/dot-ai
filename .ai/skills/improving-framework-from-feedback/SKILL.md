@@ -151,15 +151,26 @@ Write instructions so an agent can mechanically follow them:
 
 Ensure the same failure becomes detectable in the future:
 
-- Store the prompt and expected constraints in the closest appropriate place:
-  - If project-specific: `<project-local>/` (e.g., a small “regressions” note under an existing folder if you already have one).
-  - If general: a brief “Regression examples” section inside the relevant SKILL.md (keep it short).
-- Do not create new top-level documentation categories.
+- Store the prompt and expected constraints as a standalone “regression case” file in a dedicated directory:
+  - If project-specific: `<project-local>/regressions/` (create if missing).
+  - If general: `<framework>/regressions/` (create if missing).
+- Keep regression cases out of framework articles (for example, `<framework>/ergo/tech/...`), unless the prompt explicitly requests adding them there.
+- Do not add links from articles to regression cases unless the prompt explicitly asks for it.
+- Prefer naming regression case files in `kebab-case.md` with a short domain prefix (e.g. `spring-data-jdbc-...`).
 
 A regression hook must include:
 - The prompt fragment that triggered the mistake,
 - The rule that must fire,
 - The expected observable behavior (“must” statement).
+- A concrete pointer to the enforcing mechanism (file path + section name, or script name) in the “Framework hook” section.
+
+Recommended structure for a regression case file:
+
+- Title: one short sentence that names the behavior.
+- Sections:
+  - “Prompt fragment” (verbatim).
+  - “Expected behavior” (a “must” checklist).
+  - “Framework hook” (what rule/checklist/skill/script should enforce it).
 
 ### 7) Validate and finish
 
