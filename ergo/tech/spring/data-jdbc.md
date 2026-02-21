@@ -33,6 +33,19 @@ Do not implement batch persistence by looping a single-aggregate operation (`ite
 Use `JdbcClient` for custom SQL that is not naturally expressed via aggregate operations.
 Prefer a single SQL round trip when the logic is naturally expressible in one statement.
 
+## Views and read models
+
+### Rule: Prefer mapped read models over manual mapping
+
+If a method returns a `*View` / read model that matches a DB row shape, do not load the aggregate and map it by hand.
+Prefer one of:
+
+- `JdbcAggregateOperations.findById<YourView>(id)` for a table-mapped read model type.
+- `JdbcClient` with an explicit query when you need joins or a non-trivial shape.
+
+This is an application of "No isomorphic DTOs" from `../../../conventions/contracts.md`.
+
+
 ## Recommended template
 
 ### `getRequiredPersistentEntity` helper
@@ -56,6 +69,7 @@ inline fun <reified T : Any> JdbcAggregateOperations.getRequiredPersistentEntity
 
 Extend `SimpleJdbcRepository` and use the shared helper.
 Keep `JdbcAggregateOperations` as a non-property parameter if it is only needed for the base repository wiring.
+Store it as a `private val` if you also need it for read model operations (for example `findById<YourView>(...)`).
 Replace `Entity` and `UUID` with your aggregate type and id type.
 
 ```kotlin
