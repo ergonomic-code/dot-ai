@@ -24,6 +24,26 @@ If multiple overloads represent the same operation, choose one canonical impleme
 
 - External API compatibility, when the overload set is constrained by a public interface.
 
+## Rule: Prefer abstractions in dependencies
+
+Prefer constructor parameters, fields, and method signatures typed as interfaces or abstract classes.
+Use a concrete class type only when you need an API that is not available via an abstraction.
+
+### How to verify
+
+- Constructor-injected dependencies are typed as stable abstractions, not as implementation classes.
+- A class does not expose its internal implementation details in its public API via concrete types.
+
+### How to fix
+
+- Change dependency types to existing interfaces/abstract classes when available.
+- If the dependency library has no suitable abstraction, wrap it with a local interface and inject that instead.
+
+### Exceptions
+
+- Framework constraints where only a concrete type is injectable or proxied.
+- Value types and data records where an abstraction would reduce clarity.
+
 ## Rule: No dead parameters in shared helpers
 
 Do not add or keep parameters that do not change observable behavior at any call site.

@@ -14,3 +14,4 @@ Keep domain and project-specific information out of this layer.
 - [`tech/jvm/coding-conventions/naming.md`](tech/jvm/coding-conventions/naming.md) — Component naming suffix taxonomy.
 - [`tech/kotlin/testing.md`](tech/kotlin/testing.md) — Kotlin testing conventions.
 - [`tech/spring/testing.md`](tech/spring/testing.md) — Spring testing conventions.
+- [`tech/spring/data-jdbc.md`](tech/spring/data-jdbc.md) — Spring Data JDBC repository conventions.

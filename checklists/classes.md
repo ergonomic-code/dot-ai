@@ -6,6 +6,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.C1–EA.C6).
 
 - The application-level dependency graph is acyclic.
 - Application dependency chains stay within the depth budget, or the deviation is explicitly recorded.
+- Constructor-injected dependencies prefer interfaces/abstract classes over concrete implementations.
 
 ## Size and cohesion
 
