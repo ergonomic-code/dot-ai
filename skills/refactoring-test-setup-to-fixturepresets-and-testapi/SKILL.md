@@ -17,10 +17,19 @@ Keep test cases as thin scripts: arrange, act, assert.
 Treat setup as complex enough if at least one applies.
 
 * The same setup sequence appears in more than one test.
-* A test needs to create a graph of objects across multiple resources or bounded contexts.
+* A test needs to create a graph of objects across multiple resources.
 * A test needs both data insertion and stubbing of external calls.
 * The Arrange block is longer than the Act and Assert blocks combined.
 * The test case touches low-level infrastructure directly (SQL, HTTP clients, WireMock registration).
+
+## Boundaries: `*TestApi` vs `*FixturePresets`
+
+Use these decision rules to keep the test fixture layer maintainable.
+
+* Keep each `*TestApi` scoped to a single resource.
+* If a setup operation must write to multiple resources, implement it in `*FixturePresets`, not in `*TestApi`.
+* Smell: a `*TestApi` constructor depends on multiple repos/clients from different resources.
+* Avoid “god” fixture components that aggregate many fixture beans only to make injection convenient.
 
 ## Refactoring Algorithm
 
@@ -39,12 +48,37 @@ Treat setup as complex enough if at least one applies.
 * Prefer explicit IDs and references in the fixture so relationships are visible in code review.
 * Provide small helper accessors like `theX()` only when they reduce noise without hiding important structure.
 * Keep fixtures free of side effects and insertion logic.
+* Put defaults and convenience constructors in fixture builders or presets, not in `insertFixture`.
+
+### Example shape (declarative fixture graph)
+
+Keep the graph in the `*Fixture` type, and keep insertion as a thin materialization step.
+
+```kotlin
+data class NewOrderFixture(
+    val order: Order = OrdersObjectMother.order(),
+    val lines: List<OrderLine> = LinesObjectMother.lines(order.ref(), count = 2),
+)
+
+@Component
+class OrdersFixturePresets(
+    private val ordersRepo: OrdersRepo,
+    private val linesRepo: LinesRepo,
+) {
+    fun insertFixture(fixture: NewOrderFixture): NewOrderFixture {
+        val savedOrder = ordersRepo.save(fixture.order)
+        val savedLines = linesRepo.saveAll(fixture.lines)
+        return fixture.copy(order = savedOrder, lines = savedLines)
+    }
+}
+```
 
 ## Fixture Insertion Checklist (`*FixturePresets.insertFixture`)
 
 * Insert data in a stable order that respects foreign keys and ownership boundaries.
 * If a production call is used only inside one `*FixturePresets`, it may be called directly from the preset.
 * If a production call sequence is reused across multiple tests or presets, extract it to `*TestApi`.
+* `insertFixture` materializes only what the fixture describes, except for ID resolution when IDs are DB-generated.
 * Do not use SQL scripts for scenario setup, except for a minimal ubiquitous baseline fixture.
 * Configure stubs only through `Mock*Server` wrappers and keep defaults centralized.
 * Keep insertion fast, deterministic, and repeatable across tests.
@@ -76,6 +110,7 @@ Scenario test cases do not assemble complex object graphs inline.
 Scenario test cases do not register stubs ad-hoc and rely on `Mock*Server`.
 Fixture insertion is reusable through `*FixturePresets` and uses `*TestApi` only when reuse warrants it.
 The suite remains within the speed budgets or deviations are explicitly recorded.
+If you created new files, `git status` does not show them as untracked.
 
 ## References
 

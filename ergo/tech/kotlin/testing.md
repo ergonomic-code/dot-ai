@@ -32,6 +32,7 @@ Conventions:
 * Call HTTP entry points only through `*HttpApi`.
 * In internal scenario tests, call the SUT directly in the Act step.
 * Use `*TestApi` for fixture setup and observation/asserts when reuse warrants a dedicated facade.
+* Keep each `*TestApi` scoped to one resource.
 * Set up DB state via `*TestApi` and/or `*FixturePresets`, not SQL scripts, except for a minimal ubiquitous standard fixture.
 * Describe complex scenario setup as a `*Fixture` and insert it via `*FixturePresets` (using direct production calls or `*TestApi` when reuse warrants it, and stubbing wrappers).
 

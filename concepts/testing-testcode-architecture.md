@@ -23,6 +23,7 @@ The terms below are normative for this concept.
 * **Internal scenario test** is a scenario test where the action is performed by calling the SUT directly, while setup and observation/asserts use `*TestApi` and `*FixturePresets`.
 * **`*HttpApi`** is a typed HTTP client for calling system entry points through transport.
 * **`*TestApi`** is a typed façade for fixture setup and observation/asserts that is allowed to call production code directly (controllers, operations, repos).
+  It is scoped to one resource and must not orchestrate multi-resource writes.
 * **`*Fixture`** is a declarative data graph describing required state, inputs, and stubs for a scenario or a resource.
 * **`*FixturePresets`** is a DI component that builds typical `*Fixture` graphs and inserts fixtures via production calls (directly or via `*TestApi`) and `Mock*Server`.
 * **`Mock*Server`** is a wrapper over a stubbing tool (for example WireMock) that owns endpoint-level stubs and their defaults.
@@ -113,5 +114,6 @@ Notes.
 * Internal scenario tests call production code other than the SUT directly.
 * Test cases instantiate or configure `WebTestClient` / `RestTestClient` directly.
 * Test cases assemble complex or reused object graphs inline instead of using `*Fixture` and `*FixturePresets`.
+* `*TestApi` methods orchestrate multiple resources instead of keeping `*TestApi` single-resource and moving orchestration to `*FixturePresets`.
 * WireMock stubs are registered ad-hoc in test cases instead of being owned by `Mock*Server`.
 * Multiple tests duplicate environment boot and reset logic instead of using shared test infra.
