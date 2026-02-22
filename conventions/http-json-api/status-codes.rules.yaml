@@ -1,0 +1,53 @@
+version: 1
+canonical: "https://ergowiki.azhidkov.pro/docs/patterns/http-json-api/status-code-choosing/"
+
+success:
+  - when: { kind: "query", method: "GET" }
+    respond: { status: 200 }
+  - when: { kind: "command", effect: "create" }
+    respond: { status: 201, headers: ["Location?"], body: "resource-representation?" }
+  - when: { kind: "command", body: "resource-representation" }
+    respond: { status: 200, body: "resource-representation" }
+  - when: { kind: "command", mode: "async" }
+    respond: { status: 202, body: "operation-handle" }
+  - when: { kind: "command", body: "none" }
+    respond: { status: 204 }
+
+errors:
+  - when: { category: "request.invalid" }
+    respond: { status: 400, body: "problem+json" }
+  - when: { category: "request.semantically_invalid" }
+    respond: { status: 422, body: "problem+json" }
+  - when: { category: "security.unauthenticated" }
+    respond: { status: 401, body: "problem+json?" }
+  - when: { category: "security.unauthorized" }
+    respond: { status: 403, body: "problem+json?" }
+  - when: { category: "contract.endpoint_not_found" }
+    respond: { status: 404, body: "problem+json" }
+  - when: { category: "contract.method_not_allowed" }
+    respond: { status: 405, body: "problem+json" }
+  - when: { category: "domain.not_found" }
+    respond: { status: 404, body: "problem+json" }
+  - when: { category: "request.rate_limited" }
+    respond: { status: 429, body: "problem+json" }
+
+  # Expected domain failures
+  - when: { category: "domain.expected_failure" }
+    respond: { status: 409, body: "problem+json" }
+
+  - when: { category: "integration.unavailable" }
+    respond: { status: 502, body: "problem+json" }
+
+  - when: { category: "server.unavailable" }
+    respond: { status: 503, body: "problem+json" }
+  - when: { category: "server.timeout" }
+    respond: { status: 504, body: "problem+json" }
+
+  - when: { category: "server.unexpected" }
+    respond: { status: 500, body: "problem+json" }
+
+notes:
+  problem_details:
+    media_type: "application/problem+json"
+    required_fields: ["type", "title", "status", "detail", "instance"]
+    extra_fields_allowed: ["timestamp"]

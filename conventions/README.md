@@ -12,3 +12,4 @@ Conventions are normative agreements intended to be referenced from specs and sk
 - [`git.md`](git.md) — Git conventions for changes.
 - [`code-hygiene.md`](code-hygiene.md) — Universal rules to reduce duplication and dead complexity.
 - [`kotlin.md`](kotlin.md) — Kotlin coding conventions (project emphasis).
+- [`http-json-api/README.md`](http-json-api/README.md) — HTTP/JSON API conventions.

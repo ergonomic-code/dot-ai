@@ -14,6 +14,7 @@ Each skill lives in its own directory and is defined by a `SKILL.md` file with Y
 ## API design workflows
 
 - [`api-design-cqs/SKILL.md`](api-design-cqs/SKILL.md) — Design and refactor APIs to follow Command–Query Separation (CQS).
+- [`choosing-http-status-codes/SKILL.md`](choosing-http-status-codes/SKILL.md) — Choose HTTP status codes for an HTTP/JSON endpoint.
 
 ## Testing workflows
 
