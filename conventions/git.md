@@ -18,3 +18,22 @@ If you created multiple files, stage them in one go after checking `.gitignore`.
 Exceptions:
 - Build artifacts and generated outputs that belong in `.gitignore`.
 - Temporary local files.
+
+## Rule: Renames and moves are staged (especially under `src/`)
+
+If you rename or move a tracked file, stage the rename before reporting task completion or making a commit.
+Prefer `git mv` for renames and moves to avoid leaving a deleted + untracked pair in the working tree.
+
+### How to verify
+
+Run `git status --porcelain` and ensure there are no unexpected `D` / `??` pairs that represent an unstaged rename.
+Treat this as a hard rule for any `*/src/**` path.
+
+### How to fix
+
+Either redo the operation with `git mv`, or stage both paths explicitly.
+
+Examples:
+
+- `git add -- <old-path> <new-path>`
+- `git add -A -- <dir>`

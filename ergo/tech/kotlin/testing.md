@@ -40,9 +40,34 @@ See `../../../concepts/testing-testcode-architecture.md` for the normative test-
 
 ## Naming
 
-Annotate test classes with `@DisplayName` (in Russian) using the name of the SUT.
+Prefer naming that reads as a requirement in test reports.
 
-Test case names should be phrased using “should”, so that `@DisplayName + test name` reads as a requirement.
+### Class `@DisplayName`
+
+Annotate test classes with `@DisplayName` using a human-readable name of the SUT or operation.
+Prefer the project language over identifiers.
+
+### Test case names
+
+In Kotlin, prefer backtick function names for readable test case names.
+Phrase the human-readable name as a requirement (for example, “should ...” or its project-language equivalent).
+
+Rules:
+
+- If using backtick function names, do not add `@DisplayName` on the method.
+- Use method-level `@DisplayName` only when the backtick name would be too long, or when required by JUnit features (for example, parameterized tests).
+
+If the codebase uses identifier method names + `@DisplayName`, keep that style.
+In that style, `@DisplayName` must contain the human-readable requirement text, not the function identifier.
+
+### Refactors between styles
+
+If the user asks to “replace `@DisplayName` on methods with the method name in backticks”, interpret it as:
+
+- Move the human-readable `@DisplayName` text into the function name in backticks.
+- Remove `@DisplayName` from the method.
+
+If the prompt is ambiguous, ask one clarifying question before editing.
 
 ## Determinism
 

@@ -6,6 +6,7 @@ Primary reference is `../conventions/git.md`.
 
 - `git status --porcelain` shows only intentional changes (no accidental changes or generated artifacts).
 - No new files under any `src/` directory remain untracked (`?? */src/...`).
+- Renames and moves are staged (no accidental `D` + `??` pairs, especially under `*/src/**`).
 
 ## Staging new files
 

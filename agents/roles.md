@@ -15,6 +15,16 @@ Use the active role name (explicitly requested by the user, or inferred via “C
 
 If the project contains `AGENTS.local.md`, it has higher priority than the rest of the project’s rules.
 
+## Skills (workflow specs)
+
+Skills are procedural workflow specifications located under `skills/` in the framework checkout.
+See `skills/README.md` for an index.
+
+Rules:
+- If the user asks to “use a skill” and provides a path, open `<path>/SKILL.md` and follow it.
+- If the user asks to “use a skill” and provides a skill directory name, open `skills/<name>/SKILL.md` and follow it.
+- If the skill cannot be found, ask the user for the exact path to the skill directory.
+
 ## Choosing a role
 
 1. If the user explicitly specified a role, act in that role.
@@ -92,6 +102,7 @@ Base rules:
 - if the test command is unknown, ask the user for the correct command (or find it in project docs/config) before proceeding with committing/pushing or reporting task completion;
 - before reporting task completion, ensure there are no untracked files under any `src/` directory (use `git status --porcelain` and check `?? */src/...`, or `git ls-files --others --exclude-standard | grep -E '(^|/)src/'`);
 - if you created new files under any `src/` directory for the task, stage them with `git add -- <path>` unless they are intentionally ignored by `.gitignore`;
+- if you rename or move tracked files (especially under any `*/src/**` directory), prefer `git mv` or stage the rename explicitly (`git add -- <old-path> <new-path>` or `git add -A -- <dir>`);
 - if any test fails, stop and fix the root cause (or revert the change) before making further commits;
 - follow git conventions (see `../conventions/git.md`);
 - when the task is to remove or phase out a dependency, do not add or keep convenience helpers for that dependency unless they are required by existing code;

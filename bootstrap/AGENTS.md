@@ -7,6 +7,9 @@
 3. Framework index (start here): see `.ai/ergo/INDEX.md`.
 4. If the framework is not located at `.ai/ergo/`, find `agents/roles.md` in the repository and open `INDEX.md` in the same directory tree.
 5. Global skills: see `.ai/ergo/skills`.
+6. If the user asks to “use a skill”, open that skill’s `SKILL.md` and follow it.
+   - If the user provides a path: open `<path>/SKILL.md`.
+   - If the user provides a skill name: locate the framework root (the directory that contains `agents/roles.md` and `skills/`) and open `skills/<name>/SKILL.md`.
 
 ## 1. Project context
 
