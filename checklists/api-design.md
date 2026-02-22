@@ -14,11 +14,14 @@ Primary reference is `../conventions/ea-principles.md` (EA.D5, EA.F4, EA.F7) and
 
 ## Behavior
 
-- Commands change state and do not return unnecessary data.
-- Queries do not change state and do not have hidden effects.
+- Commands change state and return only acknowledgment and generated data (e.g., ids, timestamps, server-assigned defaults, revision/version), not a read projection of existing state.
+- Queries do not change observable state and do not have hidden effects.
+- Mixed “change + return a read projection of state” operations are split into a command + a follow-up query, or recorded as an explicit exception.
 
 ## Links
 
 - EA principles: `../conventions/ea-principles.md`.
 - Contracts: `../conventions/contracts.md`.
+- CQS: `../concepts/command-query-separation.md`.
 - Illegal states: `../concepts/making-illegal-states-unrepresentable.md`.
+- Skill: `../skills/api-design-cqs/SKILL.md`.

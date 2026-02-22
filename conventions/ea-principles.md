@@ -439,11 +439,12 @@ Exceptions / trade-offs
 
 - Very small operations may be denser; once branching grows, the layout is required.
 
-### EA.F7 — Follow Command–Query Segregation (CQS) where possible
+### EA.F7 — Follow Command–Query Separation (CQS) where possible
 
 Statement
 
-- Commands change state and return minimal information; queries do not change state.
+- Commands change state and may return acknowledgment and generated data (ids, timestamps, server-assigned defaults, revision/version), but do not act as read APIs for existing state.
+- Queries do not change observable state.
 
 Why
 
@@ -453,11 +454,12 @@ How to verify
 
 - Reviews ensure there are no hidden effects in query methods.
 - Command operations have explicit effects and diagnosable errors.
+  Command return payloads do not replace queries for reading state.
 
 Links
 
-- Concepts: `../concepts/cqs.md` (TODO).
-- Skills: `../skills/api-design-cqs/` (TODO).
+- Concepts: `../concepts/command-query-separation.md`.
+- Skills: `../skills/api-design-cqs/`.
 - Checklists: `../checklists/api-design.md`.
 
 Exceptions / trade-offs

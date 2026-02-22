@@ -11,6 +11,10 @@ Each skill lives in its own directory and is defined by a `SKILL.md` file with Y
 - [`generating-execution-spec/SKILL.md`](generating-execution-spec/SKILL.md) — Fill an Execution‑Spec template from the HLD results.
 - [`exporting-chat-artifacts/SKILL.md`](exporting-chat-artifacts/SKILL.md) — Export the current chat transcript and brief for framework improvements.
 
+## API design workflows
+
+- [`api-design-cqs/SKILL.md`](api-design-cqs/SKILL.md) — Design and refactor APIs to follow Command–Query Separation (CQS).
+
 ## Testing workflows
 
 - [`refactoring-http-tests-to-httpapi/SKILL.md`](refactoring-http-tests-to-httpapi/SKILL.md) — Refactor Spring/JUnit HTTP tests to typed `*HttpApi` clients.
