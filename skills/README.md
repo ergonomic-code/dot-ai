@@ -11,6 +11,10 @@ Each skill lives in its own directory and is defined by a `SKILL.md` file with Y
 - [`generating-execution-spec/SKILL.md`](generating-execution-spec/SKILL.md) — Fill an Execution‑Spec template from the HLD results.
 - [`exporting-chat-artifacts/SKILL.md`](exporting-chat-artifacts/SKILL.md) — Export the current chat transcript and brief for framework improvements.
 
+## Git workflow
+
+- [`git-working-tree-hygiene/SKILL.md`](git-working-tree-hygiene/SKILL.md) — Ensure git working tree hygiene before commits and before reporting completion.
+
 ## API design workflows
 
 - [`api-design-cqs/SKILL.md`](api-design-cqs/SKILL.md) — Design and refactor APIs to follow Command–Query Separation (CQS).

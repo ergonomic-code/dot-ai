@@ -18,3 +18,4 @@
 - `agents/roles.md` (Developer base rules for staging and hygiene).
 - `conventions/git.md` (Renames and moves are staged).
 - `checklists/git.md` (Working tree hygiene).
+- `skills/git-working-tree-hygiene/SKILL.md` (Procedure and done gate).

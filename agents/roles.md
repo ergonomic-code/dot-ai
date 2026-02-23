@@ -100,9 +100,7 @@ Base rules:
 - if tests exist, work via TDD;
 - before committing or pushing any change, and before reporting task completion, run the relevant automated test suite(s) and ensure they pass;
 - if the test command is unknown, ask the user for the correct command (or find it in project docs/config) before proceeding with committing/pushing or reporting task completion;
-- before reporting task completion, ensure there are no untracked files under any `src/` directory (use `git status --porcelain` and check `?? */src/...`, or `git ls-files --others --exclude-standard | grep -E '(^|/)src/'`);
-- if you created new files under any `src/` directory for the task, stage them with `git add -- <path>` unless they are intentionally ignored by `.gitignore`;
-- if you rename or move tracked files (especially under any `*/src/**` directory), prefer `git mv` or stage the rename explicitly (`git add -- <old-path> <new-path>` or `git add -A -- <dir>`);
+- before committing/pushing, and before reporting task completion, follow the git working tree hygiene procedure (see `../skills/git-working-tree-hygiene/SKILL.md`);
 - if any test fails, stop and fix the root cause (or revert the change) before making further commits;
 - follow git conventions (see `../conventions/git.md`);
 - when the task is to remove or phase out a dependency, do not add or keep convenience helpers for that dependency unless they are required by existing code;
