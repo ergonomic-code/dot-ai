@@ -7,6 +7,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 - Every system entry point affected by the change is covered by tests through the public API.
 - Every external write effect introduced or modified by the change is observable and asserted in tests.
 - Pure business logic branches affected by the change are covered by unit tests with branch coverage enabled where feasible.
+- Every regression bug fix is accompanied by a test that reproduces the bug and fails without the fix.
 
 ## Coupling
 
@@ -18,6 +19,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 - Smell: if a test case inlines low-level technical boilerplate (for example latches, futures, or executors), extract it to shared test platform helpers or fixture APIs.
 - Smell: if a test case repeats expected error parsing or allowlisting, extract it into an outcome-returning `*HttpApi` method.
 - Tests primarily assert behavior and contracts, not internal implementation details.
+- In external scenario (HTTP/API) tests, prefer asserting the HTTP contract plus observable effects (published messages, outgoing calls, follow-up queries) over inspecting internal persistence or command-storage details.
 - Mocks are used only for unmanaged external dependencies and for simulating failures.
 
 ## Test architecture

@@ -5,6 +5,8 @@ Primary reference is `../conventions/git.md`.
 ## Working tree hygiene
 
 - `git status --porcelain` shows only intentional changes (no accidental changes or generated artifacts).
+- The staged set for the next commit matches the intended commit scope (`git diff --name-status --cached`).
+- No intended changes are left unstaged (`git diff --name-status`).
 - No new files under any `*/src/**` directory remain untracked (`?? */src/...`).
 - Renames and moves are staged (no accidental `D` + `??` pairs, especially under `*/src/**`).
 

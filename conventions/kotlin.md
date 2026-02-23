@@ -12,3 +12,4 @@ Follow the official Kotlin coding conventions: <https://kotlinlang.org/docs/codi
 - Do not use deprecated APIs unless there is no practical alternative.
 - If you must use a deprecated API, justify it and record a removal plan.
 - If a private helper does not use class state, prefer a top-level private function over a private member method.
+- Avoid overload sets of generic functions that collide on JVM type erasure, and prefer distinct names (or `@JvmName`) when Java interop is required.

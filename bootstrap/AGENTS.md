@@ -10,6 +10,7 @@
 6. If the user asks to “use a skill”, open that skill’s `SKILL.md` and follow it.
    - If the user provides a path: open `<path>/SKILL.md`.
    - If the user provides a skill name: locate the framework root (the directory that contains `agents/roles.md` and `skills/`) and open `skills/<name>/SKILL.md`.
+7. Before committing/pushing, and before reporting task completion, use the `git-working-tree-hygiene` skill.
 
 ## 1. Project context
 
