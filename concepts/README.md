@@ -6,6 +6,7 @@ Each concept is written as a verifiable operational spec.
 ## Index
 
 - [`command-query-separation.md`](command-query-separation.md) — Command–Query Separation (CQS) as an operation-level contract rule (commands change state, queries do not).
+- [`balanced-system-form.md`](balanced-system-form.md) — Balanced System Form as an operation-level morphology (explicit read / transform / write branches and a thin orchestrator).
 - [`effects-diagram.md`](effects-diagram.md) — A behavioral model “event → operation → effects on resources.”
 - [`epochal-time-model.md`](epochal-time-model.md) — A model for reasoning about change as atomic transitions between immutable snapshots.
 - [`ergonomic-components-structure.md`](ergonomic-components-structure.md) — A runtime structure model for backend services as a graph of long-lived components.

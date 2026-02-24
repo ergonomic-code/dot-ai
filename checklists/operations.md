@@ -23,5 +23,6 @@ Primary reference is `../conventions/ea-principles.md` (EA.F1–EA.F7) and `../e
 ## Links
 
 - EA principles: `../conventions/ea-principles.md`.
+- Balanced System Form: `../concepts/balanced-system-form.md`.
 - Operations conventions: `../ergo/core/coding-conventions/operations.md`.
 - Ports conventions: `../ergo/core/coding-conventions/ports.md`.

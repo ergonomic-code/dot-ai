@@ -431,7 +431,7 @@ How to verify
 
 Links
 
-- Concepts: `../concepts/structural-design-balanced-form.md` (TODO).
+- Concepts: `../concepts/balanced-system-form.md`.
 - Skills: `../skills/designing-operations/` (TODO).
 - Checklists: `../checklists/operations.md`.
 

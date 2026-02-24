@@ -20,12 +20,23 @@ What it is not:
 - Not a transport rule (e.g., “HTTP GET is always a query”): transports may align, but CQS is defined by semantics, not verbs.
 
 Operational rule to distinguish “similar but not the same”:
-- If, for an operation that is treated as a *query*, it is acceptable that calling it can change the value of any *non-secret query* (i.e., the observable state as seen through the API), then the API is not applying CQS.
+- If, for an operation treated as a *query*, it is acceptable that calling it can change the value of any *non-secret query* (i.e., the observable state as seen through the API), then the API is not applying CQS.
 - If the “separation” is expressed only as “different endpoints/models for reads vs writes” while individual operations are still allowed to mix “change + return a read projection of state” as a normal pattern, that is a CQRS-style separation, not CQS.
 
 Scope boundaries / non-goals:
 - CQS does not prescribe persistence strategy, transaction boundaries, concurrency model, or system-level read/write topology.
 - CQS does not guarantee determinism of queries; it constrains self-induced observable state change, not time-varying answers.
+
+Interoperation with Balanced System Form (operation-level morphology)
+
+When used together with Balanced System Form:
+
+* At a chosen operation abstraction level, branch-root obligations typically align as:
+  * afferent roots are queries,
+  * transform roots are queries (pure calculation),
+  * efferent roots are commands,
+  * an orchestrator may be a query (read operation) or a command (write operation).
+* A strong (optional) discipline is the “Read-before-Transform, Write-after” rule of thumb: complete reads before the pure calculation; perform writes after the calculation.
 
 ### 2.3. Concept Invariants
 
@@ -36,7 +47,9 @@ Invariant 1 — Total classification of operations.
 
 Invariant 2 — Queries do not produce abstract side effects.
 - Statement: A Query must not change the observable state of the object/system as exposed by non-secret queries.
-- Verification: (a) contract/tests: for a stable environment and without intervening commands, repeating the same query yields the same results for all non-secret queries; (b) architecture/lint: query paths forbid writes to domain state and forbid emitting domain-significant external effects.
+- Verification:
+  - contract/tests: for a stable environment and without intervening commands, repeating a query does not change the results of any non-secret query;
+  - architecture/lint: query paths forbid writes to domain state and forbid emitting domain-significant external effects.
 - Falsified by: “get/find/calculate” operations that modify business flags, persist changes, emit domain events/messages, advance workflows, or otherwise change non-secret query results.
 
 Invariant 3 — Commands may change state but are not used to return domain information.
@@ -75,7 +88,7 @@ Common vs variant-specific
 Selection criteria
 - Prefer Profile A when internal caching/representation preparation is important and you can precisely define “observable state” via non-secret queries.
 - Prefer Profile B when you want to treat queries as “diagnostic-safe reads” and can enforce that in code.
-- Prefer Profile C when the layer needs return-based outcomes and/or needs server-generated data returned by commands, and you can keep the payload from becoming a read API for existing state.
+- Prefer Profile C when the layer needs return-based outcomes and/or needs server-generated data returned by commands, and you can keep the payload from becoming a read API for existing domain state.
 
 ### 2.4. Minimal Formalization (Vocabulary mode)
 
@@ -152,7 +165,7 @@ Mixed operation: a single operation that both changes observable state and retur
 
 3) “Hidden cursor advance / IO in a query” without an explicit two-step API.
 - Detect: queries that implicitly advance input cursors, consume streams, or otherwise make subsequent reads differ.
-- Highlight: “Observation changes what will be observed next; redesign as advance/last_value style.”
+- Highlight: “Observation changes what will be observed next; redesign as an explicit two-step API (advance command + current query).”
 - Auto-correctable: often requires API split.
 
 4) “Misclassified caching”.
@@ -170,13 +183,15 @@ Mixed operation: a single operation that both changes observable state and retur
 - EA principles: `../conventions/ea-principles.md` (EA.F7).
 - Checklist: `../checklists/api-design.md`.
 - Skill: `../skills/api-design-cqs/SKILL.md`.
+- Related concept: `../concepts/balanced-system-form.md`.
 
 ## 3. Sources and Attributions
 
 ### 3.1. Sources
 
-- Bertrand Meyer, Object-Oriented Software Construction (2nd edition), Prentice Hall, 1997. Chapter 23 ("Principles of class design"), section on side effects in functions and the Command-Query Separation principle; plus the glossary/definitions appendix.
-- Bertrand Meyer, Eiffel: The Language (original source for the principle’s formulation; used for historical attribution where needed).
+- Bertrand Meyer, Object-Oriented Software Construction (2nd edition), Prentice Hall, 1997.
+  Chapter 23 (principles of class design), section on side effects in functions and the Command-Query Separation principle; plus glossary/definitions appendix.
+- Bertrand Meyer, Eiffel: The Language (historical attribution and original formulation context).
 - Martin Fowler, “CommandQuerySeparation” (Bliki).
 - Wikipedia, “Command–query separation”.
 - Martin Fowler, “CQRS” (Bliki) for the relationship and non-equivalence between CQS and CQRS.
@@ -196,5 +211,5 @@ Mixed operation: a single operation that both changes observable state and retur
 ### 3.4. Discrepancies and Resolutions
 
 - Strictness of side-effect prohibition in queries: resolved by defining Profile A (no abstract side effects) and Profile B (no observable effects at all).
-- Command return values: resolved by allowing Profile C (control-result only) as a compatibility profile while preserving “no domain information returned by commands”.
+- Command return values: resolved by allowing Profile C (control-result and/or generated-result) as a compatibility profile while preserving “no domain information returned by commands”.
 - Mixed operations required for atomicity: resolved by requiring explicit exception recording and containment tests rather than weakening baseline invariants.
