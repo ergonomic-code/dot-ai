@@ -12,18 +12,35 @@ Use immediately when repeated clarifications or rework become noticeable.
 
 ## What counts as a “transcript”
 
-* Only **visible** messages in the current chat from **User** and **Assistant**.
-* Do not include: system/developer instructions, tool calls/outputs, internal reasoning.
-* Practical rule: **include only messages sent with role `User` or `Assistant`**.
-* Any “service” blocks or preambles (even if visible in logs or context) — **exclude**.
+A transcript is an evidence bundle for postmortems and framework improvements.
+It must contain enough detail to reconstruct what happened and why.
+
+Include:
+
+* The dialogue as seen by the user (messages from **User** and **Assistant**).
+* User-provided runtime context that was part of the dialogue (for example IDE context blocks and environment context blocks).
+* A dedicated appendix with execution evidence (commands, changed files, test runs, errors) when it is available and relevant.
+
+Do not include:
+
+* System/developer instructions (system prompt, developer message, sandbox/permission policy blocks).
+* Internal chain-of-thought reasoning.
+* Full raw tool dumps unless they are needed to understand the failure mode.
+
+### Runtime context blocks (keep, but normalize)
+
+If the user message contains an IDE context block (active file, open tabs, request), keep it.
+If the user message contains an `<environment_context>` block, keep at least `cwd` and `shell`.
+Prefer normalizing such blocks into a compact “Context” subsection rather than pasting raw harness headings.
+Do not include raw code excerpts from the IDE selection unless the user explicitly requests it and it is safe to export.
 
 ### Markers that must be removed (if they appear in draft)
 
 If any of the following appears in the text, it is not part of the transcript and must be deleted:
 
-* `AGENTS.md instructions`
+* `# AGENTS.md instructions`
+* `<INSTRUCTIONS>`
 * `<permissions instructions>`
-* `<environment_context>`
 * `developer message`
 * `system prompt`
 * Any blocks containing assistant instructions / launch policies / sandbox descriptions
@@ -74,6 +91,7 @@ If the chat contains multiple topics, ask which topic should be used for `brief.
 Before writing files, remove or replace sensitive data.
 Replace tokens, keys, names, internal URLs, and identifiers with placeholders.
 Example placeholders: `<TOKEN>`, `<EMAIL>`, `<INTERNAL_URL>`, `<PERSON>`, `<PROJECT>`.
+In the execution evidence appendix, redact secrets and truncate large outputs to the minimum needed excerpt.
 
 ## Where to export (variant selection)
 
@@ -110,11 +128,27 @@ Generate Markdown:
 * Header: `# Transcript`
 * Metadata: local generation date.
 * Optionally add topic or short description if relevant.
+* Add an appendix section for execution evidence (required by default).
 * Then messages in dialogue order:
 
   * `## User`
   * `## Assistant`
 * Leave a blank line between messages.
+
+### Execution evidence appendix (required by default)
+
+At the end of `transcript.md`, add a section `## Execution evidence`.
+Prefer short, structured facts over long logs.
+Include only what is load-bearing for reproducing or understanding outcomes.
+
+Suggested subsections:
+
+* `### Commands` (commands that were executed and their intent).
+* `### Git` (branch, commit SHAs, staged/unstaged state when relevant).
+* `### Commits` (list of commits produced during the chat, plus a best-effort mapping to the relevant user requests).
+* `### Tests` (what was run, pass/fail, key error lines if failed).
+* `### Files changed` (high-level list, optionally with `git diff --stat`).
+* `### Errors` (key stack traces excerpts and the chosen fix).
 
 ## Export algorithm
 
@@ -122,19 +156,31 @@ Generate Markdown:
 2. Verify write conditions.
 3. Do not overwrite files without explicit confirmation.
 4. Collect transcript from current chat (visible user + assistant messages).
-5. Remove service blocks and markers.
-6. If transcript is “dirty,” clean it via script.
-7. Use `python skills/exporting-chat-artifacts/scripts/clean_transcript.py <file> --inplace`.
-8. Perform sanitization (tokens, keys, names, internal URLs).
-9. Write `transcript.md`.
-10. If Variant A is selected, generate `brief.md` using the structure above and write it alongside.
-11. Do not invent facts.
-12. If information is missing, mark as `TBD` and list required clarifications.
-13. Perform final self-check.
+5. Keep user-provided runtime context blocks, but normalize them (IDE context and `<environment_context>`).
+6. Remove system/developer/service blocks and markers.
+7. If transcript is “dirty,” clean it via script.
+8. Use `python skills/exporting-chat-artifacts/scripts/clean_transcript.py <file> --inplace --mode verbose`.
+9. Append `## Execution evidence` to `transcript.md`.
+10. Perform sanitization (tokens, keys, names, internal URLs).
+11. Write `transcript.md`.
+12. If Variant A is selected, generate `brief.md` using the structure above and write it alongside.
+13. Do not invent facts.
+14. If information is missing, mark as `TBD` and list required clarifications.
+15. Perform final self-check.
+
+### Commit mapping rule (best-effort)
+
+If the work includes git commits, add a `### Commits` subsection to `## Execution evidence`.
+List the relevant commits with SHA and subject.
+Prefer extracting them via `git log --oneline --decorate <range>` (or `git log --oneline -n 20` if the range is unknown).
+If possible, add a short “why/trigger” note per commit by referencing the corresponding user request from the transcript.
+If you are not sure about the mapping, label it as `approx`.
 
 ## Quality criteria (self-check)
 
-* `transcript.md` contains no system/developer instructions or tool output.
+* `transcript.md` contains no system/developer instructions or sandbox/permission policy blocks.
+* `transcript.md` keeps (normalized) IDE and environment context when it existed in the dialogue.
+* `transcript.md` contains an `## Execution evidence` appendix with load-bearing commands/results.
 * `transcript.md` contains no markers from the “Markers” section.
 * `brief.md` includes at minimum: `Constraints`, `Decisions`, `Friction`, `Delta`.
 * `Delta` includes 1–3 concrete framework changes.
@@ -152,6 +198,17 @@ Generated: 2026-01-28
 
 ## Assistant
 ...
+
+## Execution evidence
+
+### Commands
+- ...
+
+### Commits
+- `<sha>` `<subject>` — `<trigger>`
+
+### Tests
+- ...
 ```
 
 ## Mini template `brief.md`
