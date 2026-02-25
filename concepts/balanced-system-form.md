@@ -209,6 +209,7 @@ Vocabulary mode (minimal terms)
 - Checklist: `../checklists/operations.md`.
 - Related concept: `../concepts/command-query-separation.md`.
 - Related concept: `../concepts/structure-chart.md`.
+- Related concept: `../concepts/actions-calculations-data.md`.
 
 ## 3. Sources and Attributions
 

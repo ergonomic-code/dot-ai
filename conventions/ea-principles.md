@@ -307,7 +307,7 @@ How to verify
 
 Links
 
-- Concepts: `../concepts/effects-diagram.md`, `../concepts/functional-core-imperative-shell.md` (TODO).
+- Concepts: `../concepts/actions-calculations-data.md`, `../concepts/effects-diagram.md`, `../concepts/functional-core-imperative-shell.md` (TODO).
 - Skills: `../skills/designing-operations/` (TODO).
 - Checklists: `../checklists/operations.md`.
 

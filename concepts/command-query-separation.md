@@ -184,6 +184,7 @@ Mixed operation: a single operation that both changes observable state and retur
 - Checklist: `../checklists/api-design.md`.
 - Skill: `../skills/api-design-cqs/SKILL.md`.
 - Related concept: `../concepts/balanced-system-form.md`.
+- Related concept: `../concepts/actions-calculations-data.md`.
 
 ## 3. Sources and Attributions
 
