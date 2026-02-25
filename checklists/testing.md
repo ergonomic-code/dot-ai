@@ -29,6 +29,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 - Fixture data/object factory naming follows `../ergo/tech/jvm/coding-conventions/naming.md`.
 - Stubs are defined only in `Mock*Server` wrappers and are not registered ad-hoc in test cases.
 - Shared test infrastructure (boot, reset, clients) is extracted and reused.
+- For DB-backed integration tests, prefer a reusable pooled `DataSource` shared across Spring test application contexts when feasible.
 - After changing shared HTTP test infrastructure (client wiring, base URLs, codecs, MockMvc vs real transport), run a sentinel smoke set that covers routing, authentication, serialization, and architecture rules.
 - Test runtime is measured and kept within budgets, or deviations are explicitly recorded.
 
@@ -45,6 +46,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 - Testing philosophy: `../concepts/testing-philosophy.md`.
 - Test code architecture: `../concepts/testing-testcode-architecture.md`.
 - Testing speed budgets: `../concepts/testing-speed-budgets.md`.
+- Reusable DB `DataSource` in tests: `../ergo/tech/spring/reusable-test-datasource.md`.
 - Code hygiene: `../conventions/code-hygiene.md`.
 - Kotlin testing conventions: `../ergo/tech/kotlin/testing.md`.
 - Spring testing conventions: `../ergo/tech/spring/testing.md`.

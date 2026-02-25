@@ -36,6 +36,15 @@ abstract class BaseIntegrationTest
 
 Inject the specific fixture beans you need (for example `OrdersFixturePresets` and `UsersTestApi`) directly into each test class.
 
+## Database in Tests
+
+When integration tests use a real DB via Testcontainers, prefer reusing a single DB container and a single pooled `DataSource` across test application contexts.
+This reduces suite time and avoids repeated DB wiring work when different `@SpringBootTest(classes = ...)` combinations exist.
+Use a dedicated `@TestConfiguration` with a `DataSource` `@Bean`, and keep the actual `HikariDataSource` in a JVM-singleton lazy holder.
+
+Enable bean overriding for the test profile when a production `DataSource` exists.
+See `reusable-test-datasource.md` for a reference implementation and failure modes.
+
 ## `*HttpApi` Design
 
 Public `*HttpApi` methods accept and return the same Kotlin types as the corresponding controller method parameters and return type.
@@ -54,7 +63,8 @@ Prefer a dedicated request builder DSL for cross-cutting concerns such as authen
 If many call sites build `Authorization: Bearer ...`, extract a helper like `authorized(token)` in shared test code and use it consistently.
 
 Prefer simple URI templates over `uri { uriBuilder -> ... }` when the URI is a static path with a small number of query parameters.
-This keeps diffs small and reduces incidental complexity in migrations.
+This keeps diffs small.
+This reduces incidental complexity in migrations.
 
 Do not use `ThreadLocal` to pick routing, base URLs, or per-test client configuration.
 Make the client and its base configuration explicit (constructor parameters or per-test wiring in shared infra).
