@@ -23,6 +23,7 @@ Each skill lives in its own directory and is defined by a `SKILL.md` file with Y
 ## Testing workflows
 
 - [`refactoring-http-tests-to-httpapi/SKILL.md`](refactoring-http-tests-to-httpapi/SKILL.md) — Refactor Spring/JUnit HTTP tests to typed `*HttpApi` clients.
+- [`migrating-spring-http-tests-to-mockmvc/SKILL.md`](migrating-spring-http-tests-to-mockmvc/SKILL.md) — Switch `*HttpApi` clients to a MockMvc-backed `WebTestClient` while keeping routing, security, and codecs correct.
 - [`refactoring-test-setup-to-fixturepresets-and-testapi/SKILL.md`](refactoring-test-setup-to-fixturepresets-and-testapi/SKILL.md) — Refactor scenario test setup to `*Fixture` + `*FixturePresets` + `*TestApi`.
 
 ## Effects diagram workflow

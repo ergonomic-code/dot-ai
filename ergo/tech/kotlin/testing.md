@@ -8,11 +8,14 @@ Use `kotest-assertions`.
 
 ## Test Structure
 
-Test cases should be divided into blocks and separated with comments:
+Test cases must be divided into blocks and separated with comments:
 
 * `// Given`
 * `// When`
 * `// Then`
+
+Do not remove these blocks when editing an existing test.
+Keep “Act” in `// When` and keep assertions in `// Then`.
 
 ## Test Location
 
@@ -37,6 +40,14 @@ Conventions:
 * Describe complex scenario setup as a `*Fixture` and insert it via `*FixturePresets` (using direct production calls or `*TestApi` when reuse warrants it, and stubbing wrappers).
 
 See `../../../concepts/testing-testcode-architecture.md` for the normative test-layering model.
+
+## Kotlin-first APIs in tests
+
+Prefer Kotlin-generic APIs over Java `Class` tokens.
+For example, prefer `.expectBody<T>()` over `.expectBody(T::class.java)` when both are available.
+
+This is a general Kotlin convention and applies to production code as well.
+See `../../../conventions/kotlin.md`.
 
 ## Naming
 

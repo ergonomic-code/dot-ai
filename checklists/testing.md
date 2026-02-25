@@ -28,6 +28,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 - Complex fixture setup and insertion is implemented in `*FixturePresets`, using direct production calls or `*TestApi` when reuse warrants it.
 - Stubs are defined only in `Mock*Server` wrappers and are not registered ad-hoc in test cases.
 - Shared test infrastructure (boot, reset, clients) is extracted and reused.
+- After changing shared HTTP test infrastructure (client wiring, base URLs, codecs, MockMvc vs real transport), run a sentinel smoke set that covers routing, authentication, serialization, and architecture rules.
 - Test runtime is measured and kept within budgets, or deviations are explicitly recorded.
 
 ## Speed

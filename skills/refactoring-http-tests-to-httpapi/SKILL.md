@@ -27,11 +27,20 @@ For non-deterministic test cases (usually due to concurrency) where multiple out
 ## Notes
 
 Do not use `WebTestClient` or `RestTestClient` directly in test cases.
+Preserve the existing `// Given`, `// When`, `// Then` block structure in test cases while migrating.
 For generic return types, decode using `ParameterizedTypeReference<T>` (or a project helper built on it).
 Do not create ad-hoc `*Request` or `*Response` DTOs in tests or fixtures when the controller already defines the transport contract.
 If the controller contract is not decodable as-is, fix the contract in production code by introducing an explicit transport DTO.
 If the project provides JSON schemas, validate both request and response bodies inside `*HttpApi` before decoding.
 If the client validates the same response body against multiple schemas (for example, “success” vs “error”), keep diagnostics for all failed validations.
+Do not name a successful method as `*ForError`, and do not implement a successful method by calling `*ForError` internally.
+If a `*ForError` method becomes unused after migration, delete it instead of keeping it “just in case”.
+
+In Kotlin, prefer Kotlin-generic APIs over Java `Class` tokens where possible.
+For example, prefer `.expectBody<T>()` over `.expectBody(T::class.java)` when both are available.
+
+Prefer simple URI templates over `uri { uriBuilder -> ... }` when the URI is a static path with a small number of query parameters.
+This keeps diffs small and makes migrations more incremental.
 
 ## Done Gate
 
@@ -39,6 +48,7 @@ All HTTP calls in the migrated area are performed through `*HttpApi`.
 No test case uses `WebTestClient` or `RestTestClient` directly.
 `*HttpApi` public method signatures match the corresponding controller contracts.
 Transport-contract checks live in `*HttpApi`, and test cases assert business rules and observable behavior.
+`*ForError` methods are used only for negative cases, and successful methods do not delegate to `*ForError`.
 
 ## References
 

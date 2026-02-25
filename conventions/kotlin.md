@@ -8,6 +8,8 @@ Follow the official Kotlin coding conventions: <https://kotlinlang.org/docs/codi
 - Place `companion object` declarations at the end of the class.
 - Prefer imports over fully qualified names.
 - Use fully qualified names only to disambiguate name collisions.
+- Prefer Kotlin-generic APIs over Java `Class` tokens when both are available.
+- Prefer Kotlin extension functions over Java-style calls when both represent the same operation.
 - If a class body contains one or more functions, insert a blank line after `{` and before `}`.
 - Do not use deprecated APIs unless there is no practical alternative.
 - If you must use a deprecated API, justify it and record a removal plan.

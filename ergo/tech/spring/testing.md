@@ -9,6 +9,10 @@ Test cases must not call `WebTestClient` or `RestTestClient` directly.
 Test cases call HTTP entry points through `*HttpApi` fixtures APIs.
 For a step-by-step procedure, see `../../../skills/refactoring-http-tests-to-httpapi/SKILL.md`.
 
+When the project uses `MockMvcWebTestClient` (MockMvc-backed `WebTestClient`) to speed up tests, treat it as a `WebTestClient` implementation detail inside shared test infrastructure.
+Do not leak `MockMvc` or `MockMvcWebTestClient` knowledge into test cases.
+For a step-by-step procedure, see `../../../skills/migrating-spring-http-tests-to-mockmvc/SKILL.md`.
+
 ## Test Fixture Wiring
 
 Wire fixture components (`*TestApi`, `*FixturePresets`) into the Spring test context via a dedicated `*Conf` class in test sources.
@@ -43,6 +47,20 @@ For non-deterministic test cases (usually due to concurrency) where a given HTTP
 Expected errors are returned as values, while unexpected responses throw exceptions (fail-fast).
 Keep the set of expected errors centralized and reusable (for example `only(HttpStatus.CONFLICT with <errorCode>)`).
 For generic Kotlin types, decode using `ParameterizedTypeReference<T>` (or a project helper built on it).
+
+## `WebTestClient` request conventions (inside `*HttpApi`)
+
+Prefer a dedicated request builder DSL for cross-cutting concerns such as authentication headers.
+If many call sites build `Authorization: Bearer ...`, extract a helper like `authorized(token)` in shared test code and use it consistently.
+
+Prefer simple URI templates over `uri { uriBuilder -> ... }` when the URI is a static path with a small number of query parameters.
+This keeps diffs small and reduces incidental complexity in migrations.
+
+Do not use `ThreadLocal` to pick routing, base URLs, or per-test client configuration.
+Make the client and its base configuration explicit (constructor parameters or per-test wiring in shared infra).
+
+If the project uses a custom Jackson `ObjectMapper`, ensure the `WebTestClient` codecs use it.
+If the codecs are not aligned, migrations often fail with `CodecException` or `InvalidDefinitionException` and hide real behavior changes.
 
 ## Low-level technical details in test cases
 
