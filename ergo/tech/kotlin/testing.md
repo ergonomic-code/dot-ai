@@ -32,6 +32,7 @@ Avoid direct interaction with production code inside external scenario test case
 Conventions:
 
 * Create test data using `*ObjectMother` factories.
+* Follow `../jvm/coding-conventions/naming.md` for fixture-factory naming (`*ObjectMother` and similar components).
 * Call HTTP entry points only through `*HttpApi`.
 * In internal scenario tests, call the SUT directly in the Act step.
 * Use `*TestApi` for fixture setup and observation/asserts when reuse warrants a dedicated facade.

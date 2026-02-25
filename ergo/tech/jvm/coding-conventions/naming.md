@@ -54,6 +54,10 @@ Operation behavior constraints are defined in `../../../core/coding-conventions/
 - `Mock*Server` — a wrapper over a stubbing tool (for example WireMock) that owns stubs and defaults.
 - `*ObjectMother` — factories/builders for production data types used in tests.
 
+Rule.
+
+- In `*ObjectMother` (and similar fixture factories), method names that generate fixture objects and values must start with the `a` / `an` prefix (for example `aHotel`, `aRoom`, `aReservationPeriod`, `anObserver`, `anEvent`).
+
 ### Primitive resources (implementation details)
 
 - `*Dao` — a low-level persistence or infrastructure detail used to implement a higher-level Resource.

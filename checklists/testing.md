@@ -26,6 +26,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 
 - External scenario test cases call HTTP entry points only through `*HttpApi` and do not use `WebTestClient` or `RestTestClient` directly.
 - Complex fixture setup and insertion is implemented in `*FixturePresets`, using direct production calls or `*TestApi` when reuse warrants it.
+- Fixture data/object factory naming follows `../ergo/tech/jvm/coding-conventions/naming.md`.
 - Stubs are defined only in `Mock*Server` wrappers and are not registered ad-hoc in test cases.
 - Shared test infrastructure (boot, reset, clients) is extracted and reused.
 - After changing shared HTTP test infrastructure (client wiring, base URLs, codecs, MockMvc vs real transport), run a sentinel smoke set that covers routing, authentication, serialization, and architecture rules.
