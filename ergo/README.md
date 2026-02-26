@@ -13,6 +13,7 @@ Keep domain and project-specific information out of this layer.
 - [`tech/jvm/coding-conventions/packages.md`](tech/jvm/coding-conventions/packages.md) — Package layout conventions.
 - [`tech/jvm/coding-conventions/naming.md`](tech/jvm/coding-conventions/naming.md) — Component naming suffix taxonomy.
 - [`tech/kotlin/testing.md`](tech/kotlin/testing.md) — Kotlin testing conventions.
+- [`tech/kotlin/object-mothers-and-fixture-data.md`](tech/kotlin/object-mothers-and-fixture-data.md) — `*ObjectMother` conventions and fixture data generation rules.
 - [`tech/kotlin/ubiquitous-test-fixtures.md`](tech/kotlin/ubiquitous-test-fixtures.md) — A minimal baseline fixture pattern (SQL seed + `the*` references).
 - [`tech/spring/testing.md`](tech/spring/testing.md) — Spring testing conventions.
 - [`tech/spring/reusable-test-datasource.md`](tech/spring/reusable-test-datasource.md) — A reusable DB `DataSource` pattern for Spring integration tests.

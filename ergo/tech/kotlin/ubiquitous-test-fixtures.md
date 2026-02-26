@@ -15,6 +15,7 @@ Creating them through production code in every test can also be harder than inse
 - Use SQL scripts only for a minimal ubiquitous baseline fixture.
 - Treat everything else as scenario setup and build it via `*TestApi` and `*FixturePresets`.
 - For each baseline entity inserted by SQL, provide a `the*` constant (or value) in the relevant `*ObjectMother` so tests can reference it.
+- See `object-mothers-and-fixture-data.md` for `*ObjectMother` placement and naming conventions.
 
 ## SQL Baseline Fixture
 
@@ -50,12 +51,6 @@ object HotelsObjectMother {
 
 Keep `the*` values inside the relevant `*ObjectMother` object.
 If a `the*` value is shared across many fixtures, keep it near the top of the relevant `*ObjectMother`.
-
-## Scope and Naming
-
-- Place object mothers under `...tests.fixture.object_mothers...`.
-- Use `the*` prefix for baseline entities.
-- Use `a*` / `an*` prefix for generated fixture factories.
 
 ## Failure Modes
 

@@ -42,6 +42,7 @@ Conventions:
 
 See `../../../concepts/testing-testcode-architecture.md` for the normative test-layering model.
 See `ubiquitous-test-fixtures.md` for the minimal baseline fixture pattern (SQL seed + `the*` references).
+See `object-mothers-and-fixture-data.md` for conventions on coding `*ObjectMother` factories and fixture data generation.
 
 ## Kotlin-first APIs in tests
 
