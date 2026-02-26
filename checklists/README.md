@@ -7,6 +7,7 @@ Checklists are intended to be referenced from specs and skills as lightweight se
 
 - [`testing.md`](testing.md) — Testing and contracts.
 - [`git.md`](git.md) — Git hygiene and staging.
+- [`code-hygiene.md`](code-hygiene.md) — DRY pass, helpers, and duplication control.
 - [`data-model.md`](data-model.md) — Data model shape and invariants.
 - [`api-design.md`](api-design.md) — API contracts, DTO shape, and CQS.
 - [`operations.md`](operations.md) — Operations and function design.

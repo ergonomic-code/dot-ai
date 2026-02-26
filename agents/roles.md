@@ -110,7 +110,10 @@ Base rules:
 - follow git conventions (see `../conventions/git.md`);
 - when the task is to remove or phase out a dependency, do not add or keep convenience helpers for that dependency unless they are required by existing code;
 - when coding, avoid duplication (DRY), including in tests and string constants;
-- after the relevant tests are green, do a quick DRY pass over newly added/changed code;
+- before reporting task completion, enforce a DRY done gate:
+  - scan the diff of newly added/changed code and remove obvious duplication;
+  - if you introduce a new helper / abstraction, search the repository for an existing equivalent and reuse it instead;
+  - follow the code hygiene checklist (see `../checklists/code-hygiene.md`).
 - in tests, shared infrastructure (for example `WebTestClient` creation, base URLs, object mappers, common request builders) must be extracted to a base test or a dedicated fixture API rather than copy-pasted across test classes;
 - follow testing conventions and checklists (see `../ergo/tech/kotlin/testing.md`, `../ergo/tech/spring/testing.md`, and `../checklists/testing.md`);
 - for Spring Data JDBC repositories, follow `../ergo/tech/spring/data-jdbc.md`;
