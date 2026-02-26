@@ -21,6 +21,9 @@ Include:
 * User-provided runtime context that was part of the dialogue (for example IDE context blocks and environment context blocks).
 * A dedicated appendix with execution evidence (commands, changed files, test runs, errors) when it is available and relevant.
 
+ Export user messages verbatim.
+ Do not paraphrase, translate, “improve,” or normalize the wording.
+
 Do not include:
 
 * System/developer instructions (system prompt, developer message, sandbox/permission policy blocks).
@@ -85,6 +88,9 @@ If the chat contains multiple topics, ask which topic should be used for `brief.
 * `Artifacts`: final prompts, checklists, templates, commands, repository file references.
 * `Delta`: 1–3 concrete framework changes to shorten similar future work.
 * `Postmortem`: 5–10 lines on what worked and what did not.
+
+ When the brief includes user requests (for example in `Task`, `Definition of Done`, `Constraints`, `Friction`, or `Decisions`), copy them verbatim from the transcript.
+ Do not paraphrase, translate, “improve,” or normalize the wording.
 
 ### Sanitization and security
 
