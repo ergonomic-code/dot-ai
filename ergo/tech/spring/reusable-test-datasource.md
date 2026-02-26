@@ -36,6 +36,9 @@ If the same DB container and pool are reused across contexts, any missing reset 
 
 Reset the database state before each test (or at least before each test class) using a project-standard mechanism.
 
+If the suite needs a minimal ubiquitous baseline fixture (reference entities used as link targets across many tests), insert it via SQL during reset and expose stable `the*` references from `*ObjectMother`.
+See `../kotlin/ubiquitous-test-fixtures.md`.
+
 ## Reference Implementation (Spring Boot + Kotlin)
 
 Use a JVM-singleton holder for the container and the pool.

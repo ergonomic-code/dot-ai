@@ -41,6 +41,7 @@ Conventions:
 * Describe complex scenario setup as a `*Fixture` and insert it via `*FixturePresets` (using direct production calls or `*TestApi` when reuse warrants it, and stubbing wrappers).
 
 See `../../../concepts/testing-testcode-architecture.md` for the normative test-layering model.
+See `ubiquitous-test-fixtures.md` for the minimal baseline fixture pattern (SQL seed + `the*` references).
 
 ## Kotlin-first APIs in tests
 
