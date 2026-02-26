@@ -80,6 +80,15 @@ Create a short internal “evidence bundle” (notes in your working buffer; do 
 - For each `FIX_COMMIT`:
   - Record (a) what changed, (b) why (commit message), (c) what constraint it implies.
 
+Also analyze the most recent framework history to detect recurring failure modes:
+
+- Review the last 10 commits in the framework repository.
+- Infer which agent mistakes those commits were correcting (from diffs + commit messages).
+- Compare those mistake patterns against your current chat behavior.
+- If you find a match (you are repeating a previously-fixed mistake), stop and reconsider prevention:
+  - Think through why the prior prevention did not hold in this chat.
+  - Try a different prevention mechanism (a different framework lever), not just “be more careful”.
+
 Produce a table in your notes:
 
 - Fix commit → symptom (diff) → stated reason (message) → implied rule/constraint.
