@@ -4,6 +4,7 @@
 
 If you create a new file under any `src/` directory (for example `src/...` or `app-core/src/...`), add it to git in the same branch or PR.
 Do not leave new `*/src/**` files untracked locally at the end of the task.
+This is a blocking rule: do not send a task-completion message while any new `*/src/**` files remain untracked.
 
 ### How to verify
 

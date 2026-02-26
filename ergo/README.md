@@ -15,4 +15,5 @@ Keep domain and project-specific information out of this layer.
 - [`tech/kotlin/testing.md`](tech/kotlin/testing.md) — Kotlin testing conventions.
 - [`tech/spring/testing.md`](tech/spring/testing.md) — Spring testing conventions.
 - [`tech/spring/reusable-test-datasource.md`](tech/spring/reusable-test-datasource.md) — A reusable DB `DataSource` pattern for Spring integration tests.
+- [`tech/spring/testing-infrastructure-slices.md`](tech/spring/testing-infrastructure-slices.md) — An experimental pattern for composing test infrastructure from small slices instead of base test classes.
 - [`tech/spring/data-jdbc.md`](tech/spring/data-jdbc.md) — Spring Data JDBC repository conventions.

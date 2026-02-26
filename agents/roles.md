@@ -101,6 +101,11 @@ Base rules:
 - before committing or pushing any change, and before reporting task completion, run the relevant automated test suite(s) and ensure they pass;
 - if the test command is unknown, ask the user for the correct command (or find it in project docs/config) before proceeding with committing/pushing or reporting task completion;
 - before committing/pushing, and before reporting task completion, follow the git working tree hygiene procedure (see `../skills/git-working-tree-hygiene/SKILL.md`);
+- before reporting task completion, enforce a hard git gate for source files:
+  - run `git status --porcelain`;
+  - ensure there are no untracked files under any `*/src/**`;
+  - if new `*/src/**` files exist, stage them with `git add -- <path>` before final response;
+  - if there is an unstaged rename/move pair under `*/src/**` (`D` + `??`), stage both paths;
 - if any test fails, stop and fix the root cause (or revert the change) before making further commits;
 - follow git conventions (see `../conventions/git.md`);
 - when the task is to remove or phase out a dependency, do not add or keep convenience helpers for that dependency unless they are required by existing code;

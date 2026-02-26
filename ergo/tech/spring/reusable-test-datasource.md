@@ -3,6 +3,9 @@
 This document defines a reusable `DataSource` pattern for Spring integration tests.
 The goal is to reduce test runtime and friction by reusing a single connection pool and a single database container across multiple Spring test application contexts within one JVM test run.
 
+This pattern is typically used as the DB slice in a slice-composed test infrastructure.
+See `testing-infrastructure-slices.md`.
+
 ## Problem
 
 Spring integration tests often pay repeated costs for database wiring.
@@ -61,7 +64,7 @@ val dataSource: HikariDataSource by lazy {
 }
 
 @TestConfiguration
-class DbTestConfig {
+class DbTestConf {
   @Bean(destroyMethod = "")
   fun dataSource(): DataSource = dataSource
 }
@@ -86,7 +89,7 @@ If the test setup uses an `ApplicationContextInitializer` (for example a custom 
 * Remove the initializer from base test wiring.
 * Move container startup into the JVM-singleton holder (`by lazy`).
 * Provide a `@TestConfiguration` with a `DataSource` bean as shown above.
-* Ensure base integration tests import the config (for example via `@SpringBootTest(classes = [..., DbTestConfig::class])`).
+* Ensure base integration tests import the config (for example via `@SpringBootTest(classes = [..., DbTestConf::class])`).
 
 ## Verification
 
