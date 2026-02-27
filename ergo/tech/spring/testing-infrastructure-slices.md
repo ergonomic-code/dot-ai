@@ -61,105 +61,155 @@ To create or refactor test infrastructure into slices:
 This section sketches a minimal implementation approach for Spring Boot and JUnit 5.
 The exact split between annotations, configs, and extensions depends on your suite.
 
-### Runtime slice (JUnit extension + profile)
+### Runtime slice (`@RuntimeTest`)
 
-Use a JUnit extension for per-test runtime setup.
+Use a meta-annotation to centralize suite-wide runtime behavior.
+This slice is responsible for the test profile and per-test JUnit integration.
 
 ```kotlin
+package com.example.testinfra.annotations
+
 import org.junit.jupiter.api.extension.BeforeEachCallback
+import org.junit.jupiter.api.extension.ExtendWith
 import org.junit.jupiter.api.extension.ExtensionContext
+import org.springframework.test.context.ActiveProfiles
 
 object ResetRandomExtension : BeforeEachCallback {
   override fun beforeEach(context: ExtensionContext) {
     // Reset stable random seed and generators.
   }
 }
-```
-
-Attach it via a meta-annotation.
-TBD: document a stable-random-based test data generation pattern that stays reproducible and debuggable across the suite.
-
-```kotlin
-import org.junit.jupiter.api.extension.ExtendWith
-import org.springframework.test.context.ActiveProfiles
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
+@MustBeDocumented
 @ActiveProfiles("test")
 @ExtendWith(ResetRandomExtension::class)
-annotation class RuntimeSlice
+annotation class RuntimeTest
 ```
 
-### Resource slice (DB config)
+### Resource slice (`@DbTest`)
 
-Provide DB wiring through a dedicated `@TestConfiguration`.
-Prefer a reusable singleton `DataSource` holder when suites have multiple test contexts.
-Use the `DbTestConf` pattern described in `reusable-test-datasource.md`.
-
-Use `DbTestConf` as the implementation of the DB slice.
+Model the database as a single opt-in slice.
+This slice can import Spring configuration and also apply per-test DB reset rules.
+By default, `@Sql` runs before each test method.
 
 ```kotlin
+package com.example.testinfra.annotations
+
+import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Import
+import org.springframework.test.context.jdbc.Sql
+
+@TestConfiguration
+class DbTestConfig
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-@Import(DbTestConf::class)
-annotation class DbSlice
+@MustBeDocumented
+@RuntimeTest
+@Sql("classpath:db/reset-data.sql")
+@Import(DbTestConfig::class)
+annotation class DbTest
 ```
 
 ### Integration adapter slice (HTTP)
 
-Provide HTTP client wiring as a separate slice.
-Keep `RestTestClient` or `WebTestClient` knowledge out of test cases.
+Model SUT interaction as an adapter slice.
+This slice should provide a stable, test-friendly API that hides transport details like Spring MVC, JSON serialization, and ports.
+Prefer exposing a factory of domain-level HTTP clients instead of exposing transport clients directly.
 
 ```kotlin
-import org.springframework.boot.test.context.TestConfiguration
-import org.springframework.context.annotation.Bean
+package com.example.testinfra.annotations
 
-class HotelsHttpApi
+import org.springframework.boot.test.context.TestConfiguration
+import org.springframework.context.annotation.Import
 
 @TestConfiguration
-class HttpSliceConf {
-  @Bean
-  fun hotelsHttpApi(): HotelsHttpApi = HotelsHttpApi()
+class HttpClientTestConfig
+
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+@MustBeDocumented
+@Import(HttpClientTestConfig::class)
+annotation class HttpTest
+```
+
+To keep test code expressive, encapsulate HTTP transport into a factory bean and expose role-based clients.
+This prevents transport-level APIs (like `RestTestClient`) from leaking into test cases.
+`RestTestClient` is available in Spring Boot 4+.
+
+```kotlin
+package com.example.fixtures.clients
+
+import org.springframework.test.web.servlet.client.RestTestClient
+import tools.jackson.databind.json.JsonMapper
+
+class HttpClientFactory(
+    client: RestTestClient,
+    jsonMapper: JsonMapper
+) {
+    val aGuest = Guest(client, jsonMapper)
 }
 ```
 
-```kotlin
-import org.springframework.context.annotation.Import
+### Composed bundle (`@ApiTest`)
 
-@Target(AnnotationTarget.CLASS)
-@Retention(AnnotationRetention.RUNTIME)
-@Import(HttpSliceConf::class)
-annotation class HttpSlice
-```
-
-### Composed slice bundle (`@ApiTest`)
-
-When many tests share the same slice set, bundle it into a higher-level meta-annotation.
+When many tests share the same slice set, bundle it into a higher-level annotation.
+Bundles should remain a thin composition layer and not introduce new behavior.
 
 ```kotlin
+package com.example.testinfra.annotations
+
+import org.springframework.boot.SpringBootConfiguration
 import org.springframework.boot.test.context.SpringBootTest
 
+@SpringBootConfiguration
+class App
+
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-@RuntimeSlice
-@DbSlice
-@HttpSlice
-@SpringBootTest(classes = [HotelsApp::class])
+@MustBeDocumented
+@RuntimeTest
+@DbTest
+@HttpTest
+@SpringBootTest(
+  classes = [App::class],
+  webEnvironment = SpringBootTest.WebEnvironment.MOCK
+)
 annotation class ApiTest
+```
+
+### Narrower bundle (`@JdbcSliceTest`)
+
+When the SUT interaction does not require HTTP, compose a narrower bundle.
+
+```kotlin
+package com.example.testinfra.annotations
+
+import org.springframework.boot.data.jdbc.test.autoconfigure.DataJdbcTest
+import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase
+import org.springframework.boot.test.context.TestConfiguration
+import org.springframework.context.annotation.Import
+
+@TestConfiguration
+class JdbcConfig
+
+@Target(AnnotationTarget.CLASS)
+@Retention(AnnotationRetention.RUNTIME)
+@MustBeDocumented
+@DbTest
+@DataJdbcTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Import(JdbcConfig::class)
+annotation class JdbcSliceTest
 ```
 
 ### Composed test
 
-A composed test opts into only the slices it needs.
-
-```kotlin
-@ApiTest
-class ReserveRoomApiOpTest {
-  // Inject only slice-provided fixtures needed by the test.
-}
-```
+Tests pick the smallest bundle that provides what they need.
+Avoid abstract base test classes.
+If you need shared client fixtures, expose them as beans and inject them.
 
 ## Verification
 
