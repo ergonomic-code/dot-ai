@@ -5,7 +5,7 @@ description: "Reverse engineering an effects diagram from existing code (when re
 
 # Effects diagram: reverse engineering from code
 
-See the definition and format of the diagram in `concepts/effects-diagram.md`.
+See the definition and format of the diagram in `../../concepts/effects-diagram.md`.
 
 ## Input
 
@@ -21,7 +21,7 @@ See the definition and format of the diagram in `concepts/effects-diagram.md`.
 
 ## Output
 
-* Effects diagram in `DIAGRAM_PATH` using the format defined in `concepts/effects-diagram.md`.
+* Effects diagram in `DIAGRAM_PATH` using the format defined in `../../concepts/effects-diagram.md`.
 * Mermaid visual representation of the diagram (if `DIAGRAM_VISUAL_PATH` is specified).
 * A short report at the end of the response:
 
@@ -51,7 +51,7 @@ See the definition and format of the diagram in `concepts/effects-diagram.md`.
 8. Generate a list of questions.
    Ask only about `TBD` items that affect behavioral boundaries (for example, unclear writes/integrations).
 9. Save the diagram to `DIAGRAM_PATH`.
-10. If `DIAGRAM_VISUAL_PATH` is specified, generate a Mermaid representation according to the rules in `concepts/effects-diagram.md` and save it.
+10. If `DIAGRAM_VISUAL_PATH` is specified, generate a Mermaid representation according to the rules in `../../concepts/effects-diagram.md` and save it.
 
 ## Code search hints (optional)
 
@@ -77,3 +77,4 @@ See `../../ergo/tech/jvm/coding-conventions/naming.md` and `../../ergo/tech/jvm/
 
 * If the diagram turns into a “call graph,” stop and raise the abstraction level to operations with external intent.
 * If a single operation performs 2+ independent `write`s, explicitly highlight the coupling risk and suggest clarifying transactional boundaries and possible decoupling options.
+* Do not model cross-cutting technical concerns (e.g., centralized error handling, technical logging) unless they are business-significant external effects (see `../../concepts/effects-diagram.md`).

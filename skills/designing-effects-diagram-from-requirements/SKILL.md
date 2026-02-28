@@ -5,7 +5,7 @@ description: "Building an effects diagram from requirements (user stories, scena
 
 # Effects diagram: design new diagram from requirements
 
-See the definition and format of the diagram in `concepts/effects-diagram.md`.
+See the definition and format of the diagram in `../../concepts/effects-diagram.md`.
 
 ## Input
 
@@ -38,10 +38,10 @@ See the definition and format of the diagram in `concepts/effects-diagram.md`.
 6. Add triggers (`triggers`).  
    Link events to operations.
 7. Validation and questions.  
-   Check invariants from `concepts/effects-diagram.md`.  
+   Check invariants from `../../concepts/effects-diagram.md`.  
    Produce a minimal list of questions resolving `TBD` in `write` effects and input events.
 8. Save the result to `TARGET_DIAGRAM_PATH`.
-9. If `TARGET_DIAGRAM_VISUAL_PATH` is provided, generate a Mermaid representation according to the rules in `concepts/effects-diagram.md` and save it.
+9. If `TARGET_DIAGRAM_VISUAL_PATH` is provided, generate a Mermaid representation according to the rules in `../../concepts/effects-diagram.md` and save it.
 
 ## Minimal order of clarification questions
 
@@ -58,3 +58,4 @@ Ask questions strictly in order of impact on system behavior.
 - If requirements describe user steps, do not convert them directly into operations.  
   Operations must describe system intentions and its effects on resources.
 - If an operation results in multiple independent `write` effects, explicitly highlight the risk and request clarification on consistency constraints.
+- Do not model cross-cutting technical concerns (e.g., centralized error handling, technical logging) unless they are business-significant external effects (see `../../concepts/effects-diagram.md`).

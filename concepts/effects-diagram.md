@@ -229,6 +229,10 @@ and second as user feedback only when clarification or scope decisions are requi
   Symptom: “resource” equals internal module/class name without state.
   Message: an effect is interaction with environmental resources, not a function call.
 
+* **Cross-cutting technical concerns modeled as business effects.**
+  Symptom: “centralized error handling” (e.g., framework-level exception mapping) or technical logging is added as an operation/resource/effect.
+  Message: do not model technical error handling and logging in the effects diagram unless it is a business-significant external effect (e.g., audit/compliance log as a required integration).
+
 * **Operation writes to multiple independent resources without explicit reason.**
   Symptom: 2+ `write` effects to resources with different lifecycles.
   Message: verify necessity, transactional requirements, and decoupling options.
@@ -240,8 +244,8 @@ and second as user feedback only when clarification or scope decisions are requi
 This section describes the tool-level skill: how the agent applies the concept.
 Concrete local workflow skills are defined in:
 
-* `skills/effects-diagram-reverse-from-code/SKILL.md`
-* `skills/effects-diagram-update-from-requirements/SKILL.md`
+* `skills/reverse-engineering-effects-diagram/SKILL.md`
+* `skills/designing-effects-diagram-from-requirements/SKILL.md`
 
 ### 3.1. Usage triggers
 
