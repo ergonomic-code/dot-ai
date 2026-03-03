@@ -16,6 +16,7 @@ Keep domain and project-specific information out of this layer.
 - [`tech/kotlin/object-mothers-and-fixture-data.md`](tech/kotlin/object-mothers-and-fixture-data.md) — `*ObjectMother` conventions and fixture data generation rules.
 - [`tech/kotlin/ubiquitous-test-fixtures.md`](tech/kotlin/ubiquitous-test-fixtures.md) — A minimal baseline fixture pattern (SQL seed + `the*` references).
 - [`tech/spring/testing.md`](tech/spring/testing.md) — Spring testing conventions.
+- [`tech/spring/dependency-injection.md`](tech/spring/dependency-injection.md) — Spring dependency injection conventions.
 - [`tech/spring/reusable-test-datasource.md`](tech/spring/reusable-test-datasource.md) — A reusable DB `DataSource` pattern for Spring integration tests.
 - [`tech/spring/testing-infrastructure-slices.md`](tech/spring/testing-infrastructure-slices.md) — An experimental pattern for composing test infrastructure from small slices instead of base test classes.
 - [`tech/spring/data-jdbc.md`](tech/spring/data-jdbc.md) — Spring Data JDBC repository conventions.
