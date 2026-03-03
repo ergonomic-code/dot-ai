@@ -14,6 +14,8 @@ Follow the official Kotlin coding conventions: <https://kotlinlang.org/docs/codi
 - Do not use deprecated APIs unless there is no practical alternative.
 - If you must use a deprecated API, justify it and record a removal plan.
 - If a private helper does not use class state, prefer a top-level `private` function over a private member method.
+- If such a helper is naturally expressed as an extension on a receiver type and does not require access to the receiver's private or protected state, prefer a top-level `private fun Receiver.helper(...)` extension over a private member method.
+- Keep the helper inside the class only when it must access private class state, when it forms part of the class's internal contract, or when co-locating it materially improves readability.
 - Avoid overload sets of generic functions that collide on JVM type erasure, and prefer distinct names (or `@JvmName`) when Java interop is required.
 
 ## Rule: Prefer constructor parameters and immutable properties
