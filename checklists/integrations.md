@@ -13,6 +13,11 @@ Primary reference is `../conventions/contracts.md` and `../conventions/ea-princi
 - For each critical integration, tests verify the observable effect and the reaction to typical failures.
 - Fakes or emulators are preferred for expensive or unstable external dependencies.
 
+## DSL semantics
+
+- If the integration uses a DSL with non-obvious semantics, restate the logic in the DSL terms and validate it with explicit examples.
+- If the DSL has size, ordering, or expressiveness limits, make those limits explicit and design within them.
+
 ## Links
 
 - Contracts: `../conventions/contracts.md`.

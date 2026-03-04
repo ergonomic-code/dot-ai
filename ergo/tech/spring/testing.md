@@ -20,6 +20,14 @@ Prefer `@ComponentScan` (or `@Import`) on the config class, and include it in `@
 In Spring Boot tests, prefer `@TestConfiguration` for such configs.
 With `@ComponentScan` without explicit packages, scanning defaults to the package of the config class.
 
+Avoid bean name collisions between scanned `@Component` fixtures and explicit `@Bean` factory methods.
+
+- By default, `FooBar` becomes bean name `fooBar`.
+- For `@Bean` methods, the default bean name is the factory method name.
+- A scanned `@Component class UsersTestApi` and a `@Bean fun usersTestApi(): UsersTestApi` share the same bean name and may override or conflict.
+- Prefer unique names for factory beans (for example `@Bean(name = ["integrationDbTestApi"])`) or rename the method to avoid colliding with fixture component names.
+- When a fixture bean is unexpectedly missing at runtime (`NoSuchBeanDefinitionException`), first suspect a naming collision before rewriting the wiring.
+
 Avoid introducing an `@Component` that aggregates multiple fixture beans only to make injection “convenient”.
 Such an aggregator defeats `spring.main.lazy-initialization` and pulls unrelated fixture code into tests that do not need it.
 

@@ -6,6 +6,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.D5, EA.F4, EA.F7) and
 
 - Canonical terms are consistent across HTTP/RPC, domain, persistence, and integrations.
 - If a concept exists on multiple surfaces, a contract map explicitly documents naming, encoding, and sources of truth.
+- If a field has multiple plausible sources of truth (query params, stored profile, headers), explicitly pick one and document it.
 
 ## Model shape
 
@@ -30,6 +31,11 @@ Primary reference is `../conventions/ea-principles.md` (EA.D5, EA.F4, EA.F7) and
 - Expected dependency failures return 502.
 - Backend outage/unavailability uses 503/504 (usually infrastructure).
 - Unexpected server failures return 500.
+
+## OpenAPI
+
+- Any change to an externally consumed HTTP contract is reflected in OpenAPI in the same change set.
+- In OpenAPI 3, extract repeated enums and string value sets into reusable `components/schemas` entries and reference them via `$ref`.
 
 ## Links
 

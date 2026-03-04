@@ -39,6 +39,9 @@ Conventions:
 * Keep each `*TestApi` scoped to one resource.
 * Set up DB state via `*TestApi` and/or `*FixturePresets`, not SQL scripts, except for a minimal ubiquitous standard fixture.
 * Describe complex scenario setup as a `*Fixture` and insert it via `*FixturePresets` (using direct production calls or `*TestApi` when reuse warrants it, and stubbing wrappers).
+* In scenario tests, build expected outputs from the test inputs (request DTOs or fixture factories), not from intermediate domain/view structures or database round-trips.
+* In test cases, mention only the inputs and observable outputs of the scenario, not helper projections or internal representations.
+* Keep the test script minimal, and introduce time shifts, flushes, or extra queries only when they are required to observe the behavior under test.
 
 See `../../../concepts/testing-testcode-architecture.md` for the normative test-layering model.
 See `ubiquitous-test-fixtures.md` for the minimal baseline fixture pattern (SQL seed + `the*` references).
@@ -55,6 +58,8 @@ See `../../../conventions/kotlin.md`.
 ## Naming
 
 Prefer naming that reads as a requirement in test reports.
+Prefer business/domain language over implementation language in those requirements.
+Avoid leaking internal type names and helper projections into test names.
 
 ### Class `@DisplayName`
 
@@ -88,3 +93,10 @@ If the prompt is ambiguous, ask one clarifying question before editing.
 Do not use non-deterministic randomness in tests.
 
 If randomized input is required, use [datafaker](https://www.datafaker.net/) and custom wrappers in a way that keeps generation controlled.
+
+## Property-based tests (unit level)
+
+Use property-based tests only for unit tests of pure logic and invariants, and only when the project already has the tooling.
+Prefer expressing invariants as properties over enumerating a fixed set of examples.
+Keep generation bounded and reproducible (for example by fixing seeds and the number of cases).
+Do not introduce new property-testing dependencies as part of a task unless the user explicitly asks.
