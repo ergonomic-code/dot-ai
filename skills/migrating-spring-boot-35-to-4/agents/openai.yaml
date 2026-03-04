@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spring Boot 3.5 to 4 Migration"
+  short_description: "Migrate Spring Boot 3.5 projects to Spring Boot 4"
+  default_prompt: "Use $migrating-spring-boot-35-to-4 to migrate a project from Spring Boot 3.5 to Spring Boot 4 by mapping errors to the inlined KB under assets/migration-kb/spring-boot-4/ and applying evidenced fixes."

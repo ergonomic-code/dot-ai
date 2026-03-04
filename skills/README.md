@@ -30,3 +30,7 @@ Each skill lives in its own directory and is defined by a `SKILL.md` file with Y
 
 - [`designing-effects-diagram-from-requirements/SKILL.md`](designing-effects-diagram-from-requirements/SKILL.md) — Build a new effects diagram from requirements.
 - [`reverse-engineering-effects-diagram/SKILL.md`](reverse-engineering-effects-diagram/SKILL.md) — Reverse engineer an effects diagram from existing code.
+
+## Platform migration workflows
+
+- [`migrating-spring-boot-35-to-4/SKILL.md`](migrating-spring-boot-35-to-4/SKILL.md) — Migrate a codebase from Spring Boot 3.5 to Spring Boot 4 using the evidence-based migration KB.

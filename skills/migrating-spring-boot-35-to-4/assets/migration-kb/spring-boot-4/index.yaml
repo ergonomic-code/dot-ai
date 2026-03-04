@@ -1,0 +1,156 @@
+issues:
+  - id: sb4-0001
+    title: "Kotlin compilation fails due to stricter nullability metadata in Spring APIs"
+    stage: compile
+    projects:
+      - ergo-arch-hotels
+      - qg-repo-main
+    confidence: high
+    affected_components:
+      - spring-web
+      - spring-data-jdbc
+      - kotlin
+    pattern: sb4p-001
+  - id: sb4-0002
+    title: "Kotlin property access syntax breaks for Java setters ('val' cannot be reassigned)"
+    stage: compile
+    projects:
+      - qg-repo-main
+      - el-repo-i9s-emias-main
+    confidence: high
+    affected_components:
+      - spring-security
+      - kotlin
+    pattern: sb4p-005
+  - id: sb4-0003
+    title: "DaoAuthenticationProvider API change breaks test security configuration"
+    stage: compile
+    projects:
+      - qg-repo-main
+    confidence: high
+    affected_components:
+      - security
+    pattern: null
+  - id: sb4-0004
+    title: "Spring Boot autoconfiguration classes move out of org.springframework.boot.autoconfigure.*"
+    stage: compile
+    projects:
+      - qg-repo-main
+    confidence: high
+    affected_components:
+      - spring-boot-autoconfigure
+      - security
+    pattern: sb4p-003
+  - id: sb4-0005
+    title: "TypeInformation moves from org.springframework.data.util to org.springframework.data.core"
+    stage: compile
+    projects:
+      - qg-repo-main
+    confidence: high
+    affected_components:
+      - spring-data
+    pattern: null
+  - id: sb4-0006
+    title: "Spring Data JDBC Kotlin helpers break due to RowMapper and Converter signature changes"
+    stage: compile
+    projects:
+      - qg-repo-main
+    confidence: high
+    affected_components:
+      - spring-jdbc
+      - spring-data-jdbc
+    pattern: sb4p-001
+  - id: sb4-0007
+    title: "Jackson 3 repackaging to tools.jackson breaks imports and custom deserializers"
+    stage: compile
+    projects:
+      - qg-repo-main
+      - el-repo-i9s-emias-main
+    confidence: high
+    affected_components:
+      - jackson
+    pattern: sb4p-002
+  - id: sb4-0008
+    title: "JavaTimeModule import and registration fails in tests during Jackson 3 migration"
+    stage: compile
+    projects:
+      - ergo-arch-hotels
+    confidence: high
+    affected_components:
+      - jackson
+    pattern: sb4p-002
+  - id: sb4-0009
+    title: "RestAssured upgrade resolves NullPointerException in tests after Jackson 3 migration"
+    stage: test
+    projects:
+      - qg-repo-main
+    confidence: medium
+    affected_components:
+      - jackson
+      - testing
+    pattern: sb4p-002
+  - id: sb4-0010
+    title: "Oversized multipart requests stop returning an empty 413 response"
+    stage: test
+    projects:
+      - qg-repo-main
+    confidence: medium
+    affected_components:
+      - spring-web
+      - tomcat
+    pattern: null
+  - id: sb4-0011
+    title: "DuplicateKeyException handling changes in Spring Data JDBC"
+    stage: test
+    projects:
+      - el-repo-config-main
+      - qg-repo-main
+    confidence: medium
+    affected_components:
+      - spring-data-jdbc
+    pattern: sb4p-004
+  - id: sb4-0012
+    title: "logstash-logback-encoder decorator API changes to MapperBuilderDecorator"
+    stage: compile
+    projects:
+      - el-repo-i9s-emias-main
+    confidence: high
+    affected_components:
+      - logging
+      - jackson
+    pattern: sb4p-002
+  - id: sb4-0013
+    title: "Unresolved reference 'list' in DAOs after Spring Boot 4 upgrade"
+    stage: compile
+    projects:
+      - qg-repo-main
+    confidence: low
+    affected_components:
+      - spring-data-jdbc
+    pattern: null
+
+patterns:
+  - id: sb4p-001
+    title: "Kotlin compilation breaks due to stricter nullability metadata"
+    related_issues:
+      - sb4-0001
+      - sb4-0006
+  - id: sb4p-002
+    title: "Jackson 3 migration to tools.jackson and ecosystem compatibility"
+    related_issues:
+      - sb4-0007
+      - sb4-0008
+      - sb4-0009
+      - sb4-0012
+  - id: sb4p-003
+    title: "Spring Boot autoconfiguration package relocation"
+    related_issues:
+      - sb4-0004
+  - id: sb4p-004
+    title: "DuplicateKeyException propagation changes in Spring Data JDBC"
+    related_issues:
+      - sb4-0011
+  - id: sb4p-005
+    title: "Kotlin property access syntax breaks for Java setters"
+    related_issues:
+      - sb4-0002
