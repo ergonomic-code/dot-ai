@@ -20,6 +20,22 @@ Exceptions:
 - Build artifacts and generated outputs that belong in `.gitignore`.
 - Temporary local files.
 
+## Rule: Task-created files are tracked (even outside `src/`)
+
+If you create a new file that is part of the task deliverable (docs, configs, scripts), add it to git in the same branch or PR.
+Do not leave task-created deliverables untracked locally at the end of the task.
+If you are unsure whether an untracked file is a deliverable or a local artifact, stop and ask.
+
+### How to verify
+
+Run `git status --porcelain` and review `??` entries for task-created deliverables.
+Optionally run `git ls-files --others --exclude-standard` for a focused list of untracked files.
+
+### How to fix
+
+Stage new files with `git add -- <path>`.
+Prefer explicit paths over `git add -A` unless the user explicitly asks to stage everything.
+
 ## Rule: Renames and moves are staged (especially under `src/`)
 
 If you rename or move a tracked file, stage the rename before reporting task completion or making a commit.
