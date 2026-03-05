@@ -35,6 +35,8 @@ If the project provides JSON schemas, validate both request and response bodies 
 If the client validates the same response body against multiple schemas (for example, “success” vs “error”), keep diagnostics for all failed validations.
 Do not name a successful method as `*ForError`, and do not implement a successful method by calling `*ForError` internally.
 If a `*ForError` method becomes unused after migration, delete it instead of keeping it “just in case”.
+When a negative case needs to send invalid or raw transport values that cannot be represented in the typed controller contract (for example an unknown enum value), add a raw `*ForResponse` overload (for example `queryParams: Map<String, String?>`) and delegate typed overloads to it.
+Do not add one-off methods like `getXForResponseWithRawY` for each such case.
 
 In Kotlin, prefer Kotlin-generic APIs over Java `Class` tokens where possible.
 For example, prefer `.expectBody<T>()` over `.expectBody(T::class.java)` when both are available.

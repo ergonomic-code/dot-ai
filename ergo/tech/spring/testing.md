@@ -58,6 +58,10 @@ See `reusable-test-datasource.md` for a reference implementation and failure mod
 Public `*HttpApi` methods accept and return the same Kotlin types as the corresponding controller method parameters and return type.
 Do not introduce intermediate `*Request` or `*Response` DTOs in tests or fixtures when the controller already defines the transport contract.
 Use the `*ForResponse` pattern to expose a response spec for HTTP-level assertions in tests.
+Keep one canonical request-building implementation for each operation.
+When negative and edge cases need raw or out-of-contract transport values, add an explicit escape hatch to `*ForResponse` (for example raw query parameters as `Map<String, String?>`).
+Prefer typed overloads that delegate to the canonical method.
+Do not introduce a new `*HttpApi` method for each invalid parameter case.
 Use the `*ForError` pattern for negative cases to validate the error contract and return a typed error representation or a response spec.
 For non-deterministic test cases (usually due to concurrency) where a given HTTP call may legitimately succeed or return an expected error, prefer the `*ForOutcome` pattern.
 `*ForOutcome` returns a typed value outcome (for example `HttpOutcome<SuccessBody, ErrorBody>`).

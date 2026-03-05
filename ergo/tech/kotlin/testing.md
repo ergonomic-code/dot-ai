@@ -38,6 +38,7 @@ Conventions:
 * Use `*TestApi` for fixture setup and observation/asserts when reuse warrants a dedicated facade.
 * Keep each `*TestApi` scoped to one resource.
 * Set up DB state via `*TestApi` and/or `*FixturePresets`, not SQL scripts, except for a minimal ubiquitous standard fixture.
+* When creating multiple fixtures of the same kind, prefer bulk helpers (for example `createXList` or `saveAll`) over repeating a single-object helper in a loop.
 * Describe complex scenario setup as a `*Fixture` and insert it via `*FixturePresets` (using direct production calls or `*TestApi` when reuse warrants it, and stubbing wrappers).
 * In scenario tests, build expected outputs from the test inputs (request DTOs or fixture factories), not from intermediate domain/view structures or database round-trips.
 * In test cases, mention only the inputs and observable outputs of the scenario, not helper projections or internal representations.
