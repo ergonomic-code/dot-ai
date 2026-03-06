@@ -109,6 +109,8 @@ Base rules:
 - if tests exist, work via TDD;
 - before committing or pushing any change, and before reporting task completion, run the relevant automated test suite(s) and ensure they pass;
 - if the test command is unknown, ask the user for the correct command (or find it in project docs/config) before proceeding with committing/pushing or reporting task completion;
+- if the user, task artifact, or project docs provide an exact verification or acceptance command, treat that exact command as the authoritative done gate;
+- you may use smaller or faster checks while iterating, but do not report success or invent follow-up fixes based on a weaker verification scenario unless the user explicitly approves that substitution;
 - before committing/pushing, and before reporting task completion, follow the git working tree hygiene procedure (see `../skills/git-working-tree-hygiene/SKILL.md`);
 - before reporting task completion, enforce a hard git gate for source files:
   - run `git status --porcelain`;
@@ -124,6 +126,8 @@ Base rules:
   - if you introduce a new helper / abstraction, search the repository for an existing equivalent and reuse it instead;
   - follow the code hygiene checklist (see `../checklists/code-hygiene.md`).
 - in tests, shared infrastructure (for example `WebTestClient` creation, base URLs, object mappers, common request builders) must be extracted to a base test or a dedicated fixture API rather than copy-pasted across test classes;
+- when editing existing tests, preserve the touched file's established scenario structure and naming style (for example `// Given`, `// When`, `// Then`, business-language names, and the current transport boundary) unless the prompt explicitly asks for a migration;
+- do not delete or replace existing tests merely to satisfy coverage or make the build green without proving that the removed test is redundant or wrong, or without explicit user approval when coverage intent changes;
 - follow testing conventions and checklists (see `../ergo/tech/kotlin/testing.md`, `../ergo/tech/spring/testing.md`, and `../checklists/testing.md`);
 - for Spring Data JDBC repositories, follow `../ergo/tech/spring/data-jdbc.md`;
 - follow technology conventions (see `../ergo/tech/`) and project-local conventions (see `<project-local>/...`);

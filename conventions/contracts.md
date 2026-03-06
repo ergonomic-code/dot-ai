@@ -23,6 +23,18 @@ Use a table that maps the same concept across:
 
 This contract map is a primary rework minimizer.
 
+## Rule: Derive client-shaped contracts from actual consumers
+
+When one capability is split into client-specific contract variants (for example admin vs mobile), shape each variant from actual consumer evidence rather than guesswork.
+At minimum, record the consumer or surface name, the reused contract elements, the intentionally omitted parameters or fields, and the evidence source.
+
+Rules:
+
+- Keep only parameters and fields that are justified by explicit evidence or an explicit compatibility requirement.
+- Do not remove, default, or rename a parameter or field only because it “looks unused”.
+- Treat “parameter omitted” and “parameter sent with a default value” as different contract states when server behavior differs.
+- If evidence is missing and compatibility risk is material, inspect the actual consumer or ask the user before finalizing the contract.
+
 ## Rule: No isomorphic DTOs (DTO == domain)
 
 An isomorphic DTO is a DTO type that is identical to the domain model in:

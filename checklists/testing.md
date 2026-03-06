@@ -24,6 +24,11 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 - In external scenario (HTTP/API) tests, prefer asserting the HTTP contract plus observable effects (published messages, outgoing calls, follow-up queries) over inspecting internal persistence or command-storage details.
 - Mocks are used only for unmanaged external dependencies and for simulating failures.
 
+## Editing existing tests
+
+- Preserve the touched file's established `// Given`, `// When`, `// Then` block structure and local naming style unless the task explicitly migrates them.
+- Do not delete or replace scenario tests merely to satisfy coverage or make a failing suite pass without proving redundancy or explicit approval.
+
 ## Naming
 
 - Test case names read as requirements and use the project's business/domain language.
@@ -32,6 +37,8 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 ## Test architecture
 
 - External scenario test cases call HTTP entry points only through `*HttpApi` and do not use `WebTestClient` or `RestTestClient` directly.
+- For new tests, and for changes that explicitly migrate test boundaries, controller behavior, routing, binding, validation, security, and default request semantics must be verified through the HTTP/MVC boundary (`*HttpApi` or an MVC slice), not a direct controller call.
+- When editing an existing test without explicit migration scope, the preservation rule above takes priority over boundary modernization by default.
 - Complex fixture setup and insertion is implemented in `*FixturePresets`, using direct production calls or `*TestApi` when reuse warrants it.
 - Fixture data/object factory naming follows `../ergo/tech/jvm/coding-conventions/naming.md`.
 - Stubs are defined only in `Mock*Server` wrappers and are not registered ad-hoc in test cases.

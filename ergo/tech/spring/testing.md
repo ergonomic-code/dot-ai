@@ -60,6 +60,8 @@ Do not introduce intermediate `*Request` or `*Response` DTOs in tests or fixture
 Use the `*ForResponse` pattern to expose a response spec for HTTP-level assertions in tests.
 Keep one canonical request-building implementation for each operation.
 When negative and edge cases need raw or out-of-contract transport values, add an explicit escape hatch to `*ForResponse` (for example raw query parameters as `Map<String, String?>`).
+If a scenario depends on a parameter being omitted entirely, add a raw or relaxed overload that can omit keys instead of serializing a typed request object with defaults.
+Do not silently turn “parameter omitted” into “parameter sent with a default value” inside typed helpers.
 Prefer typed overloads that delegate to the canonical method.
 Do not introduce a new `*HttpApi` method for each invalid parameter case.
 Use the `*ForError` pattern for negative cases to validate the error contract and return a typed error representation or a response spec.
@@ -83,6 +85,21 @@ Make the client and its base configuration explicit (constructor parameters or p
 
 If the project uses a custom Jackson `ObjectMapper`, ensure the `WebTestClient` codecs use it.
 If the codecs are not aligned, migrations often fail with `CodecException` or `InvalidDefinitionException` and hide real behavior changes.
+
+## Spring MVC binding pitfall: `@ModelAttribute` and Kotlin default arguments
+
+In Spring MVC controllers, do not rely on a Kotlin default argument on an `@ModelAttribute` parameter to represent omitted request input.
+Spring request binding and Kotlin call-site defaults are separate mechanisms.
+Model omission and default semantics via the bound type, explicit request parameters, or another framework-supported mechanism instead of a controller-method default argument.
+Verify the observable behavior through an MVC-level request test, not through a direct controller call.
+
+## Controller-boundary coverage
+
+For new tests, and for changes that explicitly migrate test boundaries, execute controller behavior, routing, request binding, validation, security, and HTTP default-semantics checks through Spring MVC.
+Use `*HttpApi` or an MVC slice test for those scenarios.
+Do not call controller methods directly for MVC-boundary behavior, because direct calls bypass routing, argument binding, validation, and security.
+When editing an existing test without explicit migration scope, preserve its current boundary by default and treat boundary migration as a separate change.
+If you intentionally write a pure unit test for controller-local branching, say that explicitly in the test and keep it separate from API or endpoint coverage.
 
 ## Low-level technical details in test cases
 

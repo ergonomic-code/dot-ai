@@ -8,6 +8,13 @@ Primary reference is `../conventions/ea-principles.md` (EA.D5, EA.F4, EA.F7) and
 - If a concept exists on multiple surfaces, a contract map explicitly documents naming, encoding, and sources of truth.
 - If a field has multiple plausible sources of truth (query params, stored profile, headers), explicitly pick one and document it.
 
+## Surface strategy
+
+- Before changing paths or splitting an endpoint family, explicitly decide the surface strategy: prefix vs suffix, versioning, client split, compatibility paths, and any local rule about class-level prefixes.
+- Keep the chosen surface strategy aligned across controllers, OpenAPI, test clients, and auth rules.
+- When an endpoint moves between public and admin surfaces, update the authorization rules in the same change set.
+- If the user asks to keep only the necessary parameters or fields, treat omitted vs explicitly defaulted request input as a contract decision and cover that behavior in tests.
+
 ## Model shape
 
 - API models do not encode “modes” as sets of optional/nullable fields.

@@ -36,7 +36,9 @@ If the client validates the same response body against multiple schemas (for exa
 Do not name a successful method as `*ForError`, and do not implement a successful method by calling `*ForError` internally.
 If a `*ForError` method becomes unused after migration, delete it instead of keeping it “just in case”.
 When a negative case needs to send invalid or raw transport values that cannot be represented in the typed controller contract (for example an unknown enum value), add a raw `*ForResponse` overload (for example `queryParams: Map<String, String?>`) and delegate typed overloads to it.
+If a scenario depends on a query parameter being omitted entirely, add a raw or relaxed overload that can omit keys, and use it instead of a typed request object that serializes defaults.
 Do not add one-off methods like `getXForResponseWithRawY` for each such case.
+Do not replace controller-boundary coverage with direct controller method calls during the migration.
 
 In Kotlin, prefer Kotlin-generic APIs over Java `Class` tokens where possible.
 For example, prefer `.expectBody<T>()` over `.expectBody(T::class.java)` when both are available.
@@ -51,6 +53,7 @@ No test case uses `WebTestClient` or `RestTestClient` directly.
 `*HttpApi` public method signatures match the corresponding controller contracts.
 Transport-contract checks live in `*HttpApi`, and test cases assert business rules and observable behavior.
 `*ForError` methods are used only for negative cases, and successful methods do not delegate to `*ForError`.
+Scenarios that depend on omitted parameters preserve that omission at the HTTP boundary.
 
 ## References
 
