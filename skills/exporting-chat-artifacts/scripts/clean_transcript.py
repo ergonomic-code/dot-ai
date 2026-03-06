@@ -13,29 +13,6 @@ class Section:
     body: str
 
 
-BAD_MARKERS_MINIMAL = [
-    r"^# AGENTS\.md instructions",
-    r"^<INSTRUCTIONS>",
-    r"^<permissions instructions>",
-    r"^<environment_context>",
-    r"^# Context from my IDE setup:",
-    r"^## My request for Codex:",
-    r"^## Open tabs:",
-    r"^## Active file:",
-    r"^## Active selection of the file:",
-    r"^developer message",
-    r"^system prompt",
-]
-
-BAD_MARKERS_VERBOSE = [
-    r"^<permissions instructions>",
-    r"^developer message",
-    r"^system prompt",
-]
-
-BAD_RE_MINIMAL = re.compile("|".join(f"(?:{p})" for p in BAD_MARKERS_MINIMAL), flags=re.MULTILINE)
-BAD_RE_VERBOSE = re.compile("|".join(f"(?:{p})" for p in BAD_MARKERS_VERBOSE), flags=re.MULTILINE)
-
 AGENTS_BLOCK_RE = re.compile(r"(?s)^# AGENTS\.md instructions.*?</INSTRUCTIONS>\s*", re.MULTILINE)
 PERMISSIONS_BLOCK_RE = re.compile(r"(?s)<permissions instructions>.*?</permissions instructions>\s*", re.MULTILINE)
 ENV_BLOCK_RE = re.compile(r"(?s)<environment_context>.*?</environment_context>\s*", re.MULTILINE)
@@ -148,7 +125,8 @@ def clean_user_body(body: str, *, mode: str) -> str:
     text = AGENTS_BLOCK_RE.sub("", text)
     text = ACTIVE_SELECTION_BLOCK_RE.sub("", text)
 
-    # If the message contains IDE context blocks, keep only the actual request parts.
+    # If the message contains IDE context blocks, normalize the surrounding runtime context
+    # but keep the extracted user-authored request text verbatim.
     if "# Context from my IDE setup:" in text and "## My request for Codex:" in text:
         chunks = IDE_CONTEXT_SPLIT_RE.split(text)
         extracted: list[str] = []
@@ -169,17 +147,15 @@ def clean_user_body(body: str, *, mode: str) -> str:
                     parts.append(ide_ctx)
                 if env_ctx:
                     parts.append(env_ctx)
-                parts.append(f"Request:\n{request.strip()}")
+                parts.append(request)
                 extracted.append("\n\n".join(parts).strip())
         return "\n\n".join(extracted).strip()
 
     text = strip_ide_noise(text, mode=mode)
     text = replace_environment_context(text, mode=mode)
 
-    # Otherwise, drop any remaining harness-ish headings that may have slipped through.
-    bad_re = BAD_RE_MINIMAL if mode == "minimal" else BAD_RE_VERBOSE
-    lines = [line for line in text.splitlines() if not bad_re.match(line)]
-    return "\n".join(lines).strip()
+    # Otherwise, keep the remaining user-authored text verbatim after structured cleanup.
+    return text.strip()
 
 
 def split_sections(text: str) -> tuple[str, list[Section]]:

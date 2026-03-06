@@ -21,8 +21,9 @@ Include:
 * User-provided runtime context that was part of the dialogue (for example IDE context blocks and environment context blocks).
 * A dedicated appendix with execution evidence (commands, changed files, test runs, errors) when it is available and relevant.
 
- Export user messages verbatim.
- Do not paraphrase, translate, “improve,” or normalize the wording.
+Keep user-authored request text verbatim wherever it is quoted or extracted into `transcript.md` or `brief.md`.
+Do not paraphrase, translate, “improve,” or normalize that user-authored request text.
+This verbatim rule has priority over the sanitization rules below.
 
 Do not include:
 
@@ -37,9 +38,10 @@ If the user message contains an `<environment_context>` block, keep at least `cw
 Prefer normalizing such blocks into a compact “Context” subsection rather than pasting raw harness headings.
 Do not include raw code excerpts from the IDE selection unless the user explicitly requests it and it is safe to export.
 
-### Markers that must be removed (if they appear in draft)
+### Markers that must be removed from non-user-authored draft material
 
-If any of the following appears in the text, it is not part of the transcript and must be deleted:
+If any of the following appears as harness or assistant/service scaffolding in a draft, it is not part of the transcript and must be deleted.
+Do not delete these strings when they are part of verbatim user-authored text that must be kept.
 
 * `# AGENTS.md instructions`
 * `<INSTRUCTIONS>`
@@ -89,15 +91,18 @@ If the chat contains multiple topics, ask which topic should be used for `brief.
 * `Delta`: 1–3 concrete framework changes to shorten similar future work.
 * `Postmortem`: 5–10 lines on what worked and what did not.
 
- When the brief includes user requests (for example in `Task`, `Definition of Done`, `Constraints`, `Friction`, or `Decisions`), copy them verbatim from the transcript.
- Do not paraphrase, translate, “improve,” or normalize the wording.
+When the brief includes user requests (for example in `Task`, `Definition of Done`, `Constraints`, `Friction`, or `Decisions`), copy them verbatim from the transcript.
+Do not paraphrase, translate, “improve,” or normalize the wording.
+This verbatim rule has priority over the sanitization rules below.
 
 ### Sanitization and security
 
-Before writing files, remove or replace sensitive data.
-Replace tokens, keys, names, internal URLs, and identifiers with placeholders.
+Before writing files, sanitize only assistant-authored summaries, metadata, placeholder text, and execution evidence.
+Do not redact or rewrite verbatim user-authored requests that you quote or extract into `transcript.md` or `brief.md`.
+Replace sensitive data in non-user-authored text with placeholders when needed.
 Example placeholders: `<TOKEN>`, `<EMAIL>`, `<INTERNAL_URL>`, `<PERSON>`, `<PROJECT>`.
 In the execution evidence appendix, redact secrets and truncate large outputs to the minimum needed excerpt.
+If verbatim user-authored text contains obvious secrets and the export destination or sharing scope is unclear, stop and ask whether to export that text as-is or omit the affected section.
 
 ## Where to export (variant selection)
 
@@ -164,15 +169,16 @@ Suggested subsections:
 4. Collect transcript from current chat (visible user + assistant messages).
 5. Keep user-provided runtime context blocks, but normalize them (IDE context and `<environment_context>`).
 6. Remove system/developer/service blocks and markers.
-7. If transcript is “dirty,” clean it via script.
-8. Use `python skills/exporting-chat-artifacts/scripts/clean_transcript.py <file> --inplace --mode verbose`.
+7. Resolve `EXPORT_SKILL_DIR` as the directory that contains this `SKILL.md`.
+8. If transcript is “dirty,” clean it via `python ${EXPORT_SKILL_DIR}/scripts/clean_transcript.py <file> --inplace --mode verbose` while preserving extracted user-authored request text verbatim and normalizing only the surrounding runtime context wrappers.
 9. Append `## Execution evidence` to `transcript.md`.
-10. Perform sanitization (tokens, keys, names, internal URLs).
-11. Write `transcript.md`.
-12. If Variant A is selected, generate `brief.md` using the structure above and write it alongside.
-13. Do not invent facts.
-14. If information is missing, mark as `TBD` and list required clarifications.
-15. Perform final self-check.
+10. Perform sanitization only on assistant-authored text, metadata, and execution evidence.
+11. Keep quoted or extracted user-authored request text verbatim.
+12. Write `transcript.md`.
+13. If Variant A is selected, generate `brief.md` using the structure above and write it alongside.
+14. Do not invent facts.
+15. If information is missing, mark as `TBD` and list required clarifications.
+16. Perform final self-check.
 
 ### Commit mapping rule (best-effort)
 
@@ -187,10 +193,12 @@ If you are not sure about the mapping, label it as `approx`.
 * `transcript.md` contains no system/developer instructions or sandbox/permission policy blocks.
 * `transcript.md` keeps (normalized) IDE and environment context when it existed in the dialogue.
 * `transcript.md` contains an `## Execution evidence` appendix with load-bearing commands/results.
-* `transcript.md` contains no markers from the “Markers” section.
+* `transcript.md` contains no markers from the “Markers” section outside verbatim user-authored text that must be kept.
 * `brief.md` includes at minimum: `Constraints`, `Decisions`, `Friction`, `Delta`.
 * `Delta` includes 1–3 concrete framework changes.
-* Neither file contains secrets or internal identifiers.
+* Quoted or extracted user-authored requests remain verbatim wherever they appear.
+* Sanitization does not rewrite quoted or extracted user-authored requests.
+* Non-user-authored text and execution evidence do not contain secrets or internal identifiers.
 
 ## Mini template (example structure)
 

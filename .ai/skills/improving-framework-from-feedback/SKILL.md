@@ -1,6 +1,6 @@
 ---
 name: improving-framework-from-feedback
-description: "Improve an AI agent framework from git evidence (result commit + fix-up commits); produce targeted patches to <framework>/core|tech and/or <project-local>/ so a rerun with the same prompt/model no longer needs manual fixes."
+description: "Improve an AI agent framework from git evidence (result commit + fix-up commits); produce targeted patches to the correct framework artifacts and/or <project-local>/ so a rerun with the same prompt/model no longer needs manual fixes."
 ---
 
 # Improving framework from git feedback
@@ -13,11 +13,12 @@ Prefer small patches that prevent the same class of error.
 ## Inputs
 
 - `PATCH_MODE` — where to apply patches.
-  - `framework-repo`: patch this repository (the framework source repo where you are running) and/or `{PROJECT_DIR}/.ai/project-local/`.
-  - `consumer-project`: patch `{PROJECT_DIR}/.ai/ergo/` (framework checkout inside the consumer project) and/or `{PROJECT_DIR}/.ai/project-local/`.
-- `PROJECT_DIR` — path to the project repo that contains:
-  - a framework checkout (often `.ai/ergo/`), and
-  - a project-local overlay `<project-local>/` (often `.ai/project-local/`).
+  - `framework-repo`: patch the framework checkout you are currently editing and/or `<project-local>/` resolved inside `PROJECT_DIR`.
+  - `consumer-project`: patch the framework checkout resolved inside `PROJECT_DIR` and/or `<project-local>/` resolved inside `PROJECT_DIR`.
+- `PROJECT_DIR` — path to the evidence repository whose git history contains:
+  - `RESULT_COMMIT`,
+  - `FIX_COMMITS[]`,
+  - and, when relevant, a framework checkout plus a project-local overlay.
 - `MODEL` — model identifier used to produce the result (store verbatim).
 - `PROMPT` — exact prompt text used (store verbatim).
 - `RESULT_COMMIT` — git commit SHA with the model-produced result (the “before fixes” state).
@@ -26,8 +27,9 @@ Prefer small patches that prevent the same class of error.
 
 ## Output
 
-- A set of patches to framework files under:
-  - `<framework>/core/` and/or `<framework>/tech/` and/or `<project-local>/`
+- A set of patches to framework artifacts under `<framework>/...` and/or `<project-local>/...`.
+- Place general knowledge in `<framework>/ergo/core/` or `<framework>/ergo/tech/` when those are the real enforcing layers.
+- Patch the actual enforcing artifact when the lever is a role, skill, process, template, convention, concept, regression, script, or asset under `<framework>/...`.
 - Each patch must be explicitly linked to:
   - the mistake pattern observed (from diffs),
   - the fix rationale (from commit messages),
@@ -51,23 +53,29 @@ Run these in `PROJECT_DIR`:
 
 ## Workflow
 
-### 0) Resolve patch roots (mode selection)
+### 0) Resolve the evidence repo, framework root, and project-local root
 
-Decide `PATCH_MODE`, then resolve patch roots.
+Treat `PROJECT_DIR` as the evidence repository for git inspection.
 
-- If `PATCH_MODE` is not provided:
-  - If `{PROJECT_DIR}/.ai/ergo/` exists: set `PATCH_MODE=consumer-project`.
-  - Otherwise: set `PATCH_MODE=framework-repo`.
-- Resolve these two directories:
-  - `FRAMEWORK_DIR`:
-    - If `PATCH_MODE=framework-repo`: `FRAMEWORK_DIR=.` (this repository root).
-    - If `PATCH_MODE=consumer-project`: `FRAMEWORK_DIR={PROJECT_DIR}/.ai/ergo/`.
-  - `PROJECT_LOCAL_DIR={PROJECT_DIR}/.ai/project-local/`.
+- Decide `PATCH_MODE`.
+  - If `PATCH_MODE` is provided, use it.
+  - Otherwise resolve `PROJECT_FRAMEWORK_DIR` from `PROJECT_DIR` using the canonical framework-root discovery rules.
+  - Also resolve `CURRENT_FRAMEWORK_DIR` as the framework checkout you are currently editing, if one exists.
+  - If `PROJECT_FRAMEWORK_DIR` is not found, use `framework-repo`.
+  - If both roots are found and resolve to the same filesystem path, use `framework-repo`.
+  - If both roots are found and resolve to different filesystem paths, stop and ask which checkout to patch instead of guessing.
+  - Otherwise use `consumer-project`.
+- Resolve `FRAMEWORK_DIR` using the canonical framework-root discovery rules from `AGENTS.md` and `bootstrap/AGENTS.md`.
+  - If `PATCH_MODE=framework-repo`, resolve the framework checkout you are currently editing.
+  - If `PATCH_MODE=consumer-project`, use the already-resolved framework checkout inside `PROJECT_DIR`.
+- Resolve `PROJECT_LOCAL_DIR` by interpreting `<project-local>/...` via the canonical rules from `AGENTS.md` and `bootstrap/AGENTS.md`.
 - Interpret placeholders:
-  - `<framework>/...` means `${FRAMEWORK_DIR}/...`.
-  - `<project-local>/...` means `${PROJECT_LOCAL_DIR}/...`.
+  - `<framework>/...` means paths under the resolved `FRAMEWORK_DIR`.
+  - `<project-local>/...` means paths under the resolved `PROJECT_LOCAL_DIR`.
+- In framework materials, keep project-local references written as `<project-local>/...`.
+- Use resolved filesystem paths only for execution notes and terminal commands.
 - Scope guard:
-  - Only change files under `${FRAMEWORK_DIR}` and `${PROJECT_LOCAL_DIR}`.
+  - Only change files under the resolved `${FRAMEWORK_DIR}` and `${PROJECT_LOCAL_DIR}` roots.
   - Do not change anything else unless the prompt explicitly expands scope.
 
 ### 1) Establish the evidence bundle
@@ -82,7 +90,7 @@ Create a short internal “evidence bundle” (notes in your working buffer; do 
 
 Also analyze the most recent framework history to detect recurring failure modes:
 
-- Review the last 10 commits in the framework repository.
+- Review the last 10 commits in `FRAMEWORK_DIR` (for example, `git -C "${FRAMEWORK_DIR}" log --oneline -n 10`).
 - Infer which agent mistakes those commits were correcting (from diffs + commit messages).
 - Compare those mistake patterns against your current chat behavior.
 - If you find a match (you are repeating a previously-fixed mistake), stop and reconsider prevention:
@@ -95,7 +103,8 @@ Produce a table in your notes:
 
 ### 2) Extract mistake patterns (cluster fixes)
 
-Cluster fixes into mistake patterns. Use the smallest useful set; typical clusters:
+Cluster fixes into mistake patterns.
+Use the smallest useful set; typical clusters:
 
 - Missing constraints: a requirement existed but wasn’t applied.
 - Ambiguous instruction: framework text allowed multiple interpretations.
@@ -108,23 +117,28 @@ Cluster fixes into mistake patterns. Use the smallest useful set; typical cluste
 For each cluster, write:
 - “If the framework had X, the mistake would likely not happen.”
 
-### 3) Decide where the fix belongs: core vs tech vs project-local
+### 3) Decide where the fix belongs: framework layer vs project-local
 
 Place guidance where it will be reused, with minimal blast radius.
 
 Use these rules:
 
-- Patch `<framework>/core/` when:
+- Patch `<framework>/ergo/core/` when:
   - the rule is technology-agnostic (process, structure, acceptance criteria discipline),
   - the failure mode can happen in any stack.
-- Patch `<framework>/tech/` when:
+- Patch `<framework>/ergo/tech/` when:
   - the rule depends on a specific stack/tooling (Kotlin, Spring, Gradle, Detekt, etc.),
   - the fix is a known ecosystem convention or command sequence.
+- Patch another framework artifact under `<framework>/...` when:
+  - the enforcing mechanism is itself a role, skill, process, template, convention, concept, regression, script, or asset,
+  - placing the rule in `ergo/core|tech` would hide the real lever or duplicate knowledge.
 - Patch `<project-local>/` when:
   - the constraint is project-specific (repo layout, domain naming, non-general rules),
   - the fix is not confidently reusable across projects.
 
-Prefer core/tech over project-local only if you can state a general rule without leaking project specifics.
+Prefer framework artifacts over `<project-local>/` only if you can state a general rule without leaking project specifics.
+Do not force every framework change into `ergo/core|tech`.
+Patch the real enforcing lever instead.
 
 ### 4) Map each mistake pattern to a framework lever
 
@@ -154,6 +168,7 @@ Write instructions so an agent can mechanically follow them:
 - Prefer imperative steps.
 - Prefer short checklists with “stop conditions”.
 - Prefer exact filenames/paths/patterns.
+- In persisted framework docs, keep framework links relative and keep project-local links written as `<project-local>/...`.
 - Add a tiny example only when it disambiguates (keep examples short).
 
 ### 6) Add a regression hook (lightweight)
@@ -221,7 +236,7 @@ Use these patterns in SKILL.md bodies or agent rules.
 You have produced framework patches such that, if the same prompt is run again with the same model:
 
 - each fix commit’s rationale is covered by an explicit rule/checklist/asset/script,
-- the rules are placed in core vs tech vs project-local appropriately,
+- the rules are placed in the correct framework artifact or in `<project-local>/` as appropriate,
 - the framework change is minimal and generalizable,
 - the skill triggering likelihood improves (when relevant),
 - there is at least one regression hook that documents the prevented failure mode.
