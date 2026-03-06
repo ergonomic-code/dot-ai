@@ -54,13 +54,7 @@ description: 'Turn an informal development task statement into a formal task sta
 ## Interop
 
 - Use this document as input for solution design workflows.
-- For the engineering-log workflow, see `../engineering-log-solution-design/SKILL.md`.
-
-## engineering-log defaults (optional)
-
-- If the user provides `TASK_DIR`, treat `TASK_DIR/01-problem-statement.md` as the default input.
-- Write the formalized statement to `TASK_DIR/01-problem-statement-formal.md` by default.
-- Overwrite `TASK_DIR/01-problem-statement.md` only if the user explicitly asks.
+- For the engineering-log process, see `../../processes/engineering-log/README.md`.
 
 ## File output rules
 

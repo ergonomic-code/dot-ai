@@ -18,7 +18,8 @@ Recommended integration structure:
 
 - [INDEX.md](INDEX.md) — start here (entry point and artifact index).
 - agents/ — agent roles and collaboration model.
-- skills/ — executable skills and procedures.
+- skills/ — reusable executable skills.
+- processes/ — multi-step internal workflows composed from reusable skills and process-local step specs.
 - concepts/ — formalized concepts (operational definitions and specifications).
 - conventions/ — shared conventions and formatting rules.
 - conventions/ea-principles.md — EA principles as top-level review criteria.

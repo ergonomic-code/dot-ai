@@ -21,13 +21,13 @@ Acceptance test changes: (how acceptance tests must change after this work)
 Key invariants:
   - <...>
   - <...>
-  - Illegal states and enforcement: <...> (see `../../../concepts/making-illegal-states-unrepresentable.md`)
+  - Illegal states and enforcement: <...> (see `../../../../concepts/making-illegal-states-unrepresentable.md`)
 Hard constraints:
   - <...>
   - <...>
-  - Sources of truth and contract mapping: <...> (see `../../../conventions/contracts.md`)
-  - EA principles and budgets: <...> (see `../../../conventions/ea-principles.md`)
-  - Review checklist(s): <...> (see `../../../checklists/README.md`)
+  - Sources of truth and contract mapping: <...> (see `../../../../conventions/contracts.md`)
+  - EA principles and budgets: <...> (see `../../../../conventions/ea-principles.md`)
+  - Review checklist(s): <...> (see `../../../../checklists/README.md`)
 Responsibility boundaries:
   - <...>
   - <...>

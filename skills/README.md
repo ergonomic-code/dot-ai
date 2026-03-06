@@ -2,13 +2,11 @@
 
 This directory contains reusable skills expressed as procedural specifications.
 Each skill lives in its own directory and is defined by a `SKILL.md` file with YAML front matter.
+Internal multi-step workflows live under `../processes/`.
 
-## Engineering-log workflow
+## Requirements and framework feedback
 
-- [`initializing-engineering-log-task/SKILL.md`](initializing-engineering-log-task/SKILL.md) — Initialize an `engineering-log/` task directory from templates.
 - [`formalizing-task-requirements/SKILL.md`](formalizing-task-requirements/SKILL.md) — Turn an informal task into a formal, testable problem statement.
-- [`designing-solution-for-engineering-log-task/SKILL.md`](designing-solution-for-engineering-log-task/SKILL.md) — Produce solution options and a conceptual HLD for an `engineering-log/` task.
-- [`generating-execution-spec/SKILL.md`](generating-execution-spec/SKILL.md) — Fill an Execution‑Spec template from the HLD results.
 - [`exporting-chat-artifacts/SKILL.md`](exporting-chat-artifacts/SKILL.md) — Export the current chat transcript and brief for framework improvements.
 
 ## Git workflow
@@ -34,3 +32,7 @@ Each skill lives in its own directory and is defined by a `SKILL.md` file with Y
 ## Platform migration workflows
 
 - [`migrating-spring-boot-35-to-4/SKILL.md`](migrating-spring-boot-35-to-4/SKILL.md) — Migrate a codebase from Spring Boot 3.5 to Spring Boot 4 using the evidence-based migration KB.
+
+## Internal processes
+
+- See [`../processes/engineering-log/README.md`](../processes/engineering-log/README.md) for the `engineering-log/` process and its process-local step specs.

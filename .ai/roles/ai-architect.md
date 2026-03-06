@@ -22,7 +22,7 @@ The primary outcome is a clear, consistent, and reusable “knowledge architectu
 
 * `agents/*` — role model and interaction rules for the agent.
 * `skills/*/SKILL.md` — skills (workflows) and related `scripts/`/`assets/`, when this simplifies usage.
-* `processes/*` — processes (step-by-step workflows) reusable across tasks.
+* `processes/*` — internal or composite step-by-step workflows that orchestrate reusable skills and process-local step specs.
 * `bootstrap/*` — starter integration templates (for example `AGENTS.md`, `APPLICATION-CONTEXT.md`, `SYSTEM-CONTEXT.md`).
 * `conventions/*` — shared agreements (including documentation style).
 * `concepts/*` — formalized concepts and their operational definitions.

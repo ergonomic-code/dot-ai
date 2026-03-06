@@ -26,6 +26,10 @@ Use this page as an entry point and as a discoverability index.
 
 - See [`skills/README.md`](skills/README.md) for the skills index.
 
+## Processes
+
+- See [`processes/README.md`](processes/README.md) for multi-step internal workflows.
+
 ## Integration templates
 
 - Use [`bootstrap/AGENTS.md`](bootstrap/AGENTS.md) as a starter `AGENTS.md` for a target project.

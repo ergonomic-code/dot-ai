@@ -57,8 +57,8 @@ Implement the functionality *strictly according to* this document.
 - <...> (compatibility / backward compatibility)
 - <...> (security / access control)
 - <...> (performance / timeouts / resource limits)
-- <...> (contract mapping and sources of truth, see `../../../conventions/contracts.md`)
-- <...> (EA principles and budgets, see `../../../conventions/ea-principles.md` and `../../../checklists/README.md`)
+- <...> (contract mapping and sources of truth, see `../../../../conventions/contracts.md`)
+- <...> (EA principles and budgets, see `../../../../conventions/ea-principles.md` and `../../../../checklists/README.md`)
 - Always follow the development and testing rules from `AGENTS.md` and `AGENTS.local.md`.
 
 > This section is mandatory.
@@ -108,7 +108,7 @@ Format: statements only, no explanations.
 
 ### 5.0 Contract map (cross-surface naming and encoding)
 
-Use the conventions from `../../../conventions/contracts.md`.
+Use the conventions from `../../../../conventions/contracts.md`.
 If a concept exists in multiple surfaces, it must appear in this table.
 
 | Concept | HTTP (field/param) | Persistence (table/column/path) | Integration (keys) | Encoding | Source of truth |
@@ -119,7 +119,7 @@ If a concept exists in multiple surfaces, it must appear in this table.
 ### 5.1 DTO / API models
 
 DTO strategy (must be explicit): `reuse-domain` or `dedicated-dto`.
-Isomorphic DTOs are forbidden (see `../../../conventions/contracts.md`).
+Isomorphic DTOs are forbidden (see `../../../../conventions/contracts.md`).
 
 If `dedicated-dto`, include a “DTO ↔ Domain delta” table with at least one row.
 
@@ -146,7 +146,7 @@ Serialization / Jackson / nullability:
 
 ### 5.3 Illegal states
 
-Follow `../../../concepts/making-illegal-states-unrepresentable.md`.
+Follow `../../../../concepts/making-illegal-states-unrepresentable.md`.
 List invariants and concrete illegal states, and state how each invariant is enforced (`type` → `constructor` → `validation`).
 
 ```yaml

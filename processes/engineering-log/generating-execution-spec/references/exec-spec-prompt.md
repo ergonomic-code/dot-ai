@@ -73,18 +73,18 @@ If the input block is missing, contradictory, or information is insufficient, as
 - Write the result into `{{TASK_DIR}}/04-execution-spec.md` as a single document ready to be handed to the executor model.
 - Print the exact same text to chat, with no additions.
 - Ask whether the current chat transcript may be saved.
-- If yes, save it to `{{TASK_DIR}}/chats/02-execution-spec-chat-1.md`.
+- If yes, save it to `{{TASK_DIR}}/chats/03-execution-spec-chat-1.md`.
 - If you cannot save the transcript automatically, do not fabricate it.
 - Ask the user for help, or use `$exporting-chat-artifacts`.
 
 ## Rework minimization (mandatory self-checks)
 
 - Self-check: contract terminology is consistent across all surfaces (HTTP/API, persistence, integration keys, docs).
-- Self-check: if a concept exists in multiple contracts, its mapping and encoding are explicit (see `../../../conventions/contracts.md`).
-- Self-check: no isomorphic DTO types are introduced (see `../../../conventions/contracts.md`).
+- Self-check: if a concept exists in multiple contracts, its mapping and encoding are explicit (see `../../../../conventions/contracts.md`).
+- Self-check: no isomorphic DTO types are introduced (see `../../../../conventions/contracts.md`).
 - Self-check: if dedicated DTO types exist, their contract delta is explicit and non-empty.
 - Self-check: sources of truth for value sets and dictionaries are explicitly named and reused (no local duplicates unless required).
-- Self-check: if the solution uses an external query/filter DSL, the spec uses a canonical form, not ambiguous boolean “pseudocode” (see `../../../conventions/contracts.md`).
-- Self-check: illegal states implied by invariants are made unrepresentable where feasible, and the enforcement kind is explicit (see `../../../concepts/making-illegal-states-unrepresentable.md`).
-- Self-check: the resulting specification respects EA principles and budgets by default, or explicitly records justified exceptions (see `../../../conventions/ea-principles.md`).
-- Self-check: the specification links to the relevant review checklist(s) for impacted areas (see `../../../checklists/README.md`).
+- Self-check: if the solution uses an external query/filter DSL, the spec uses a canonical form, not ambiguous boolean “pseudocode” (see `../../../../conventions/contracts.md`).
+- Self-check: illegal states implied by invariants are made unrepresentable where feasible, and the enforcement kind is explicit (see `../../../../concepts/making-illegal-states-unrepresentable.md`).
+- Self-check: the resulting specification respects EA principles and budgets by default, or explicitly records justified exceptions (see `../../../../conventions/ea-principles.md`).
+- Self-check: the specification links to the relevant review checklist(s) for impacted areas (see `../../../../checklists/README.md`).

@@ -15,10 +15,14 @@
 
 Task directory: `{{TASK_DIR}}=<>`
 
+Problem statement file: `{{PROBLEM_STATEMENT_FILE}}`.
+Set it to `01-problem-statement-formal.md` when that file exists and is non-empty.
+Otherwise set it to `01-problem-statement.md`.
+
 Inside `{{TASK_DIR}}`, these files must exist:
-- `01-problem-statement.md`
+- `{{PROBLEM_STATEMENT_FILE}}`
 - `03-solution-hld.md` (output)
-- `chats/01-solution-hld-chat-1.md` (output)
+- `chats/02-solution-hld-chat-1.md` (output)
 
 Optionally:
 - `02-solution-options.md` (not used in this prompt)
@@ -79,10 +83,10 @@ Do not write anything into `03-solution-hld.md`.
   - what is *definitely required*;
   - what is *not required*.
 - Identify any “source of truth” choices that must be fixed before writing the solution (for example, request parameter vs stored profile vs derived state).
-- If the task depends on an external filter/query DSL, name it explicitly and note that its semantics must be expressed in the DSL’s canonical form (see `../../../conventions/contracts.md`).
-- Identify DTO/domain invariants that imply “illegal states” and must be made unrepresentable (see `../../../concepts/making-illegal-states-unrepresentable.md`).
-- Ensure the solution respects EA principles and budgets by default (see `../../../conventions/ea-principles.md`).
-- Use the relevant checklist(s) for a quick self-audit (see `../../../checklists/README.md`).
+- If the task depends on an external filter/query DSL, name it explicitly and note that its semantics must be expressed in the DSL’s canonical form (see `../../../../conventions/contracts.md`).
+- Identify DTO/domain invariants that imply “illegal states” and must be made unrepresentable (see `../../../../concepts/making-illegal-states-unrepresentable.md`).
+- Ensure the solution respects EA principles and budgets by default (see `../../../../conventions/ea-principles.md`).
+- Use the relevant checklist(s) for a quick self-audit (see `../../../../checklists/README.md`).
 - Ask clarifying questions only if there are missing facts/constraints that block Stage 2.
 
 At this stage:
@@ -113,9 +117,9 @@ Rules:
 File writing:
 - After producing `=== RESULT FOR EXECUTION-SPEC ===`, write that block into `{{TASK_DIR}}/03-solution-hld.md` (without extra comments).
 - Then output the same block to chat without changes.
-- Finally, save the current chat transcript into `{{TASK_DIR}}/chats/01-solution-hld-chat-1.md`.
+- Finally, save the current chat transcript into `{{TASK_DIR}}/chats/02-solution-hld-chat-1.md`.
   - If you cannot save the transcript automatically, do not fabricate it; ask me how to save it.
 
 This block is intended for:
-- passing into the **Generate Execution-Spec** prompt (`engineering-log/exec-spec-prompt.md`);
+- passing into the **Generate Execution-Spec** process step;
 - later use by the executor model.

@@ -1,6 +1,6 @@
 ---
 name: initializing-engineering-log-task
-description: Initialization of a solution design directory in the engineering-log based on a template, including file creation, copying 04-execution-spec.md, and writing the original problem statement to 01-problem-statement.md.
+description: Initialization of an engineering-log task directory based on a template, including file creation, copying 04-execution-spec.md, and writing the original problem statement to 01-problem-statement.md.
 ---
 
 # engineering-log task init
@@ -23,15 +23,17 @@ description: Initialization of a solution design directory in the engineering-lo
 * The script prints the relative path of the created directory.
 * Created files:
 
-  * `chats/02-problem-formalization-chat-1.md`
-  * `chats/02-solution-exploration-chat-1.md`
-  * `chats/03-solution-specification-chat-1.md`
-  * `chats/04-solution-implementation-chat-1.md`
+  * `chats/01-problem-formalization-chat-1.md`
+  * `chats/02-solution-options-chat-1.md`
+  * `chats/02-solution-hld-chat-1.md`
+  * `chats/03-execution-spec-chat-1.md`
+  * `chats/04-implementation-chat-1.md`
   * `01-problem-statement.md`
-  * `01-problem-statement-formal.md`
   * `02-solution-options.md`
   * `03-solution-hld.md`
   * `04-execution-spec.md`
+
+`01-problem-statement-formal.md` is created later by the problem formalization step.
 
 ## Algorithm
 

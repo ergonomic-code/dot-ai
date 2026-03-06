@@ -267,9 +267,11 @@ def main() -> int:
         encoding="utf-8",
     )
 
-    _touch_empty_file(chats_dir / "01-exploration-chat-1.md")
-    _touch_empty_file(chats_dir / "02-specification-chat-1.md")
-    _touch_empty_file(chats_dir / "03-implementation-chat-1.md")
+    _touch_empty_file(chats_dir / "01-problem-formalization-chat-1.md")
+    _touch_empty_file(chats_dir / "02-solution-options-chat-1.md")
+    _touch_empty_file(chats_dir / "02-solution-hld-chat-1.md")
+    _touch_empty_file(chats_dir / "03-execution-spec-chat-1.md")
+    _touch_empty_file(chats_dir / "04-implementation-chat-1.md")
 
     print(task_dir_rel)
     return 0

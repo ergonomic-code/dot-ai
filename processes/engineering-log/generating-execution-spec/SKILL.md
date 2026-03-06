@@ -1,9 +1,9 @@
 ---
 name: generating-execution-spec
-description: "Fill the Execution-Spec template for a engineering-log task: read TASK_DIR/03-solution-hld.md (must contain === RESULT FOR EXECUTION-SPEC ===) and TASK_DIR/04-execution-spec.md (template), ask only factual clarifying questions if needed, then overwrite 04-execution-spec.md with a complete unambiguous spec and (optionally) save chat transcript to TASK_DIR/chats/02-execution-spec-chat-1.md."
+description: "Fill the Execution-Spec template for a engineering-log task: read TASK_DIR/03-solution-hld.md (must contain === RESULT FOR EXECUTION-SPEC ===) and TASK_DIR/04-execution-spec.md (template), ask only factual clarifying questions if needed, then overwrite 04-execution-spec.md with a complete unambiguous spec and (optionally) save chat transcript to TASK_DIR/chats/03-execution-spec-chat-1.md."
 ---
 
-# engineering-log: execution spec
+# Process step: engineering-log execution spec
 
 ## Input
 
@@ -14,13 +14,13 @@ description: "Fill the Execution-Spec template for a engineering-log task: read 
 
 If `TASK_DIR` is not provided, ask for it.
 If the required files are missing, stop and ask for the correct path.
-If the template is missing, ask the user to run the task init skill first.
+If the template is missing, ask the user to run the task init step first.
 
 ## Output
 
 - Overwritten `TASK_DIR/04-execution-spec.md` as a single complete document (English).
 - The same final text printed to chat (no additions).
-- Optional: saved chat transcript to `TASK_DIR/chats/02-execution-spec-chat-1.md`.
+- Optional: saved chat transcript to `TASK_DIR/chats/03-execution-spec-chat-1.md`.
 
 ## Algorithm
 
@@ -48,6 +48,6 @@ If the template is missing, ask the user to run the task init skill first.
 15. Write the final document to `TASK_DIR/04-execution-spec.md` in English and output the exact same text to chat.
 16. Ask whether the current chat transcript may be saved.
 17. If yes, append to the transcript as you go, after each completed step, instead of saving only at the end.
-18. Save the transcript to `TASK_DIR/chats/02-execution-spec-chat-1.md`.
+18. Save the transcript to `TASK_DIR/chats/03-execution-spec-chat-1.md`.
 19. If you cannot save the transcript automatically, do not fabricate it.
 20. Ask the user for help or use `$exporting-chat-artifacts`.

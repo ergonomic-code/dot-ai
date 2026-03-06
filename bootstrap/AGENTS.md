@@ -6,11 +6,15 @@
 2. Global rules: see `.ai/ergo/agents/roles.md` and `.ai/ergo/conventions/`.
 3. Framework index (start here): see `.ai/ergo/INDEX.md`.
 4. If the framework is not located at `.ai/ergo/`, find `agents/roles.md` in the repository and open `INDEX.md` in the same directory tree.
-5. Global skills: see `.ai/ergo/skills`.
-6. If the user asks to “use a skill”, open that skill’s `SKILL.md` and follow it.
+5. Reusable skills: see `.ai/ergo/skills`.
+6. Internal processes: see `.ai/ergo/processes`.
+7. If the user asks to “use a skill”, open that skill’s `SKILL.md` and follow it.
    - If the user provides a path: open `<path>/SKILL.md`.
    - If the user provides a skill name: locate the framework root (the directory that contains `agents/roles.md` and `skills/`) and open `skills/<name>/SKILL.md`.
-7. Before committing/pushing, and before reporting task completion, use the `git-working-tree-hygiene` skill.
+   - If `skills/<name>/SKILL.md` does not exist: look for a unique matching `processes/**/<name>/SKILL.md` as a backward-compatible fallback.
+8. If the user provides a path to a process step directory, open `<path>/SKILL.md` and follow it.
+   - If the user provides only a process step directory name: locate a unique matching `processes/**/<name>/SKILL.md` and follow it.
+9. Before committing/pushing, and before reporting task completion, use the `git-working-tree-hygiene` skill.
 
 ## 1. Project context
 

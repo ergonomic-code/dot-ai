@@ -14,11 +14,15 @@
 
 Task directory: `{{TASK_DIR}}` (repo-relative path, example: `engineering-log/26/01/05-...`)
 
+Problem statement file: `{{PROBLEM_STATEMENT_FILE}}`.
+Set it to `01-problem-statement-formal.md` when that file exists and is non-empty.
+Otherwise set it to `01-problem-statement.md`.
+
 Inside `{{TASK_DIR}}`, these files must exist:
-- `01-problem-statement.md`
+- `{{PROBLEM_STATEMENT_FILE}}`
 - `02-solution-options.md` (output)
 - `03-solution-hld.md` (output)
-- `chats/01-solution-options-chat-1.md` (output)
+- `chats/02-solution-options-chat-1.md` (output)
 
 If the path/files differ, stop and ask.
 
@@ -54,7 +58,7 @@ Reasoning, hypotheses, and comparisons are **allowed and required**.
 
 ### 1. Problem statement
 
-Read `{{TASK_DIR}}/01-problem-statement.md`.
+Read `{{TASK_DIR}}/{{PROBLEM_STATEMENT_FILE}}`.
 
 ### 2. Non-functional priorities
 
@@ -99,10 +103,10 @@ Choose an option: 1 / 2 / 3 / 4 (or suggest edits to options/criteria)
   - what is *definitely required*;
   - what is *not required*.
 - Identify any “source of truth” choices that must be fixed before solution design (for example, request parameter vs stored profile vs derived state).
-- If the task depends on an external filter/query DSL, name it explicitly and note that its semantics must be expressed in the DSL’s canonical form (see `../../../conventions/contracts.md`).
-- Identify DTO/domain invariants that imply “illegal states” and must be made unrepresentable (see `../../../concepts/making-illegal-states-unrepresentable.md`).
-- Ensure the solution respects EA principles and budgets by default (see `../../../conventions/ea-principles.md`).
-- Use the relevant checklist(s) for a quick self-audit (see `../../../checklists/README.md`).
+- If the task depends on an external filter/query DSL, name it explicitly and note that its semantics must be expressed in the DSL’s canonical form (see `../../../../conventions/contracts.md`).
+- Identify DTO/domain invariants that imply “illegal states” and must be made unrepresentable (see `../../../../concepts/making-illegal-states-unrepresentable.md`).
+- Ensure the solution respects EA principles and budgets by default (see `../../../../conventions/ea-principles.md`).
+- Use the relevant checklist(s) for a quick self-audit (see `../../../../checklists/README.md`).
 - Ask clarifying questions only if there are missing facts/constraints that block Stage 2.
 
 At this stage:
@@ -128,7 +132,7 @@ For each option, describe:
 - what changes are required (modules/files/contracts);
 - key risks;
 - pros and cons.
-- If the option uses an external filter/query DSL, include a canonical representation and an estimate of size/complexity growth (see `../../../conventions/contracts.md`).
+- If the option uses an external filter/query DSL, include a canonical representation and an estimate of size/complexity growth (see `../../../../conventions/contracts.md`).
 - If the option changes data contracts, explicitly state how illegal states are prevented (type shape vs construction checks vs validation).
 
 ⚠️ **Forbidden:**
@@ -189,7 +193,7 @@ File writing:
 - in **Stage 4**, after producing `=== RESULT FOR EXECUTION-SPEC ===`, write all considered options in final form (as in Stages 2–3) into `{{TASK_DIR}}/02-solution-options.md`;
 - in **Stage 4**, after producing `=== RESULT FOR EXECUTION-SPEC ===`, write that block into `{{TASK_DIR}}/03-solution-hld.md` (without extra comments);
 - then output the same block to chat without changes;
-- finally, save the current chat transcript into `{{TASK_DIR}}/chats/01-solution-options-chat-1.md`.
+- finally, save the current chat transcript into `{{TASK_DIR}}/chats/02-solution-options-chat-1.md`.
   - If you cannot save the transcript automatically, do not fabricate it; ask me how to save it.
 
 This block is intended for:
