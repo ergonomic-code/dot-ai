@@ -49,7 +49,7 @@ Priority order when principles conflict:
 ## 3. Budgets (targets)
 
 Budgets are target constraints.
-They may be overridden per project (for example in `<project-local>/PROJECT-CONTEXT.md` or a dedicated `<project-local>/budgets.yaml`), but any deviation must be explicit and recorded.
+They may be overridden per project (for example in `APPLICATION-CONTEXT.md` or a dedicated `<project-local>/budgets.yaml`), but any deviation must be explicit and recorded.
 
 - Test time: a typical test case < 10 seconds; full service test suite < 300 seconds.
 - Cognitive complexity: I/O functions <= 4; pure functions <= 15.

@@ -23,7 +23,7 @@ The primary outcome is a clear, consistent, and reusable “knowledge architectu
 * `agents/*` — role model and interaction rules for the agent.
 * `skills/*/SKILL.md` — skills (workflows) and related `scripts/`/`assets/`, when this simplifies usage.
 * `processes/*` — processes (step-by-step workflows) reusable across tasks.
-* `contexts/templates/*` — context templates (e.g., `AGENTS.md`).
+* `bootstrap/*` — starter integration templates (for example `AGENTS.md`, `APPLICATION-CONTEXT.md`, `SYSTEM-CONTEXT.md`).
 * `conventions/*` — shared agreements (including documentation style).
 * `concepts/*` — formalized concepts and their operational definitions.
 
@@ -31,7 +31,7 @@ The primary outcome is a clear, consistent, and reusable “knowledge architectu
 
 * `ergo/core/` — no technology.
 * `ergo/tech/` — technology yes, domain no.
-* `project-local/` — project-specific details only (no global EA rules).
+* `<project-local>/` — project-specific details only (no global EA rules).
 * Instructions must be executable, verifiable, and reference concrete artifacts via repository paths.
 
 ## Integrating the Framework into a Project
@@ -48,7 +48,8 @@ Recommended (but not mandatory) `.ai/` structure in the target repository:
 Stable reference rules:
 
 * Within the framework, use relative links between files.
-* For project-local artifacts, first try `.ai/project-local/...`, then search the repository by filename.
+* In framework materials, reference project-local artifacts as `<project-local>/...`.
+* Executors resolve `<project-local>/...` by first trying `.ai/project-local/...`, then searching the repository by filename.
 * If an instruction requires the “framework root,” describe how to locate it (e.g., the directory containing `agents/roles.md` and `skills/`).
 
 Responsibility boundary:

@@ -117,7 +117,7 @@ Base rules:
 - in tests, shared infrastructure (for example `WebTestClient` creation, base URLs, object mappers, common request builders) must be extracted to a base test or a dedicated fixture API rather than copy-pasted across test classes;
 - follow testing conventions and checklists (see `../ergo/tech/kotlin/testing.md`, `../ergo/tech/spring/testing.md`, and `../checklists/testing.md`);
 - for Spring Data JDBC repositories, follow `../ergo/tech/spring/data-jdbc.md`;
-- follow technology and project conventions (see `../ergo/tech/` and `../../project-local/`);
+- follow technology conventions (see `../ergo/tech/`) and project-local conventions (see `<project-local>/...`);
 
 ## Role: assistant (operational tasks)
 

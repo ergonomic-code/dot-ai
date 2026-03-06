@@ -53,3 +53,9 @@ Build, run, and test commands.
 ## 8. Project-specific Notes
 
 Rules that apply only to this project.
+
+## 9. Overrides and Budgets
+
+Record explicit deviations from framework defaults here.
+For each deviation, note the overridden rule or budget, the replacement value, and the reason.
+If the project uses a dedicated budget artifact, reference it here using `<project-local>/...`.

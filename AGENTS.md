@@ -60,7 +60,7 @@ Authoring rules for project-local references (in this repository):
 - If the user provides a path like `.ai/project-local/...` or `project-local/...`, normalize it to `<project-local>/...` before writing it down.
 - Do not try to resolve or search for project-local artifacts inside this repository.
 
-Executor-side rules for resolving project-local references live in `contexts/templates/AGENTS.md`.
+Executor-side rules for resolving project-local references live in `bootstrap/AGENTS.md`.
 
 ## 6. Skills
 
