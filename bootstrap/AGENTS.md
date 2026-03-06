@@ -10,10 +10,12 @@
 6. Internal processes: see `.ai/ergo/processes`.
 7. If the user asks to “use a skill”, open that skill’s `SKILL.md` and follow it.
    - If the user provides a path: open `<path>/SKILL.md`.
-   - If the user provides a skill name: locate the framework root (the directory that contains `agents/roles.md` and `skills/`) and open `skills/<name>/SKILL.md`.
-   - If `skills/<name>/SKILL.md` does not exist: look for a unique matching `processes/**/<name>/SKILL.md` as a backward-compatible fallback.
+   - If the user provides a skill name: locate the framework root (the directory that contains `agents/roles.md`, `skills/`, and `processes/`) and open `skills/<name>/SKILL.md`.
+   - If `skills/<name>/SKILL.md` does not exist: look for a unique matching `<framework-root>/processes/**/<name>/SKILL.md` as a backward-compatible fallback.
+   - If the lookup is not unique or is not found: ask the user for the exact path to the skill or process step directory.
 8. If the user provides a path to a process step directory, open `<path>/SKILL.md` and follow it.
-   - If the user provides only a process step directory name: locate a unique matching `processes/**/<name>/SKILL.md` and follow it.
+   - If the user provides only a process step directory name: locate the framework root (the directory that contains `agents/roles.md`, `skills/`, and `processes/`) and follow a unique matching `<framework-root>/processes/**/<name>/SKILL.md`.
+   - If the lookup is not unique or is not found: ask the user for the exact path to the process step directory.
 9. Before committing/pushing, and before reporting task completion, use the `git-working-tree-hygiene` skill.
 
 ## 1. Project context

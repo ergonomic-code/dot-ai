@@ -23,8 +23,8 @@ Internal multi-step workflows live under `processes/` and are not part of the re
 
 Rules:
 - If the user asks to “use a skill” and provides a path, open `<path>/SKILL.md` and follow it.
-- If the user asks to “use a skill” and provides a skill directory name, open `skills/<name>/SKILL.md` and follow it.
-- If the named skill directory does not exist under `skills/`, look for a unique matching process step under `processes/**/<name>/SKILL.md` as a backward-compatible fallback.
+- If the user asks to “use a skill” and provides a skill directory name, locate the framework root (the directory that contains `agents/roles.md`, `skills/`, and `processes/`) and open `<framework-root>/skills/<name>/SKILL.md`.
+- If the named skill directory does not exist under `skills/`, locate the framework root (the directory that contains `agents/roles.md`, `skills/`, and `processes/`) and look for a unique matching process step under `<framework-root>/processes/**/<name>/SKILL.md` as a backward-compatible fallback.
 - If neither lookup is unique or successful, ask the user for the exact path to the skill or process step directory.
 
 ## Processes
@@ -32,7 +32,7 @@ Rules:
 Processes are composite framework workflows located under `processes/`.
 See `processes/README.md` for an index.
 If the user provides a path to a process step directory, open `<path>/SKILL.md` and follow it.
-If the user provides only a process step directory name, locate a unique matching `processes/**/<name>/SKILL.md` and follow it.
+If the user provides only a process step directory name, locate the framework root (the directory that contains `agents/roles.md`, `skills/`, and `processes/`) and follow a unique matching `<framework-root>/processes/**/<name>/SKILL.md`.
 
 ## Choosing a role
 

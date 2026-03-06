@@ -56,8 +56,14 @@ description: 'Turn an informal development task statement into a formal task sta
 - Use this document as input for solution design workflows.
 - For the engineering-log process, see `../../processes/engineering-log/README.md`.
 
+## engineering-log defaults (optional)
+
+- If the user provides `TASK_DIR`, treat `TASK_DIR/01-problem-statement.md` as the default input.
+- Write the formalized statement to `TASK_DIR/01-problem-statement-formal.md` by default.
+- Overwrite `TASK_DIR/01-problem-statement.md` only if the user explicitly asks.
+
 ## File output rules
 
 - If the user provided an output path, write the document there.
-- If the user did not provide an output path, propose a default path and ask for confirmation before writing.
+- If the user did not provide an output path, use the engineering-log default above when it applies, otherwise propose a default path and ask for confirmation before writing.
 - Keep Markdown in one-sentence-per-line style.

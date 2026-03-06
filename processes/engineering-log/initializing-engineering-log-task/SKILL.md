@@ -40,7 +40,7 @@ description: Initialization of an engineering-log task directory based on a temp
 1. Run from the repository root.
 2. Pass the problem statement to the script via stdin.
 3. Attempt to generate a `slug` based on the problem statement.
-   The proposed `slug` must be in English (not transliterated) and no longer than 60 characters.
+   The proposed `slug` must use ASCII letters, digits, and dashes only, should prefer English wording, and must be no longer than 60 characters.
 4. Present the proposed `slug` to the user.
 5. Obtain approval or a corrected `slug`.
 6. Determine the next number `NN` within the month by scanning directories in `engineering-log/<yy>/<MM>/`.
@@ -51,7 +51,7 @@ description: Initialization of an engineering-log task directory based on a temp
 ### Propose slug (without creating files)
 
 ```bash
-cat <<'EOF' | python3 ./scripts/init_task_dir.py --dry-run
+cat <<'EOF' | python3 ./processes/engineering-log/initializing-engineering-log-task/scripts/init_task_dir.py --dry-run
 <paste problem statement here>
 EOF
 ```
@@ -59,7 +59,7 @@ EOF
 ### Create after slug approval
 
 ```bash
-cat <<'EOF' | python3 ./scripts/init_task_dir.py --slug <approved-slug>
+cat <<'EOF' | python3 ./processes/engineering-log/initializing-engineering-log-task/scripts/init_task_dir.py --slug <approved-slug>
 <paste problem statement here>
 EOF
 ```
@@ -67,7 +67,7 @@ EOF
 ### Create task for a specific date (for yy/MM) after slug approval
 
 ```bash
-cat <<'EOF' | python3 ./scripts/init_task_dir.py --date 2026-02-07 --slug <approved-slug>
+cat <<'EOF' | python3 ./processes/engineering-log/initializing-engineering-log-task/scripts/init_task_dir.py --date 2026-02-07 --slug <approved-slug>
 <paste problem statement here>
 EOF
 ```
@@ -75,7 +75,7 @@ EOF
 ### Create without slug approval (not recommended)
 
 ```bash
-cat <<'EOF' | python3 ./scripts/init_task_dir.py --yes
+cat <<'EOF' | python3 ./processes/engineering-log/initializing-engineering-log-task/scripts/init_task_dir.py --yes
 <paste problem statement here>
 EOF
 ```
