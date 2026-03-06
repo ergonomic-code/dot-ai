@@ -57,5 +57,5 @@ Transport-contract checks live in `*HttpApi`, and test cases assert business rul
 Framework rules and conventions:
 
 - `../../ergo/tech/spring/testing.md`.
-- `../../conventions/kotlin.md`.
+- `../../ergo/tech/kotlin/coding-conventions.md`.
 - `../../concepts/testing-testcode-architecture.md`.

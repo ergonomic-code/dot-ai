@@ -43,6 +43,6 @@ Primary reference is `../conventions/ea-principles.md` (EA.D5, EA.F4, EA.F7) and
 - Contracts: `../conventions/contracts.md`.
 - CQS: `../concepts/command-query-separation.md`.
 - Illegal states: `../concepts/making-illegal-states-unrepresentable.md`.
-- HTTP status codes: `../conventions/http-json-api/status-codes.md`.
+- HTTP status codes: `../ergo/tech/http-json-api/status-codes.md`.
 - Skill: `../skills/api-design-cqs/SKILL.md`.
 - Skill: `../skills/choosing-http-status-codes/SKILL.md`.

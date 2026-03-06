@@ -5,7 +5,7 @@ description: "Choose HTTP response status codes for an HTTP/JSON endpoint using 
 
 # Choosing HTTP status codes (HTTP/JSON API)
 
-Primary reference: `../../conventions/http-json-api/status-codes.md`.
+Primary reference: `../../ergo/tech/http-json-api/status-codes.md`.
 
 ## When to use
 

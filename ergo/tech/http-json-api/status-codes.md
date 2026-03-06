@@ -3,7 +3,7 @@
 Goal: a fixed, minimal, and predictable set of HTTP status codes for an HTTP/JSON API.
 
 Machine-readable rules: `status-codes.rules.yaml`.
-Workflow skill: `../../skills/choosing-http-status-codes/SKILL.md`.
+Workflow skill: `../../../skills/choosing-http-status-codes/SKILL.md`.
 
 Canonical source:
 - https://ergowiki.azhidkov.pro/docs/patterns/http-json-api/status-code-choosing/
@@ -24,22 +24,22 @@ Related:
 Classify the failure first.
 Use the code associated with the category.
 
-- Request is invalid (parse/type/format/mapping/query/path) → 400.
-- Not authenticated → 401.
-- Authenticated but not authorized → 403.
-- Endpoint is missing, or the request references a resource id that does not exist in DB → 404.
-- Endpoint exists but does not support the HTTP method → 405.
-- Request cannot be processed in the current state of the system (requires checking current DB state or an external system) → 409.
-- Request is syntactically correct but semantically invalid → 422.
-- Rate limited (if implemented) → 429.
-- Expected dependency failure (including dependency timeouts, handled 5xx, compatibility break) → 502.
-- Full backend outage / unavailability → 503/504.
-- Anything else unexpected → 500.
+- Request is invalid (parse/type/format/mapping/query/path) -> 400.
+- Not authenticated -> 401.
+- Authenticated but not authorized -> 403.
+- Endpoint is missing, or the request references a resource id that does not exist in DB -> 404.
+- Endpoint exists but does not support the HTTP method -> 405.
+- Request cannot be processed in the current state of the system (requires checking current DB state or an external system) -> 409.
+- Request is syntactically correct but semantically invalid -> 422.
+- Rate limited (if implemented) -> 429.
+- Expected dependency failure (including dependency timeouts, handled 5xx, compatibility break) -> 502.
+- Full backend outage / unavailability -> 503/504.
+- Anything else unexpected -> 500.
 
 Note: reserve 504 for infrastructure-level/backend timeouts.
 Use 502 for expected dependency timeouts.
 
-If you need a contract-ready status code matrix for a specific endpoint, use `../../skills/choosing-http-status-codes/SKILL.md`.
+If you need a contract-ready status code matrix for a specific endpoint, use `../../../skills/choosing-http-status-codes/SKILL.md`.
 
 ## 3. Successful responses (2xx)
 
@@ -76,7 +76,7 @@ Use only the following codes:
 
 - 404 Not Found
   - Endpoint is missing (contract violation), or the request references a resource id that does not exist in DB.
-  - If the missing resource id was loaded from DB during request processing, treat it as a backend bug → 500.
+  - If the missing resource id was loaded from DB during request processing, treat it as a backend bug -> 500.
 
 - 405 Method Not Allowed
   - Endpoint exists but does not support the HTTP method (contract violation).
@@ -87,7 +87,7 @@ Use only the following codes:
   - Does not include missing resources referenced by id (use 404).
   - Does not include semantically invalid requests (use 422).
   - Common cases:
-    - uniqueness violation (“already exists”)
+    - uniqueness violation ("already exists")
     - invalid state transition / version conflict / broken invariants
     - other predictable business-rule refusals that depend on current state
   - Return Problem Details with `status: 409` and a domain-specific `type`.
@@ -113,31 +113,31 @@ Use only the following codes:
 - 504 Gateway Timeout
   - Full backend outage / unavailability due to timeouts (usually emitted by infrastructure).
 
-## 6. Mini-matrix “situation → code”
+## 6. Mini-matrix "situation -> code"
 
 Success:
-- GET → 200
-- POST create → 201
-- async start → 202
-- command without body → 204
+- GET -> 200
+- POST create -> 201
+- async start -> 202
+- command without body -> 204
 
 Errors:
-- invalid input → 400
-- unauthenticated → 401
-- unauthorized → 403
-- endpoint/resource not found → 404
-- method not allowed → 405
-- expected domain failure → 409
-- semantically invalid request → 422
-- rate limited → 429
-- unexpected server error → 500
-- dependency unavailable → 502
-- backend unavailable → 503/504
+- invalid input -> 400
+- unauthenticated -> 401
+- unauthorized -> 403
+- endpoint/resource not found -> 404
+- method not allowed -> 405
+- expected domain failure -> 409
+- semantically invalid request -> 422
+- rate limited -> 429
+- unexpected server error -> 500
+- dependency unavailable -> 502
+- backend unavailable -> 503/504
 
 ## 7. Quality control (review rules)
 
 - For each endpoint, the set of possible responses (2xx + 4xx/5xx) is fixed in the contract / OpenAPI.
-- No “success” responses (200/201) when an error actually occurred (do not mask errors).
+- No "success" responses (200/201) when an error actually occurred (do not mask errors).
 - 404 is used for missing endpoints (contract violations) and missing resources referenced by id.
 - 422 is used for semantically invalid requests.
 - 409 is used for expected domain failures that require checking current DB state or external systems.

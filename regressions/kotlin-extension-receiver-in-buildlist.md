@@ -13,4 +13,4 @@
 
 ## Framework hook
 
-- `conventions/kotlin.md` (JVM type erasure guidance).
+- `ergo/tech/kotlin/coding-conventions.md` (JVM type erasure guidance).

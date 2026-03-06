@@ -54,7 +54,7 @@ Prefer Kotlin-generic APIs over Java `Class` tokens.
 For example, prefer `.expectBody<T>()` over `.expectBody(T::class.java)` when both are available.
 
 This is a general Kotlin convention and applies to production code as well.
-See `../../../conventions/kotlin.md`.
+See `coding-conventions.md`.
 
 ## Naming
 
