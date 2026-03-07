@@ -46,6 +46,7 @@ For that case, use the coder feedback improvement skill.
 - `EXPORT_DIR` — path to the exported evidence package containing:
   - `transcript.md`,
   - `brief.md`.
+  If `transcript.md` contains `### Guidance files considered`, use that section as evidence about guidance selection and omission.
 - `ARTIFACT_PATHS[]` — one or more load-bearing design artifacts.
   Typical examples:
   - task statement,
@@ -125,6 +126,7 @@ Capture:
 - the task goal from `brief.md`;
 - the main friction points from `brief.md`;
 - the key clarification turns from `transcript.md`;
+- guidance-file evidence from `transcript.md` when `### Guidance files considered` is present;
 - the artifact chain:
   - input artifact,
   - intermediate artifact,
@@ -137,6 +139,14 @@ For each load-bearing artifact, record:
 - what it was supposed to do;
 - what was missing, ambiguous, or wrong;
 - what the accepted version added, removed, or clarified.
+
+For each guidance-file evidence entry, record:
+
+- whether the file was `read` or `discovered_not_read`;
+- whether it should have influenced role selection, source-of-truth choice, scope boundaries, or stage behavior;
+- whether the stated `reason` reveals a missing rule, a bad priority rule, or a missing stop condition.
+Use this section only as evidence about the files explicitly listed there.
+Do not treat it as proof of hidden instructions or of files that never became visibly discoverable in the transcript or repository context.
 
 Also analyze the most recent framework history to detect recurring failure modes:
 
@@ -179,6 +189,12 @@ Typical clusters:
   - external API, DB, or event compatibility constraints were omitted;
 - framework rule not enforced:
   - the right convention, concept, or checklist existed but the stage did not force it.
+- wrong guidance selection:
+  - the assistant read the wrong guiding artifact or skipped the right one during the design stage;
+- guidance-priority ambiguity:
+  - multiple visible guidance files existed, but precedence between them was not explicit enough;
+- guidance read without stage enforcement:
+  - the right guidance was read, but no hard gate forced the stage to apply it.
 
 For each cluster, write:
 
@@ -226,6 +242,10 @@ Typical designer-side levers:
   - when validation is deterministic and repeatedly forgotten;
 - regression case:
   - when the failure is recurring or caused by a risky default.
+
+When `### Guidance files considered` exists, treat it as first-class evidence for choosing the lever.
+If the failure came from wrong file selection, wrong precedence, or unjustified omission, prefer patching the role, skill, or convention that governs source-of-truth and stage sequencing.
+Do not infer invisible governing artifacts from this section alone.
 
 Do not introduce new docs unless they are directly load-bearing.
 
@@ -302,6 +322,7 @@ A regression hook must include:
 ## Quality criteria
 
 - every patch is tied to concrete evidence from chat or artifacts;
+- guidance-file evidence from exported chat artifacts is used when available to separate “wrong guidance chosen” from “right guidance present but not enforced”;
 - the patch changes the real enforcing lever;
 - the patch is reusable beyond the single incident unless clearly project-local;
 - the patch reduces future clarification or rewriting;
@@ -319,6 +340,7 @@ Typical upstream inputs:
 - requirements formalization;
 - solution design;
 - execution spec generation.
+- `### Guidance files considered` in `transcript.md`, when present.
 
 Typical downstream effects:
 

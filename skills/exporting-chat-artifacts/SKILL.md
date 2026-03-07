@@ -58,6 +58,7 @@ Include:
   - pasted prompts,
   - pasted requirements or constraints;
 - a dedicated appendix with execution evidence when it is available and relevant;
+- load-bearing guidance files when they shaped role selection, scope boundaries, workflow choice, or export decisions;
 - explicit references to load-bearing artifacts mentioned or produced in the chat.
 
 Keep user-authored request text verbatim wherever it is quoted or extracted into `transcript.md` or `brief.md`.
@@ -214,6 +215,36 @@ For implementation-stage chats, prefer listing:
 
 Only include artifacts that are load-bearing for understanding decisions or failure modes.
 Do not dump every file mentioned in the chat.
+When guidance-file selection explains the assistant's behavior, include only the load-bearing entries and keep the full detail in `transcript.md`.
+
+## Guidance file evidence
+
+When repository-visible guidance files shaped the work, add a `### Guidance files considered` subsection under `## Execution evidence` in `transcript.md`.
+Use only guidance artifacts that the assistant could actually observe in the repository or in the visible chat.
+
+Typical file families:
+
+- `AGENTS.md`
+- `AGENTS.local.md`
+- `<project-local>/...`
+- `.ai/ergo/...`
+- `.ai/roles/...`
+- `.ai/skills/...`
+- `skills/...`
+- `conventions/...`
+
+For each entry, record:
+
+- `path`
+- `status`: `read` or `discovered_not_read`
+- `source_of_awareness`
+- `reason`
+
+Use short, observable reasons for `reason`.
+Prefer values such as `higher_priority_file`, `out_of_scope`, `question_only_turn`, `redundant_with_read_source`, `not_needed_for_no_edit_turn`, `required_for_role_selection`, `required_for_skill_execution`, or `required_for_scope_boundaries`.
+Do not describe hidden harness, system, developer, sandbox, or launch-policy instructions as guidance files considered.
+Do not claim that the model “knew” a file unless the transcript shows how that file became visible.
+If no guidance files were read or explicitly considered, omit this subsection.
 
 ## Execution evidence appendix
 
@@ -224,6 +255,7 @@ Include only what is load-bearing for reproducing or understanding outcomes.
 Suggested subsections:
 
 - `### Commands`
+- `### Guidance files considered`
 - `### Git`
 - `### Commits`
 - `### Tests`
@@ -235,6 +267,7 @@ Suggested subsections:
 If the chat is design-oriented, prefer adding:
 
 - artifact paths that were read or written;
+- guidance files that defined source-of-truth priority or scope boundaries;
 - key clarification rounds;
 - chosen option and rejected options;
 - explicit source-of-truth decisions;
@@ -286,21 +319,24 @@ If verbatim user-authored text contains obvious secrets and the export destinati
    - visible assistant messages.
 5. Keep user-provided runtime context blocks, but normalize them.
 6. Remove system, developer, and service scaffolding.
-7. Resolve `EXPORT_SKILL_DIR` as the directory that contains this `SKILL.md`.
-8. If the transcript is “dirty,” clean it via:
+7. Record repository-visible guidance files that were read or explicitly considered when they affected the outcome, along with `status`, `source_of_awareness`, and `reason`.
+   If this step produces at least one guidance-file entry, `## Execution evidence` becomes required and must include `### Guidance files considered`.
+8. Resolve `EXPORT_SKILL_DIR` as the directory that contains this `SKILL.md`.
+9. If the transcript is “dirty,” clean it via:
 
 ```bash
 python ${EXPORT_SKILL_DIR}/scripts/clean_transcript.py <file> --inplace --mode verbose
 ```
 
-9.  Preserve extracted user-authored request text verbatim.
-10.  Sanitize only assistant-authored text, metadata, and execution evidence.
-11.  Append `## Execution evidence` when relevant.
-12.  Write `transcript.md`.
-13.  If Variant A is selected, generate `brief.md` using the required structure and write it alongside.
-14.  Do not invent facts.
-15.  If information is missing, mark it as `TBD` and list the exact missing data.
-16.  Perform a final self-check.
+10. Preserve extracted user-authored request text verbatim.
+11. Sanitize only assistant-authored text, metadata, and execution evidence.
+12. Append `## Execution evidence` when relevant.
+    It is mandatory when guidance-file evidence, commits, commands, tests, or other load-bearing execution facts were recorded.
+13. Write `transcript.md`.
+14. If Variant A is selected, generate `brief.md` using the required structure and write it alongside.
+15. Do not invent facts.
+16. If information is missing, mark it as `TBD` and list the exact missing data.
+17. Perform a final self-check.
 
 ## Quality criteria
 
@@ -310,6 +346,7 @@ python ${EXPORT_SKILL_DIR}/scripts/clean_transcript.py <file> --inplace --mode v
 -   `brief.md` is short enough to support framework editing without reopening the full chat.
 -   `brief.md` contains concrete friction and delta items instead of generic observations.
 -   execution evidence is concise and load-bearing.
+-   guidance-file evidence is included when relevant and uses observable facts instead of mental-state claims.
 -   no secrets remain in assistant-authored metadata or evidence.
 
 ## Interop

@@ -46,6 +46,7 @@ For that case, use the designer feedback improvement skill.
   - `transcript.md`,
   - `brief.md`.
   Use it when the rationale is not fully visible in git history.
+  If `transcript.md` contains `### Guidance files considered`, use that section as evidence about guidance selection and omission.
 
 ## Output
 
@@ -116,6 +117,14 @@ If `EXPORT_DIR` is provided, also read:
 
 Use them only to clarify rationale that is not visible in git evidence.
 Do not let chat evidence override the actual diff.
+If `transcript.md` contains `### Guidance files considered`, extract:
+
+- which guidance artifacts were actually read;
+- which were discovered but not read;
+- the stated `reason` and `source_of_awareness` for each entry;
+- whether the failure was caused by wrong guidance selection, wrong prioritization, or a missing enforcement step after the right guidance was read.
+Use this section only as evidence about the files explicitly listed there.
+Do not treat it as proof of hidden instructions or of files that never became visibly discoverable in the transcript or repository context.
 
 Also analyze the most recent framework history to detect recurring failure modes:
 
@@ -158,6 +167,12 @@ Typical clusters:
   - public contracts were changed without approval;
 - missing tests:
   - required acceptance tests or regression tests were not added or updated.
+- wrong guidance selection:
+  - the assistant read the wrong governing artifact or skipped the right one;
+- guidance-priority ambiguity:
+  - multiple visible guidance files existed, but their read order or precedence was not enforced clearly enough;
+- guidance read without execution:
+  - the right guidance was read, but the workflow had no hard gate that forced using it.
 
 For each cluster, write:
 
@@ -204,6 +219,10 @@ Typical coder-side levers:
   - when the error is ecosystem-specific and stable;
 - regression case:
   - when the failure is recurring or caused by a risky default.
+
+When `### Guidance files considered` exists, treat it as first-class evidence for choosing the lever.
+If the observed problem is wrong file selection or wrong precedence, prefer patching the artifact that defines read order, scope boundaries, or skill-trigger rules over adding another general reminder elsewhere.
+Do not infer invisible governing artifacts from this section alone.
 
 Do not introduce new docs unless they are directly load-bearing.
 
@@ -271,6 +290,7 @@ Optional but recommended:
 
 - every patch is grounded in git evidence;
 - chat evidence is used only as supporting rationale, not as a substitute for diff analysis;
+- guidance-file evidence from exported chat artifacts is used when available to distinguish “wrong rule” from “right rule, not enforced”;
 - the patch changes the real enforcing lever;
 - the same class of future fix becomes less likely;
 - the patch is reusable beyond the single incident unless clearly project-local;
@@ -288,6 +308,7 @@ Typical upstream evidence:
 - fix commits;
 - final diff;
 - implementation transcript and brief.
+- `### Guidance files considered` in `transcript.md`, when present.
 
 Typical downstream changes:
 
