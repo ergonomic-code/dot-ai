@@ -11,7 +11,10 @@ Primary reference is `../conventions/ea-principles.md` (EA.F1–EA.F7) and `../e
 ## Complexity and cohesion
 
 - Cognitive complexity stays within the project budgets, or the deviation is explicitly recorded.
-- Each function has high cohesion and a single semantic goal.
+- Each function has one clear semantic responsibility and a single semantic goal.
+- Sequential or communicational cohesion is acceptable when it is how one responsibility is completed.
+- Shared execution order or shared data alone is not used as the only reason to keep steps together.
+- Effects that are not intrinsic to the responsibility being completed are extracted.
 - Orchestrators remain thin and primarily connect steps.
 
 ## Structure
@@ -23,6 +26,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.F1–EA.F7) and `../e
 ## Links
 
 - EA principles: `../conventions/ea-principles.md`.
+- Cohesion: `../concepts/cohesion.md`.
 - Balanced System Form: `../concepts/balanced-system-form.md`.
 - Actions, Calculations, and Data: `../concepts/actions-calculations-data.md`.
 - Operations conventions: `../ergo/core/coding-conventions/operations.md`.

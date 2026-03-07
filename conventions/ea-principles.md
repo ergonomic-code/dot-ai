@@ -344,7 +344,9 @@ Exceptions / trade-offs
 
 Statement
 
-- Functions must have functional/sequential/communicational cohesion; unrelated effects/reads are not mixed without need.
+- Each function has one primary semantic responsibility.
+- Functional cohesion is the target profile.
+- Sequential and communicational cohesion are acceptable profiles when all major steps still serve one responsibility.
 
 Why
 
@@ -352,18 +354,22 @@ Why
 
 How to verify
 
-- Reviews confirm the function steps serve a single semantic goal.
-- When independent behavior branches appear, the function is decomposed.
+- Reviews confirm the function can be described with one precise verb-object responsibility statement.
+- Major steps directly realize that responsibility or are indispensable support for it.
+- Sequential cohesion is acceptable when step-to-step flow is intrinsic to completing that responsibility.
+- Communicational cohesion is acceptable when coordinated work on the same data slice is intrinsic to completing that responsibility.
+- Grouping by phase alone is not accepted as sufficient evidence of cohesion.
+- When independent change triggers target different internal step groups, the function is decomposed.
 
 Links
 
-- Concepts: `../concepts/cohesion.md` (TODO).
+- Concepts: `../concepts/cohesion.md`.
 - Skills: `../skills/improve-cohesion/` (TODO).
 - Checklists: `../checklists/operations.md`.
 
 Exceptions / trade-offs
 
-- Orchestrators may connect multiple steps if they belong to one scenario and remain thin.
+- Thin orchestrators often have sequential or communicational cohesion because they coordinate one scenario over one work item.
 
 ### EA.F4 — Keep one abstraction level per function
 
@@ -559,7 +565,8 @@ How to verify
 
 Links
 
-- Concepts: `../concepts/cohesion.md` (TODO).
+- Concepts: no dedicated class-cohesion concept yet.
+- Note: `../concepts/cohesion.md` is intentionally limited to subprogram scope.
 - Skills: `../skills/extract-operation-class/` (TODO).
 - Checklists: `../checklists/classes.md`.
 

@@ -8,6 +8,7 @@ Each concept is written as a verifiable operational spec.
 - [`command-query-separation.md`](command-query-separation.md) — Command–Query Separation (CQS) as an operation-level contract rule (commands change state, queries do not).
 - [`actions-calculations-data.md`](actions-calculations-data.md) — Classification of behavior into effectful operations (actions), pure operations (calculations), and inert data.
 - [`balanced-system-form.md`](balanced-system-form.md) — Balanced System Form as an operation-level morphology (explicit read / transform / write branches and a thin orchestrator).
+- [`cohesion.md`](cohesion.md) — Cohesion as a subprogram-level responsibility test for deciding when to keep, split, extract, or move effects.
 - [`effects-diagram.md`](effects-diagram.md) — A behavioral model “event → operation → effects on resources.”
 - [`epochal-time-model.md`](epochal-time-model.md) — A model for reasoning about change as atomic transitions between immutable snapshots.
 - [`ergonomic-components-structure.md`](ergonomic-components-structure.md) — A runtime structure model for backend services as a graph of long-lived components.
