@@ -5,7 +5,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.F1–EA.F7) and `../e
 ## Separation and boundaries
 
 - Effects (I/O) and pure computations are separated, with mixing limited to thin orchestrators.
-- Each operation stays within one abstraction level except at explicit mapping boundaries.
+- Each subprogram inside an operation uses one dominant vocabulary and stays within one abstraction level, except explicit translation routines.
 - Transport concerns do not leak into operations, and storage concerns stay in resources/adapters.
 
 ## Complexity and cohesion
@@ -26,6 +26,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.F1–EA.F7) and `../e
 ## Links
 
 - EA principles: `../conventions/ea-principles.md`.
+- Subprogram level of abstraction: `../concepts/subprogram-level-of-abstraction.md`.
 - Cohesion: `../concepts/cohesion.md`.
 - Balanced System Form: `../concepts/balanced-system-form.md`.
 - Actions, Calculations, and Data: `../concepts/actions-calculations-data.md`.

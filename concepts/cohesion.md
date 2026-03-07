@@ -18,6 +18,7 @@ A subprogram may be cohesive and still contain branching, iteration, mutation, o
 Operational distinction rules.
 A complexity metric answers: "How hard is this control flow to read or reason about?"
 Cohesion answers: "Do the internal steps of this subprogram belong to one responsibility?"
+Level of abstraction answers: "Are those steps expressed within one dominant vocabulary and one local narrative level?"
 A routine may be low in complexity and still have low cohesion if it bundles unrelated work.
 A routine may be non-trivial in complexity and still be highly cohesive if all of its steps are essential to one responsibility.
 
@@ -165,6 +166,7 @@ Decision: keep
 ## 2.7. Links
 - EA principles: `../conventions/ea-principles.md` (EA.F3).
 - Checklist: `../checklists/operations.md`.
+- Related concept: `../concepts/subprogram-level-of-abstraction.md`.
 - Related concept: `../concepts/actions-calculations-data.md`.
 - Related concept: `../concepts/balanced-system-form.md`.
 

@@ -375,26 +375,28 @@ Exceptions / trade-offs
 
 Statement
 
-- A function must not operate on terms from different technical domains simultaneously (e.g., HTTP and SQL), except explicit mapping at the integration boundary.
+- A function body stays within one dominant vocabulary and one local abstraction level.
+- A function may use two vocabularies only when it is an explicit translation routine.
 
 Why
 
-- Mixing levels makes code brittle and prevents integration replacement.
+- Mixing vocabularies forces semantic context switching and hides translation intent.
 
 How to verify
 
-- Reviews confirm integration terms are concentrated in adapters/integration layers.
-- Domain-layer functions do not know transport/storage details.
+- Reviews can identify either one dominant vocabulary or one explicit source/target vocabulary pair from the function name, parameters, return type, major locals, and primary callees.
+- Non-translation routines keep foreign vocabularies behind delegated helpers.
+- Translation routines make the direction explicit and do not contain independent business decisions.
 
 Links
 
-- Concepts: `../concepts/layers-and-boundaries.md` (TODO).
+- Concepts: `../concepts/subprogram-level-of-abstraction.md`.
 - Skills: `../skills/integration-mapping/` (TODO).
 - Checklists: `../checklists/operations.md`, `../checklists/integrations.md`.
 
 Exceptions / trade-offs
 
-- The integration layer may keep domain and integration terms together for mapping.
+- Explicit translators may keep source and target vocabularies together, but a hidden third vocabulary is not allowed.
 
 ### EA.F5 — Prefer straightforward implementations
 
