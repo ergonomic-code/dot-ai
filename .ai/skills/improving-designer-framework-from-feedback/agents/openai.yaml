@@ -1,0 +1,7 @@
+interface:
+  display_name: "Improve Designer Framework from Feedback"
+  short_description: "Analyze design-stage chat evidence and design artifacts, then patch the framework to reduce future clarification and rewrite loops."
+  default_prompt: "Use this skill to improve the framework from design-stage evidence. Provide PROJECT_DIR, EXPORT_DIR, ARTIFACT_PATHS, and optionally FINAL_ACCEPTED_ARTIFACTS, MODEL, PROMPT, and PATCH_MODE."
+
+policy:
+  allow_implicit_invocation: false

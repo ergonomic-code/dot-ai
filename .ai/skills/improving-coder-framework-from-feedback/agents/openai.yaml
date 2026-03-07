@@ -1,0 +1,7 @@
+interface:
+  display_name: "Improve Coder Framework from Feedback"
+  short_description: "Analyze result and fix commits, plus optional implementation chat evidence, then patch the framework to prevent similar manual fixes."
+  default_prompt: "Use this skill to improve the framework from implementation evidence. Provide PROJECT_DIR, RESULT_COMMIT, FIX_COMMITS, MODEL, PROMPT, and optionally FINAL_COMMIT, EXPORT_DIR, and PATCH_MODE."
+
+policy:
+  allow_implicit_invocation: false

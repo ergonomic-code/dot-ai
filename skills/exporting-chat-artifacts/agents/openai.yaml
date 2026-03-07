@@ -1,0 +1,7 @@
+interface:
+  display_name: "Export Chat Artifacts"
+  short_description: "Export transcript.md and brief.md as an evidence package for later framework improvement."
+  default_prompt: "Use this skill to export the current chat into transcript.md and brief.md."
+
+policy:
+  allow_implicit_invocation: false
