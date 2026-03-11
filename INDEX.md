@@ -7,7 +7,9 @@ Use this page as an entry point and as a discoverability index.
 
 - Before non-trivial coding, refactoring, or review, perform task triage.
 - Use [`checklists/README.md`](checklists/README.md) to select the mandatory checklist packs for the current activity and artifact.
-- Read the union of those mandatory packs before proceeding with the main task.
+- Select those packs from the concrete target or failing command first, not from every plausible concern in the ticket text.
+- Read the smallest mandatory pack set justified by that visible evidence before proceeding with the main task.
+- Load another mandatory pack only when local inspection shows that an additional concern is actually in play.
 - If the task also matches a reusable workflow, open the matching skill from [`skills/README.md`](skills/README.md) after reading the mandatory checklist packs.
 - Read [`conventions/ea-principles.md`](conventions/ea-principles.md) to understand the top-level principles and review criteria.
 - Use [`checklists/README.md`](checklists/README.md) for lightweight review checklists derived from the principles.
@@ -38,6 +40,8 @@ Select context on two axes.
    or class and dependency structure.
 
 The mandatory read set is the union of the packs selected by both lenses.
+Select those lenses from the concrete target under edit whenever one is available.
+Do not speculate extra lenses until local evidence shows they matter.
 Only after reading that set should the agent proceed with implementation, review, or a narrower reusable skill.
 
 ## Concepts

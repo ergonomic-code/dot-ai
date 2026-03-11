@@ -9,6 +9,7 @@ Primary reference is `../conventions/git.md`.
 - No intended changes are left unstaged (`git diff --name-status`).
 - No new files under any `*/src/**` directory remain untracked (`?? */src/...`).
 - Untracked files outside `*/src/**` are reviewed, and task-created deliverables are staged while accidental or generated artifacts are not committed.
+- Untracked `tmp/**` files are treated as local artifacts by default and are not staged unless the task explicitly requires versioning them or the repository already tracks that exact path family.
 - Renames and moves are staged (no accidental `D` + `??` pairs, especially under `*/src/**`).
 - `.gitignore` is modified only when the task explicitly requires changing ignore rules.
 
@@ -19,6 +20,7 @@ Primary reference is `../conventions/git.md`.
 - Prefer `git add -- <path>` over `git add -A` to avoid accidentally staging unrelated files.
 - New files are not added when they are intentionally ignored by `.gitignore`.
 - New non-`src/` files created for the task (docs, configs, scripts) are staged with `git add -- <path>`.
+- New `tmp/**` files are not auto-staged unless the task explicitly says they belong in git or the repository already tracks that exact path family.
 - If it is unclear whether an untracked file is generated or belongs in the repo, stop and ask.
 
 ## Links

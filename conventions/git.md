@@ -36,6 +36,22 @@ Optionally run `git ls-files --others --exclude-standard` for a focused list of 
 Stage new files with `git add -- <path>`.
 Prefer explicit paths over `git add -A` unless the user explicitly asks to stage everything.
 
+## Rule: Default `tmp/` artifacts stay local
+
+Treat new files under `tmp/` as local scratch, evidence, or generated artifacts by default.
+Do not stage or commit new `tmp/**` files unless the user explicitly asks to version them or the repository already tracks that exact path family as part of the task.
+This applies in particular to chat exports, review notes, extracted images, ad-hoc prompts, and similar working artifacts.
+
+### How to verify
+
+Run `git status --porcelain` and review `?? tmp/...` entries separately from real deliverables.
+If a `tmp/` path is already tracked and the task intentionally updates it, treat that tracked change according to task scope instead of this default.
+
+### How to fix
+
+Leave local `tmp/**` artifacts unstaged by default.
+If a file under `tmp/` must become a deliverable, move it to a tracked location or get explicit user confirmation before staging it.
+
 ## Rule: Renames and moves are staged (especially under `src/`)
 
 If you rename or move a tracked file, stage the rename before reporting task completion or making a commit.

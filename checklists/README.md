@@ -6,13 +6,16 @@ Checklists are intended to be referenced from specs and skills as lightweight se
 ## How to use checklists
 
 Before non-trivial coding, refactoring, or review, select checklist packs on two axes and read the union of the matched packs.
+Choose those axes from the concrete target under edit, the failing command, or immediate neighboring code.
+Do not preload every plausible pack from a broad task summary before local inspection narrows the work.
+Start with the smallest matched set justified by visible evidence, then add another mandatory pack only when a new concern actually appears.
 
 1. Activity lens:
    what kind of work is happening now.
 2. Artifact lens:
    what kind of code or contract is being touched.
 
-If a reusable skill also applies, open it only after the mandatory checklist packs have been read.
+If a reusable skill also applies, open it only after the mandatory checklist packs for the current narrowed scope have been read.
 
 ## Index
 

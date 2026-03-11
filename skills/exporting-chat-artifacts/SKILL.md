@@ -216,6 +216,8 @@ For implementation-stage chats, prefer listing:
 Only include artifacts that are load-bearing for understanding decisions or failure modes.
 Do not dump every file mentioned in the chat.
 When guidance-file selection explains the assistant's behavior, include only the load-bearing entries and keep the full detail in `transcript.md`.
+Treat exports written under `tmp/` as local working evidence by default, not as repository deliverables.
+Do not stage or commit those `tmp/` exports unless the user explicitly asks to version them or the repository already tracks that exact path family.
 
 ## Guidance file evidence
 
@@ -244,6 +246,10 @@ Use short, observable reasons for `reason`.
 Prefer values such as `higher_priority_file`, `out_of_scope`, `question_only_turn`, `redundant_with_read_source`, `not_needed_for_no_edit_turn`, `required_for_role_selection`, `required_for_skill_execution`, or `required_for_scope_boundaries`.
 Do not describe hidden harness, system, developer, sandbox, or launch-policy instructions as guidance files considered.
 Do not claim that the model “knew” a file unless the transcript shows how that file became visible.
+Keep paths repository-relative in this section.
+Do not list host-local absolute paths here.
+Do not list session-provided external skills or other tool-catalog entries here when they were discovered only from an available-skills list or similar runtime inventory.
+If such a session-provided skill materially affected execution, mention only the skill name and the observable trigger in assistant-authored evidence text, and only when that provenance is needed to explain the work.
 If no guidance files were read or explicitly considered, omit this subsection.
 
 ## Execution evidence appendix
@@ -320,6 +326,8 @@ If verbatim user-authored text contains obvious secrets and the export destinati
 5. Keep user-provided runtime context blocks, but normalize them.
 6. Remove system, developer, and service scaffolding.
 7. Record repository-visible guidance files that were read or explicitly considered when they affected the outcome, along with `status`, `source_of_awareness`, and `reason`.
+   Keep these paths repository-relative.
+   Exclude host-local absolute paths and session-provided external skills discovered only from runtime skill catalogs or available-skills lists.
    If this step produces at least one guidance-file entry, `## Execution evidence` becomes required and must include `### Guidance files considered`.
 8. Resolve `EXPORT_SKILL_DIR` as the directory that contains this `SKILL.md`.
 9. If the transcript is “dirty,” clean it via:
@@ -347,6 +355,7 @@ python ${EXPORT_SKILL_DIR}/scripts/clean_transcript.py <file> --inplace --mode v
 -   `brief.md` contains concrete friction and delta items instead of generic observations.
 -   execution evidence is concise and load-bearing.
 -   guidance-file evidence is included when relevant and uses observable facts instead of mental-state claims.
+-   guidance-file evidence contains only repository-relative guidance paths and excludes host-local absolute paths from runtime skill catalogs.
 -   no secrets remain in assistant-authored metadata or evidence.
 
 ## Interop

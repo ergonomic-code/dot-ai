@@ -3,7 +3,7 @@
 ## 0. Priority
 
 1. If `AGENTS.local.md` exists in this repository, read it before proceeding and follow it with higher priority than this file.
-2. Global rules: see `.ai/ergo/agents/roles.md` and `.ai/ergo/conventions/`.
+2. Global rules: see `.ai/ergo/agents/roles.md` and the relevant files under `.ai/ergo/conventions/`.
 3. Framework index (start here): see `.ai/ergo/INDEX.md`.
 4. If the framework is not located at `.ai/ergo/`, find `agents/roles.md` in the repository and open `INDEX.md` in the same directory tree.
 5. Reusable skills: see `.ai/ergo/skills`.
@@ -23,6 +23,7 @@
 
 For narrow questions, prefer the smallest context that can answer the task correctly.
 If the user references a concrete file, symbol, test, or error, read that target before any repository-wide context documents.
+For implementation and review tasks with a concrete target, inspect that target and its immediate neighbors before selecting checklist packs.
 After mandatory startup materials, load nearby code lazily: referenced types, helper functions, direct call sites, and adjacent tests.
 Do not read `APPLICATION-CONTEXT.md` or `SYSTEM-CONTEXT.md` by default for a single-file or single-symbol question.
 Open high-level context documents only when local code is insufficient, repository or module boundaries are unclear, or the task is architectural or cross-repo.
@@ -31,8 +32,10 @@ Before opening another broad document, ask whether it is likely to change the an
 ## 2. Task triage
 
 Before non-trivial coding, refactoring, or review, locate the framework root (the directory that contains `agents/roles.md`, `skills/`, and `processes/`) and use its `INDEX.md` and `checklists/README.md` to perform task triage.
-Determine the current activity lens and artifact lens.
-Read the union of mandatory checklist packs before proceeding with the main task.
+Determine the current activity lens and artifact lens from the concrete target, failing command, or directly adjacent code first, not from the broad ticket text alone.
+Start with the smallest mandatory checklist set justified by that visible evidence.
+When the same concern is covered by overlapping packs, prefer the more specific pack set selected by the routing matrix instead of preloading every plausible pack.
+If local inspection reveals another real concern, load the additional mandatory pack just before making that class of change.
 If a reusable skill matches, open it after the mandatory checklist packs have been read.
 
 ## 3. Project context

@@ -14,7 +14,10 @@
 ## Expected behavior
 
 - Before non-trivial coding, refactoring, or review, the agent must perform task triage by activity lens and artifact lens.
-- The agent must read the union of the mandatory checklist packs selected by those lenses before proceeding with the main task.
+- When the task exposes a concrete file, symbol, test, or failing command, triage must start from that concrete target instead of from the broad ticket text alone.
+- The initial mandatory read set must be the smallest checklist-pack union justified by directly visible evidence from that target and its immediate neighbors.
+- The agent must read the union of the mandatory checklist packs selected by those current lenses before proceeding with the main task.
+- Additional mandatory packs may be loaded later, but only when local inspection shows that another concern or lens is actually in play.
 - For a task that combines failing tests with data-shape or contract-shape work, the read set must include `testing.md` and `data-model.md`, and must also include `api-design.md` when a public transport contract is involved.
 - For operation-shaped work, routing must not stop at a generic operations label.
   The framework must route the agent to the common subprogram pack and, when pure logic is extracted, to the calculations pack.

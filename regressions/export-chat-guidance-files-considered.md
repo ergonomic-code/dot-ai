@@ -13,7 +13,9 @@
 - The appendix must include a `### Guidance files considered` subsection.
 - Each listed entry must record the repository path, `status` (`read` or `discovered_not_read`), `source_of_awareness`, and a short observable `reason`.
 - The section may include only guidance artifacts that the assistant actually discovered from the visible chat or the repository.
+- Listed paths must stay repository-relative.
 - The export skill must not list hidden harness, system, developer, sandbox, or launch-policy instructions as considered guidance files.
+- The export skill must not list host-local absolute paths or session-provided external skill files discovered only from a runtime skill catalog or available-skills list.
 - The export skill must not claim that the model “knew” a file without observable evidence in the transcript.
 - If no guidance files were read or explicitly considered, the subsection may be omitted.
 
