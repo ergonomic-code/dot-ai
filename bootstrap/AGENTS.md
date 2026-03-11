@@ -16,7 +16,8 @@
 8. If the user provides a path to a process step directory, open `<path>/SKILL.md` and follow it.
    - If the user provides only a process step directory name: locate the framework root (the directory that contains `agents/roles.md`, `skills/`, and `processes/`) and follow a unique matching `<framework-root>/processes/**/<name>/SKILL.md`.
    - If the lookup is not unique or is not found: ask the user for the exact path to the process step directory.
-9. Before committing/pushing, and before reporting task completion, use the `git-working-tree-hygiene` skill.
+9. Before staging, committing, pushing, or reporting task completion after making file changes, locate the framework root if needed, read `<framework-root>/conventions/git.md`, and use the `git-working-tree-hygiene` skill.
+10. Before making branch or git workflow decisions such as branch creation or naming, commit messages, merge requests, or pull/rebase strategy, read `<project-local>/GIT-CONVENTIONS.md` if it exists. If `<project-local>/GIT-CONVENTIONS.md` does not exist, continue with the framework git conventions only.
 
 ## 1. Task triage
 
