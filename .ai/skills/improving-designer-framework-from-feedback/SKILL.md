@@ -65,6 +65,8 @@ For that case, use the coder feedback improvement skill.
 - A set of patches to framework artifacts under `<framework>/...` and/or `<project-local>/...`.
 - Place general knowledge in `<framework>/ergo/core/` or `<framework>/ergo/tech/` only when those are the real enforcing layers.
 - Patch the actual enforcing artifact when the lever is a role, skill, process, template, convention, concept, regression, script, or asset under `<framework>/...`.
+- Treat exported chat packages as evidence sources, not as default patch targets.
+- Patch export/reporting artifacts only when the evidence shows the failure is in capture, omission, or presentation after upstream selection was already correct.
 - Each patch must be explicitly linked to:
   - the design failure pattern observed,
   - the evidence that demonstrates it,
@@ -147,6 +149,28 @@ For each guidance-file evidence entry, record:
 - whether the stated `reason` reveals a missing rule, a bad priority rule, or a missing stop condition.
 Use this section only as evidence about the files explicitly listed there.
 Do not treat it as proof of hidden instructions or of files that never became visibly discoverable in the transcript or repository context.
+If exported evidence mentions surprising files, paths, or artifacts, analyze what the export is showing before treating the export mechanism itself as the problem.
+
+Before choosing any patch target, audit the evidence bundle for provenance and necessity:
+
+- list which artifacts, prompts, and guidance files were actually loaded into context for the original run when that is recoverable from the transcript or visible commands;
+- mark each load-bearing file or path as:
+  - `<framework>`,
+  - `<project-local>`,
+  - repository-local outside the resolved `<framework>` and `<project-local>` roots,
+  - external-local,
+  - or chat-only evidence;
+- for every surprising file, path, or artifact mentioned in feedback, record where it came from:
+  - context loading,
+  - exported evidence,
+  - artifact contents,
+  - or user-provided chat text;
+- if the complaint is “why is this file/path/artifact present”, first decide whether the failure is:
+  - unnecessary context loading,
+  - correct loading but wrong export/evidence inclusion,
+  - or correct inclusion with missing explanation.
+
+Do not patch a downstream artifact such as an export or reporting skill before tracing the upstream source of the artifact, path, or evidence chain that triggered the complaint.
 
 Also analyze the most recent framework history to detect recurring failure modes:
 
@@ -195,10 +219,19 @@ Typical clusters:
   - multiple visible guidance files existed, but precedence between them was not explicit enough;
 - guidance read without stage enforcement:
   - the right guidance was read, but no hard gate forced the stage to apply it.
+- unnecessary context loading:
+  - extra files were loaded even though the stage did not require them.
+- wrong provenance diagnosis:
+  - the patch targeted the artifact that displayed a file/path instead of the artifact that caused it to enter the run.
+- overfitted framework change:
+  - the proposed fix encoded incident-specific paths, names, or examples instead of the reusable mechanism.
 
 For each cluster, write:
 
 - “If the framework had X, this design failure would likely not happen.”
+
+Before choosing a lever, rewrite each cluster in mechanism-level language.
+Replace ticket IDs, absolute paths, repo-local directories, and one-off filenames with stable categories unless the exact string is itself the invariant that must be enforced.
 
 ### 3) Decide where the fix belongs
 
@@ -245,6 +278,10 @@ Typical designer-side levers:
 
 When `### Guidance files considered` exists, treat it as first-class evidence for choosing the lever.
 If the failure came from wrong file selection, wrong precedence, or unjustified omission, prefer patching the role, skill, or convention that governs source-of-truth and stage sequencing.
+If feedback is about unexpected files, paths, or artifacts appearing in evidence or design artifacts, first trace which upstream discovery, context-ingestion, stage-handoff, or artifact-lifecycle step introduced them.
+Prefer patching the earliest enforcing lever that governs selection, visibility, staging, or retention before patching downstream export or reporting artifacts.
+Patch export/reporting skills only when the upstream selection was correct and the failure is in how that evidence was recorded or surfaced.
+Do not let the mere presence of an item inside exported evidence outweigh stronger evidence from artifact deltas, provenance, or upstream guidance selection.
 Do not infer invisible governing artifacts from this section alone.
 
 Do not introduce new docs unless they are directly load-bearing.
@@ -259,6 +296,7 @@ For each patch:
 - prefer explicit stop conditions;
 - prefer exact file names and artifact paths;
 - prefer “must / must not” wording for gates;
+- run an abstraction pass and remove incident-specific names, paths, and examples unless the exact artifact is the enforcing target;
 - add a tiny example only when it truly disambiguates.
 
 Common patch shapes:
@@ -323,8 +361,12 @@ A regression hook must include:
 
 - every patch is tied to concrete evidence from chat or artifacts;
 - guidance-file evidence from exported chat artifacts is used when available to separate “wrong guidance chosen” from “right guidance present but not enforced”;
+- exported evidence is analyzed for provenance before any export/reporting artifact is considered as a patch target;
+- surprising files, paths, and artifacts are traced to their origin before selecting the patch target;
+- upstream levers such as context-ingestion, stage-handoff, selection, or artifact-lifecycle rules are considered before patching downstream export/reporting artifacts;
 - the patch changes the real enforcing lever;
 - the patch is reusable beyond the single incident unless clearly project-local;
+- the patch text is stated at mechanism level and does not encode incident-specific names or paths unless they are the actual invariant being enforced;
 - the patch reduces future clarification or rewriting;
 - artifact-boundary rules become clearer, not heavier;
 - no new framework text is added without an enforcement reason;
@@ -332,8 +374,9 @@ A regression hook must include:
 
 ## Interop
 
-Use `exporting-chat-artifacts` first when evidence is still only in the chat.
+Use `exporting-chat-artifacts` only when evidence is still only in the chat and must be captured as an evidence package.
 Use this skill after evidence exists.
+Once `EXPORT_DIR` exists, analyze its contents and the accepted artifact chain before considering any export/reporting patch.
 
 Typical upstream inputs:
 
