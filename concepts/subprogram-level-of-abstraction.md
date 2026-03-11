@@ -302,7 +302,7 @@ Multiple synonyms used for the same concept in one scope.
 
 ### 2.7. Links
 - EA principles: `../conventions/ea-principles.md` (EA.F4).
-- Checklists: `../checklists/operations.md`, `../checklists/integrations.md`.
+- Checklists: `../checklists/subprograms.md`, `../checklists/operations.md`, `../checklists/integrations.md`.
 - Related concept: `../concepts/cohesion.md`.
 
 ---

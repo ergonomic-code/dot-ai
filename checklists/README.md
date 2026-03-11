@@ -21,7 +21,9 @@ If a reusable skill also applies, open it only after the mandatory checklist pac
 - [`code-hygiene.md`](code-hygiene.md) — DRY pass, helpers, and duplication control.
 - [`data-model.md`](data-model.md) — Data model shape and invariants.
 - [`api-design.md`](api-design.md) — API contracts, DTO shape, and CQS.
-- [`operations.md`](operations.md) — Operations and function design.
+- [`operations.md`](operations.md) — Effectful responsibilities and orchestration boundaries.
+- [`subprograms.md`](subprograms.md) — Common rules for any non-trivial function or method.
+- [`calculations.md`](calculations.md) — Pure transformations and decision logic.
 - [`integrations.md`](integrations.md) — External integrations and mapping.
 - [`classes.md`](classes.md) — Class design, state, and effects.
 - [`architecture.md`](architecture.md) — Dependency graphs and blast radius.
@@ -36,8 +38,10 @@ If a reusable skill also applies, open it only after the mandatory checklist pac
   read [`data-model.md`](data-model.md).
 - Designing or changing an HTTP or RPC contract, DTO boundary, query parameter set, or response shape:
   read [`api-design.md`](api-design.md).
+- Designing, implementing, or refactoring a non-trivial function, method, or helper:
+  read [`subprograms.md`](subprograms.md).
 - Designing, implementing, or refactoring an operation, use case, handler flow, or workflow orchestration:
-  read [`operations.md`](operations.md).
+  read [`subprograms.md`](subprograms.md) and [`operations.md`](operations.md).
 - Designing, implementing, or refactoring external calls, mappers, persistence boundaries, adapters, or contract translation:
   read [`integrations.md`](integrations.md).
 - Reviewing architecture, dependency structure, or class responsibilities:
@@ -56,7 +60,9 @@ If a reusable skill also applies, open it only after the mandatory checklist pac
 - Repositories, DAOs, SQL, external clients, adapters, or mapping code:
   read [`integrations.md`](integrations.md).
 - Operation code, service methods, handlers, or workflow orchestration:
-  read [`operations.md`](operations.md).
+  read [`subprograms.md`](subprograms.md) and [`operations.md`](operations.md).
+- Pure transformation code, decision helpers, selectors, reducers, or validation calculations:
+  read [`subprograms.md`](subprograms.md) and [`calculations.md`](calculations.md).
 - Dependency wiring, large classes, mutable state, or cross-module changes:
   read [`classes.md`](classes.md) and [`architecture.md`](architecture.md).
 

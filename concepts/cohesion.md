@@ -165,7 +165,7 @@ Decision: keep
 
 ## 2.7. Links
 - EA principles: `../conventions/ea-principles.md` (EA.F3).
-- Checklist: `../checklists/operations.md`.
+- Checklists: `../checklists/subprograms.md`, `../checklists/operations.md`.
 - Related concept: `../concepts/subprogram-level-of-abstraction.md`.
 - Related concept: `../concepts/actions-calculations-data.md`.
 - Related concept: `../concepts/balanced-system-form.md`.

@@ -178,7 +178,7 @@ Vocabulary mode (minimal terms)
 ### 2.7. Links
 
 - EA principles: `../conventions/ea-principles.md` (EA.F1).
-- Checklist: `../checklists/operations.md`.
+- Checklists: `../checklists/operations.md`, `../checklists/subprograms.md`, `../checklists/calculations.md`.
 - Related concept: `../concepts/command-query-separation.md`.
 - Related concept: `../concepts/balanced-system-form.md`.
 
