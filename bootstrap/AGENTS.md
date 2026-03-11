@@ -19,29 +19,38 @@
 9. Before staging, committing, pushing, or reporting task completion after making file changes, locate the framework root if needed, read `<framework-root>/conventions/git.md`, and use the `git-working-tree-hygiene` skill.
 10. Before making branch or git workflow decisions such as branch creation or naming, commit messages, merge requests, or pull/rebase strategy, read `<project-local>/GIT-CONVENTIONS.md` if it exists. If `<project-local>/GIT-CONVENTIONS.md` does not exist, continue with the framework git conventions only.
 
-## 1. Task triage
+## 1. Context loading
+
+For narrow questions, prefer the smallest context that can answer the task correctly.
+If the user references a concrete file, symbol, test, or error, read that target before any repository-wide context documents.
+After mandatory startup materials, load nearby code lazily: referenced types, helper functions, direct call sites, and adjacent tests.
+Do not read `APPLICATION-CONTEXT.md` or `SYSTEM-CONTEXT.md` by default for a single-file or single-symbol question.
+Open high-level context documents only when local code is insufficient, repository or module boundaries are unclear, or the task is architectural or cross-repo.
+Before opening another broad document, ask whether it is likely to change the answer materially; if not, continue with local code search.
+
+## 2. Task triage
 
 Before non-trivial coding, refactoring, or review, locate the framework root (the directory that contains `agents/roles.md`, `skills/`, and `processes/`) and use its `INDEX.md` and `checklists/README.md` to perform task triage.
 Determine the current activity lens and artifact lens.
 Read the union of mandatory checklist packs before proceeding with the main task.
 If a reusable skill matches, open it after the mandatory checklist packs have been read.
 
-## 2. Project context
+## 3. Project context
 
 - `APPLICATION-CONTEXT.md` — the repository structure.
 - `SYSTEM-CONTEXT.md` — the structure of the entire system/workspace.
 
-## 3. Development commands (example)
+## 4. Development commands (example)
 
 - Tests: `<command>`
 - Linter/static analysis: `<command>`
 - Build: `<command>`
 
-## 4. Project exceptions
+## 5. Project exceptions
 
 Only project-specific rules and exceptions are described here.
 
-## 5. Project-local references
+## 6. Project-local references
 
 - Canonical project-local root in the target repository: `.ai/project-local/`.
 - In framework materials, project-local links must be written as `<project-local>/...`.
