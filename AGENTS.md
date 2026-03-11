@@ -27,9 +27,9 @@ In particular, documents like `agents/roles.md` define how the framework should 
 
 ## 2. Role
 
-- If the task is about evolving or refactoring the framework, use the **AI Architect** role from `.ai/roles/ai-architect.md`.
+- If the task is about evolving or refactoring the framework, use the **Context Engineer** role from `.ai/roles/context-engineer.md`.
 - Otherwise, act as an "assistant" and clarify the role or output format on request.
-- Do not confuse framework roles from `agents/roles.md` with the meta rules of this repository from `AGENTS.md` and `.ai/roles/ai-architect.md`.
+- Do not confuse framework roles from `agents/roles.md` with the meta rules of this repository from `AGENTS.md` and `.ai/roles/context-engineer.md`.
 
 ## 3. Documentation conventions
 
