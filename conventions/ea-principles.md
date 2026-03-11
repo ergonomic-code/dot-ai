@@ -111,10 +111,12 @@ Statement
 - In internal scenario tests, the test case calls the SUT directly and uses `*TestApi` and `*FixturePresets` only for fixture setup and observation/asserts.
 - Complex fixture setup and insertion is extracted into `*FixturePresets`.
 - For “expensive” inbound dependencies, prefer fakes; mocks are used only to simulate system failures and/or to verify interactions with unmanaged (external) dependencies.
+- Production code and public contracts are not weakened, widened, or distorted only to make tests pass.
 
 Why
 
 - Tests must fail when behavior/contract changes, not during refactoring.
+- Otherwise the test suite stops protecting the real production contract and starts training the code toward test-only shapes.
 
 How to verify
 
@@ -122,6 +124,8 @@ How to verify
 - Test reviews ensure internal scenario tests call only the SUT directly and use `*TestApi` and `*FixturePresets` for fixture setup and observation/asserts.
 - The project has a rule/check that forbids tests from importing internal implementation packages (outside fixtures).
 - Mocks appear only where justified: either an unmanaged external dependency, or simulation of a system failure.
+- The final change does not keep production-only compatibility branches, nullable fields, or relaxed contracts whose sole purpose is to satisfy tests.
+- If a failing test exposed a real production boundary mismatch, the final fix is applied at the production boundary or in test infrastructure, not as a permanent test-only workaround.
 
 Links
 
@@ -132,6 +136,7 @@ Links
 Exceptions / trade-offs
 
 - If the public API does not expose a needed effect, a temporary test facade is allowed and should later become part of the test API.
+- A temporary test-only shim may be used to unblock diagnosis, but it must be removed before the task is done.
 
 ### EA.T3 — Keep tests fast (speed as a constraint)
 
@@ -240,7 +245,8 @@ Exceptions / trade-offs
 
 Statement
 
-- Invariants like “if A != null then B != null and C == null” must be encoded in types/variants, not as conventions.
+- Invariants such as co-presence, mutual exclusion, or conditional presence of fields must be encoded in types/variants, not as conventions.
+- Field groups whose legality depends on relationships between nullable fields are forbidden as flat model shapes.
 
 Why
 
@@ -249,6 +255,7 @@ Why
 How to verify
 
 - Invalid field combinations are unrepresentable at the type level (or are rejected at the boundary by explicit validation with clear diagnostics).
+- Reviews do not accept flat records or DTOs where legality is expressed only as relationships between several nullable fields.
 
 Links
 

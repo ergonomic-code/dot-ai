@@ -15,6 +15,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 - External scenario test cases do not call production code directly.
 - In external scenario tests, calls to production code are allowed only inside dedicated test facades (`*HttpApi`, `*TestApi`, `*FixturePresets`).
 - Internal scenario tests call the SUT directly and use `*TestApi` and `*FixturePresets` only for fixture setup and observation/asserts.
+- Follow the EA.T2 production-contract guardrail for test-driven fixes.
 - Smell: if a test or a `*HttpApi` models an HTTP response body as `Map<*, *>` or `Any`, treat it as a missing typed contract and refactor the client to decode the controller return type.
 - Smell: if multiple tests create the same HTTP client/test infrastructure (for example `WebTestClient` creation, base URLs, object mappers), treat it as missing shared test infrastructure and extract it to a base test or a dedicated fixtures APIs.
 - Smell: if a test case inlines low-level technical boilerplate (for example latches, futures, or executors), extract it to shared test platform helpers or fixture APIs.
@@ -28,6 +29,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.T1–EA.T3).
 
 - Preserve the touched file's established `// Given`, `// When`, `// Then` block structure and local naming style unless the task explicitly migrates them.
 - Do not delete or replace scenario tests merely to satisfy coverage or make a failing suite pass without proving redundancy or explicit approval.
+- Temporary test-only shims added for diagnosis are removed before the final state is reported as done.
 
 ## Naming
 

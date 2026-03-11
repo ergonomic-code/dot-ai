@@ -18,22 +18,29 @@
    - If the lookup is not unique or is not found: ask the user for the exact path to the process step directory.
 9. Before committing/pushing, and before reporting task completion, use the `git-working-tree-hygiene` skill.
 
-## 1. Project context
+## 1. Task triage
+
+Before non-trivial coding, refactoring, or review, locate the framework root (the directory that contains `agents/roles.md`, `skills/`, and `processes/`) and use its `INDEX.md` and `checklists/README.md` to perform task triage.
+Determine the current activity lens and artifact lens.
+Read the union of mandatory checklist packs before proceeding with the main task.
+If a reusable skill matches, open it after the mandatory checklist packs have been read.
+
+## 2. Project context
 
 - `APPLICATION-CONTEXT.md` — the repository structure.
 - `SYSTEM-CONTEXT.md` — the structure of the entire system/workspace.
 
-## 2. Development commands (example)
+## 3. Development commands (example)
 
 - Tests: `<command>`
 - Linter/static analysis: `<command>`
 - Build: `<command>`
 
-## 3. Project exceptions
+## 4. Project exceptions
 
 Only project-specific rules and exceptions are described here.
 
-## 4. Project-local references
+## 5. Project-local references
 
 - Canonical project-local root in the target repository: `.ai/project-local/`.
 - In framework materials, project-local links must be written as `<project-local>/...`.

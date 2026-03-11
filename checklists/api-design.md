@@ -1,6 +1,6 @@
 # Checklist: API Design
 
-Primary reference is `../conventions/ea-principles.md` (EA.D5, EA.F4, EA.F7) and `../conventions/contracts.md`.
+Primary reference is `../conventions/ea-principles.md` (EA.D4, EA.D5, EA.F4, EA.F7) and `../conventions/contracts.md`.
 
 ## Contracts
 
@@ -19,6 +19,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.D5, EA.F4, EA.F7) and
 
 - API models do not encode “modes” as sets of optional/nullable fields.
 - Illegal states implied by invariants are made unrepresentable where feasible, or rejected at the boundary with explicit validation and diagnostics.
+- API contracts do not use dependent nullable field groups.
 
 ## Behavior
 

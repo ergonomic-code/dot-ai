@@ -13,6 +13,7 @@ Primary reference is `../conventions/ea-principles.md` (EA.D1–EA.D5).
 - Record, entity, and value object types stay within the field budget (<= 10 fields).
   If a type exceeds the budget, it is decomposed unless a project-level exception is explicitly recorded.
 - Invariants are encoded in types and variants rather than as dependent nullable fields.
+- Dependent nullable field groups are not accepted as model contracts.
 - Mutually exclusive “modes” are represented as explicit variants (sum types) rather than optional-field combinations.
 
 ## Links
